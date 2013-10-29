@@ -10,6 +10,7 @@ var config = require('./config/config.js');
 var router = require('./routes/router.js');
 var mongoose = require('mongoose');
 var util = require('util');
+var port = process.env.PORT || 5000;
 
 //Database initialization
 mongoose.connect('mongodb://localhost/test');
@@ -30,6 +31,7 @@ db.once('open', function callback () {
 });
 
 var app = express();
+app.use(express.logger());
 app.param('collectionName', function(req, res, next, collectionName) {
   req.collection = db.collection(collectionName);
   return next();
@@ -40,6 +42,6 @@ var app = express();
 config(app);
 router(app);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app).listen(port, function(){
+  console.log('Express server listening on port ' + port);
 });
