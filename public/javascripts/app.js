@@ -22,8 +22,7 @@ angular.module('CCare',[])
         });
 }).controller('reg1Ctrl',function($scope,$http, workerApplication){
     $scope.processFormData = function(){
-      debugger;
-      workerApplication['username'] = $scope.username;
+      workerApplication['name'] = $scope.name;
       workerApplication['password'] = $scope.password1;
       workerApplication['email'] = $scope.email;
     };
@@ -35,9 +34,9 @@ angular.module('CCare',[])
     $scope.submit = function(){
       console.log('submitted?');
       console.log(workerApplication);
-      // $http.post('/formInput', [$scope.user,$scope.password]);
-    }
-  
+      $http.post('/worker-signup', workerApplication);
+    };
   }).service('workerApplication', function () {
+      //return object
         return {};
     });

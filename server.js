@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost/test');
 // db.once('open', function callback () {
   var jobApplicantSchema = mongoose.Schema({
     name: String,
-    username: String,
+    email: String,
     password: String
   });
 
@@ -32,9 +32,9 @@ mongoose.connect('mongodb://localhost/test');
   mongoose.model('JobApplicant', jobApplicantSchema);
 
   // app.param('collectionName',
-  // 	function(req, res, next, collectionName) {
-  // 	  req.collection = db.collection(collectionName);
-  // 	  return next();
+  //  function(req, res, next, collectionName) {
+  //    req.collection = db.collection(collectionName);
+  //    return next();
   // });
 
   mongoose.disconnect();
@@ -42,8 +42,8 @@ mongoose.connect('mongodb://localhost/test');
   //var newJobApplicant = new JobApplicant({name: 'Adam'});
 
   //newJobApplicant.save(function (err, data) {
-  	//if (err) console.log("ERR!!!");
-  	//console.log("DATA!!",data);
+    //if (err) console.log("ERR!!!");
+    //console.log("DATA!!",data);
   //});
 // });
 ///////////////////////////////////////////
