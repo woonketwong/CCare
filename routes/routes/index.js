@@ -4,26 +4,21 @@
  */
 var mongoose = require('mongoose');
 
-
-
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
 
 exports.signup = function(req, res){
-  mongoose.createConnection('mongodb://localhost/test');
-  var credentials = mongoose.model('Credentials', { username: String , password: String});
-  var user = new credentials({username:req.body[0],password:req.body[1]});
-  user.save(function(err,obj){
-    if(err) console.log(err);
-    credentials.find(function(err,stuff){
-      if(err) console.log(err);
-      console.log(stuff);
-      mongoose.disconnect();
-      res.writeHead(200);
-      res.end('IT WORKED');
-    });
+  mongoose.connect('mongodb://localhost/test');
+  var jobApplicantModel = mongoose.model('JobApplicant');
+  var newUser = new jobApplicantModel({username:req.body[0],password:req.body[1]});
+  
+  newUser.save(function (err, data) {
+    if (err) console.log("ERR!!!");
+      console.log("*****DATA*****",data);
+      mongoose.disconnect(); 
   });
-  console.log(req.body);
-
+  
+  res.writeHead(200);
+  res.end('IT WORKED');
 };
