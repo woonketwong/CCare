@@ -110,6 +110,54 @@
 
         <div class="row"> 
           <div class="well">
+            <h4 class="pull-left">Are you interested in working weekdays or weekends?  Select all that apply.</h4>
+            <table class="table">
+             <tr>
+                <th><div>Available Hours</div>
+                <th><div class='selectAll' id="selectall1"/>Sunday</th>
+                <th><div class='selectAll' id="selectall2"/>Monday</th>
+                <th><div class='selectAll' id="selectall3"/>Tuesday</th>
+                <th><div class='selectAll' id="selectall4"/>Wednesday</th>
+                <th><div class='selectAll' id="selectall5"/>Thursday</th>
+                <th><div class='selectAll' id="selectall6"/>Friday</th>
+                <th><div class='selectAll' id="selectall7"/>Saturday</th>
+             </tr>
+             <tr>
+                <td align="center"><div>Midnight to 8AM</div></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="1"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="2"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="3"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="4"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="5"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="6"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="7"/></td>
+             </tr>
+             <tr>
+                <td align="center"><div>8AM to 5PM</div></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="5"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="6"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="7"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="8"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="8"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="8"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="8"/></td>
+             </tr>
+             <tr>
+                <td align="center"><div>5PM to Midnight</div></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="9"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="10"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="11"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="12"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="11"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="12"/></td>
+                <td align="center"><input type="checkbox" class="case" name="case" value="12"/></td>
+             </tr>
+          </table>
+        </div>
+      </div>
+
+        <div class="row"> 
+          <div class="well">
             <h4 class="pull-left">Which of the following are you interested in?</h4>
               <div class="clearfix"></div>
                 <div class="checkbox-columns">
@@ -145,10 +193,10 @@
                 <div class="clearfix"></div>
                   <div class="checkbox-columns">
                       <label class="radio span2">
-                          <input type="radio" value="option1"> Yes
+                          <input type="radio" name="car" value="option1"> Yes
                       </label>
                       <label class="radio span2">
-                          <input type="radio" value="option2"> No
+                          <input type="radio"  name="car" value="option2"> No
                       </label>
                   </div>
             </div>
