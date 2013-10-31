@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -7,7 +6,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var config = require('./config/config.js');
-var router = require('./routes/router.js');
+var router = require('./router.js');
 var mongoose = require('mongoose');
 var util = require('util');
 var port = process.env.PORT || 5000;
@@ -20,6 +19,7 @@ var uristring =
 process.env.MONGOLAB_URI ||
 process.env.MONGOHQ_URL ||
 'mongodb://localhost/HelloMongoose';
+// 'mongodb://localhost/test';
 
 mongoose.connect(uristring, function(err, res){
   if (err) {
