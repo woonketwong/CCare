@@ -10,7 +10,7 @@
         <div class="well">
           <div class="form-group">
             <label for="exampleInputEmail1">Your Hourly Rate, Homecare and Hospital Jobs</label>
-            <select>
+            <select ng-model="hourlyRate">
               <option>$8.00-$10.00</option>
               <option>$10.00-$12.00</option>
               <option>$12.00-$14.00</option>
@@ -21,7 +21,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Your Daily Rate, Live-in Homecare Jobs</label>
-            <select>
+            <select ng-model="dailyRate">
               <option>$60.00-$80.00</option>
               <option>$80.00-$100.00</option>
               <option>$120.00-$140.00</option>
@@ -35,25 +35,22 @@
               <div class="clearfix"></div>
                 <div class="checkbox-columns">
                     <label class="checkbox span1">
-                        <input type="checkbox" value="option1"> Caregiver/Homemaker
+                        <input ng-model="caregiver" type="checkbox" value="option1"> Caregiver/Homemaker
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option2"> CHHA (Home Health Aide)
+                        <input ng-model="CHHA" type="checkbox" value="option2"> CHHA (Home Health Aide)
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> STNA
+                        <input ng-model="STNA" type="checkbox" value="option3"> STNA
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> PCA
+                        <input ng-model="PCA" type="checkbox" value="option3"> PCA
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> PCA
+                        <input ng-model="LPN" type="checkbox" value="option3"> LPN
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> LPN
-                    </label>
-                    <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> CNA
+                        <input ng-model="CNA" type="checkbox" value="option3"> CNA
                     </label>
                 </div>
           </div>
@@ -203,6 +200,6 @@
           </div>
         </div>
 
-        <a href="#/worker-registration3"><button type="submit" class="btn btn-default">Next...</button></a>
+        <a ng-click="processFormData()"><button ngtype="submit" class="btn btn-default">Next...</button></a>
         </form>
       </div>

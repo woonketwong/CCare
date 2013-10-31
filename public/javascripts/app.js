@@ -30,25 +30,55 @@ angular.module('CCare',[])
             workerApplication['name'] = $scope.name;
             workerApplication['password'] = $scope.password1;
             workerApplication['email'] = $scope.email;
-            $location.path('/worker-registration2');
+            $scope.submit();
           } else{$scope.error3 = 'Error: You must enter an email';}
         } else{$scope.error1 = 'Error: Your passwords do not match';}
       }else{$scope.error2 = 'Error: You must enter a name';}
-      
+    };
+
+    $scope.submit = function(){
+      console.log(workerApplication);
+      $http.post('/worker-signup', workerApplication)
+        .success(function(err){
+            if(err){
+               /* show username in use */
+            } else{
+              $location.path('/verifyEmail');
+            }
+        })
     };
   })
   .controller('reg2Ctrl',function($scope,$http, workerApplication){
+    $scope.caregiver = false;
+    $scope.CHHA = false;
+    $scope.STNA = false;
+    $scope.PCA = false;
+    $scope.LPN = false;
+    $scope.CNA = false;
+
+    $scope.processFormData = function(){
+      // debugger;
+      // workerApplication.preferences['hourlyRate'] = parseInt($scope.hourlyRate.replace('$',''));
+      // workerApplication.preferences.dailyRate = parseInt($scope.dailyRate.replace('$',''))
+      // workerApplication.preferences.jobType.caregiver = $scope.caregiver
+      // workerApplication.preferences.jobType.CHHA = $scope.CHHA
+      // workerApplication.preferences.jobType.STNA = $scope.STNA
+      // workerApplication.preferences.jobType.PCA = $scope.PCA
+      // workerApplication.preferences.jobType.LPN = $scope.LPN
+      // workerApplication.preferences.jobType.CNA = $scope.CNA
+
+
+
+      console.log(workerApplication);
+      // $location.path('/worker-registration3');
+    }
     
   })
   .controller('reg3Ctrl',function($scope,$http, workerApplication){
     
   })
   .controller('reg4Ctrl',function($scope,$http, workerApplication){
-    $scope.submit = function(){
-      console.log('submitted?');
-      console.log(workerApplication);
-      $http.post('/worker-signup', workerApplication);
-    };
+
   })
   .controller('LoginController',function($scope, $http, $location, loginFactory){
     $scope.currentUser = loginFactory.getLoggedInUser();
@@ -58,7 +88,12 @@ angular.module('CCare',[])
   })
   .service('workerApplication', function () {
       //return object
-        return {};
+    var obj = {};
+    obj.preferences = {};
+    obj.certifications = {};
+    obj.languages = {};
+    return {};
+    
     })
   .factory('loginFactory', function($http, $q) {
     var factory = {};
