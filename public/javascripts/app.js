@@ -22,9 +22,9 @@ angular.module('CCare',[])
         });
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
-      if($scope.password1===$scope.password2 && $scope.password1){
+      if($scope.name){
         $scope.error1 = ''
-        if($scope.name){
+        if($scope.password1===$scope.password2 && $scope.password1){
           $scope.error2 = ''
           if($scope.email){
             workerApplication['name'] = $scope.name;
@@ -32,8 +32,8 @@ angular.module('CCare',[])
             workerApplication['email'] = $scope.email;
             $location.path('/worker-registration2');
           } else{$scope.error3 = 'Error: You must enter an email';}
-        } else{$scope.error2 = 'Error: You must enter a name';}
-      }else{$scope.error1 = 'Error: Your passwords do not match';}
+        } else{$scope.error1 = 'Error: Your passwords do not match';}
+      }else{$scope.error2 = 'Error: You must enter a name';}
       
     };
   })
