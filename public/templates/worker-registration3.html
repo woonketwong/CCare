@@ -4,136 +4,225 @@
         <h3>Your Caregiver Profile, Continued</h3>
       </div>
 
-      <div class="row">
+
         <form role="form">
 
+      <div class="row">
         <div class="well">
           <div class="form-group">
-            <label for="exampleInputEmail1">Your Hourly Rate, Homecare and Hospital Jobs</label>
-            <input class="form-control" id="InputName" placeholder="Hourly Rate"></input>
+            <label >Number of years worked as a professional caregiver.</label>
+            <select>
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5+</option>
+            </select>
           </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Your Hourly Rate, Live-in Homecare Jobs</label>
-            <input class="form-control" id="InputName" placeholder="Hourly Rate"></input>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="well">
+          <div class="form-group control-group">
+            <label for="inputEmail">Enter the name of your previous employer</label>
+            <input ng-model="email" class="form-control" id="InputEmail" placeholder="Employer Name" >
           </div>
         </div>
 
+
         <div class="well">
-          <h4 class="pull-left">Select the job opportunities that you are qualifed and would like to be considered for</h4>
+          <h4 class="pull-left">Which of the following certifications do you currently have?</h4>
               <div class="clearfix"></div>
                 <div class="checkbox-columns">
-                    <label class="checkbox span2">
-                        <input type="checkbox" value="option1"> Caregiver/Homemaker
+                    <label class="checkbox span1">
+                        <input type="checkbox" value="option1"> PCA
                     </label>
                     <label class="checkbox span2">
                         <input type="checkbox" value="option2"> CHHA (Home Health Aide)
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> STNA
-                    </label>
-                    <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> PCA
-                    </label>
-                    <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> PCA
+                        <input type="checkbox" value="option3"> CNA
                     </label>
                     <label class="checkbox span2">
                         <input type="checkbox" value="option3"> LPN
-                    </label>
-                    <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> CNA
                     </label>
                 </div>
           </div>
         </div>
 
-        <div class="row"> 
+
           <div class="well">
-            <h4 class="pull-left">Which type of position are you interested in?</h4>
-                <div class="clearfix"></div>
-                  <div class="checkbox-columns">
-                      <label class="checkbox span2">
-                          <input type="checkbox" value="option1"> Full-Time
-                      </label>
-                      <label class="checkbox span2">
-                          <input type="checkbox" value="option2"> Part-Time
-                      </label>
-                  </div>
-            </div>
+          <h4 class="pull-left">Which of the following languages do you speak?</h4>
+              <div class="clearfix"></div>
+                <div class="checkbox-columns">
+                    <table class='table'>
+                      <tr>
+                        <td><label class="checkbox span1">
+                            <input type="checkbox" value="option1"> Arabic
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option2"> Chinese Cantonese
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Chinese Mandarin
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Farsi
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Filipino
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> French
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Greek
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Hebrew
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Hindu
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Italian
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Japanese
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Korean
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Polish
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Russian
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Spanish
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Swahili
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Vietnamese
+                        </label></td>
+                      </tr>
+                    </table>
+                </div>
           </div>
         </div>
 
-          <div class="well">
-            <h4 class="pull-left">Which shift are you interested in?  Check all that apply.</h4>
-                <div class="clearfix"></div>
-                  <div class="checkbox-columns">
-                      <label class="checkbox span2">
-                          <input type="checkbox" value="option1"> Day Shift
-                      </label>
-                      <label class="checkbox span2">
-                          <input type="checkbox" value="option2"> Night Shift
-                      </label>
-                  </div>
-            </div>
-          </div>
-
 
 
           <div class="well">
-            <h4 class="pull-left">Are you interested in working weekdays or weekends?  Select all that apply.</h4>
-                <div class="clearfix"></div>
-                  <div class="checkbox-columns">
-                      <label class="checkbox span2">
-                          <input type="checkbox" value="option1"> Full-Time
-                      </label>
-                      <label class="checkbox span2">
-                          <input type="checkbox" value="option2"> Part-Time
-                      </label>
-                  </div>
-            </div>
+          <h4 class="pull-left">Select all of the specializations you'd like to highlight for an employer:</h4>
+              <div class="clearfix"></div>
+                <div class="checkbox-columns">
+                    <table class='table'>
+                      <tr>
+                        <td><label class="checkbox span1">
+                            <input type="checkbox" value="option1"> Experience: Alzheimers/Dementia
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option2"> Experience: Handicapped Patients
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Hospice Patience
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Gastronomy Tubes
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Breathing Treatments
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Hoyer Lifts / Gait Belts
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Special Meal Prep
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Childcare
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Psychiatric
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Geriatric
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Homecare
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Experience: Assisted Living
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Completed: State Fingerprint Background
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Completed: AHCA Level 2 Background
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Completed: CPR Certification
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Completed: First Aid Certification
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Completed: First Aid Certification
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Completed: BLS Certification (Life Support)
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Completed: TB Test/Chest X-Ray
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Available: Work With Clients Owning Cats
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Available: Work With Clients Owning Dogs
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Available: Work With Clients That Smoke
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" value="option3"> Available: Lift 25+ Pounds
+                        </label></td>
+                      </tr>
+                    </table>
+                </div>
           </div>
-
-          <div class="well">
-            <h4 class="pull-left">Are you intrested in Live-In job opportunities?</h4>
-                <div class="clearfix"></div>
-                  <div class="checkbox-columns">
-                      <label class="radio span2">
-                          <input type="radio" value="option1"> Yes
-                      </label>
-                      <label class="radio span2">
-                          <input type="radio" value="option2"> No
-                      </label>
-                  </div>
-            </div>
-          </div>
-
-          <div class="well">
-            <h4 class="pull-left">How many miles are you willing to travel for work?</h4>
-                <div class="clearfix"></div>
-                  <div class="checkbox-columns">
-                      <label class="radio span2">
-                          <input type="radio" value="option1"> Yes
-                      </label>
-                      <label class="radio span2">
-                          <input type="radio" value="option2"> No
-                      </label>
-                  </div>
-            </div>
-          </div>
-
-          <div class="well">
-            <h4 class="pull-left">Some clients require a caregiver that can provide transportation to/from appointments.  Can you legally drive a client in your own car?</h4>
-                <div class="clearfix"></div>
-                  <div class="checkbox-columns">
-                      <label class="radio span2">
-                          <input type="radio" value="option1"> Yes
-                      </label>
-                      <label class="radio span2">
-                          <input type="radio" value="option2"> No
-                      </label>
-                  </div>
-            </div>
-          </div>
+        </div>
 
 
         <a href="#/worker-registration4"><button type="submit" class="btn btn-default">Next...</button></a>
