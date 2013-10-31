@@ -3,6 +3,8 @@
 var mongoose = require('mongoose');
 var nodemailer = require("nodemailer");
 var passwordHash = require('password-hash');
+var crypto = require('crypto');
+var q = require('q');
 
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
@@ -14,6 +16,25 @@ exports.workerSignup = function(req, res){
 
   var newUser = new jobApplicantModel(req.body);
 
+  var token;
+  
+  function createToken(){
+    var deferred = q.defer();
+
+    crypto.randomBytes(20, function(ex, buf) {
+      console.log("buf**", buf);
+      console.log("buf.toString**", buf.toString('hex'));
+      token = buf.toString('hex');
+      console.log("TOKEN generated1", token);
+      deferred.resolve('deferred resolved!!');
+    });
+
+    return deferred.promise;
+  }
+
+  createToken().then(function(){
+    console.log("TOKEN generated2", token);
+  })
 
   jobApplicantModel.findOne({name: newUser.name, email: newUser.email}, 'name email', 
     function (err, result) {
