@@ -28,13 +28,32 @@ exports.workerSignupVerify = function(req, res){
       } else{
         // TODO: create a shell account with name, email, and password
         var jobApplicantModel = mongoose.model('JobApplicant');
-        
+        var newUser = new jobApplicantModel(req.body);
+        jobApplicantModel.findOne({email: newUser.email}, 'email', 
+          function (err, result) {
+            if (err) {
+              console.log("ERROR - creating (workerSignupVerify) user aborted!!");
+            }
+            if (result === null) { // create user
+              console.log('result is null, we are creating a new user');
+              newUser.save(function (err, data) {
+                if (err) console.log("ERR!!!");
+                mongoose.disconnect();
+                res.writeHead(200);
+                res.end('IT WORKED');
+              });
+            } else{
+              console.log('That user exists: ', result);
+              mongoose.disconnect();
+              res.writeHead(500);
+              res.end("500 Internal Server Error - user existed, could not create account");
+            }
+        });
         console.log('** workerSignupVerify is successful ** ');
         mongoose.disconnect();
         res.redirect('#/worker-login?email='+result.email);
       }
   });
-
 }
 
 exports.workerSignupInitial = function(req, res){
