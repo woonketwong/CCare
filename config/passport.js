@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var JobApplicant = mongoose.model('JobApplicant');
+var LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (passport, config) {
 
@@ -8,7 +9,7 @@ module.exports = function (passport, config) {
   });
 
   passport.deserializeUser(function(id, done) {
-	  User.findOne({ _id: id }, function (err, user) {
+	  JobApplicant.findOne({ _id: id }, function (err, user) {
   	  done(err, user);
 	 });
   });

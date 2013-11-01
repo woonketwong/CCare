@@ -23,6 +23,9 @@ angular.module('CCare',[])
     .when('/verifyEmail',{
           templateUrl: 'templates/verifyEmail.html'
         })
+    .when('/workerPortal',{
+          templateUrl: 'templates/workerPortal.html'
+        })
     .when('/worker-portal',{
           controller: 'reg4Ctrl',
           templateUrl: 'templates/worker-portal.html'
@@ -111,12 +114,14 @@ angular.module('CCare',[])
   })
   .controller('wLoginCtrl'  ,function($scope, $http, $location){
     $scope.submit = function(){
-      console.log('submitting something!');
       var obj = {
         email: $scope.email,
         password: $scope.password
       };
-      $http.post('/worker-login', obj);
+      $http.post('/worker-login', obj).success(function(data,data2){
+        console.log(data)
+        console.log(data2);
+      })
     };
   })
   .service('workerApplication', function () {

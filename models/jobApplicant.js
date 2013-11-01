@@ -60,6 +60,7 @@ var jobApplicantSchema = mongoose.Schema({
 
 
 jobApplicantSchema.statics.signup = function(name, email, password, done){
+  console.log("In jobApplicantSchema ")
   var jobApplicant = this;
   jobApplicant.create({
   name: name,
@@ -73,18 +74,27 @@ jobApplicantSchema.statics.signup = function(name, email, password, done){
 }
 
 jobApplicantSchema.statics.isValidUserPassword = function(email, rawPassword, done) {
-  this.findOne({email : email}, 'password', function(err, user){
+  console.log("is valid user password")
+  this.findOne({email : email}, 'email password', function(err, data){
+    console.log(data)
     // if(err) throw err;
-    if(err) return done(err);
-    if(!user) return done(null, false, { message : 'Incorrect email.' });
-    
-    var matched = passwordHash.verify(rawPassword, password);
+    if(err){
+      console.log('login error');
+      return done(err);
+    }
+    if(!data){
+      console.log('user not found');
+      return done(null, false, { message : 'Incorrect email.' });
+    }
+    var matched = passwordHash.verify(rawPassword, data.password);
     if (!matched){
+      console.log('passwords didnt match');
       return done(null, false, {
         message : 'Incorrect password'
       });
     } else {
-      return done(null, user);
+      console.log('login successful');
+      return done(null, data);
     }
   });
 };

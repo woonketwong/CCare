@@ -9,6 +9,9 @@
     "express": "3.4.3",
     "jade": "*",
     "mongodb": "latest",
-    "mongoose": "latest"
+    "mongoose": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "connect-flash": "latest"
   }
 }
