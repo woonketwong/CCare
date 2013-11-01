@@ -17,11 +17,18 @@ angular.module('CCare',[])
           templateUrl: 'templates/worker-registration3.html'
         })
     .when('/worker-login',{
-          controller: 'wloginCtrl',
+          controller: 'wLoginCtrl',
           templateUrl: 'templates/worker-login.html'
         })
     .when('/verifyEmail',{
           templateUrl: 'templates/verifyEmail.html'
+        })
+    .when('/workerPortal',{
+          templateUrl: 'templates/workerPortal.html'
+        })
+    .when('/worker-portal',{
+          controller: 'reg4Ctrl',
+          templateUrl: 'templates/worker-portal.html'
         })
     .when('/worker-registration4',{
           controller: 'reg4Ctrl',
@@ -103,6 +110,18 @@ angular.module('CCare',[])
     $scope.currentUser = loginFactory.getLoggedInUser();
     $scope.updateLocation = function(){
       $scope.urlHash = $location.url();
+    };
+  })
+  .controller('wLoginCtrl'  ,function($scope, $http, $location){
+    $scope.submit = function(){
+      var obj = {
+        email: $scope.email,
+        password: $scope.password
+      };
+      $http.post('/worker-login', obj).success(function(data,data2){
+        console.log(data)
+        console.log(data2);
+      })
     };
   })
   .service('workerApplication', function () {
