@@ -32,6 +32,12 @@ mongoose.connect(uristring, function(err, res){
 
 // db.on('error', console.error.bind(console, 'connection error:'));
 // db.once('open', function callback () {
+  var emailTokenSchema = mongoose.Schema({
+    name: String,
+    email: String,
+    password: String,
+    token: String
+  })
   var jobApplicantSchema = mongoose.Schema({
     name: String,
     email: String,
@@ -90,7 +96,9 @@ mongoose.connect(uristring, function(err, res){
 
   // );
 
-  mongoose.model('JobApplicant', jobApplicantSchema);
+  mongoose.model('JobApplicant', jobApplicantSchema); 
+  mongoose.model('EmailToken', emailTokenSchema);
+
 
   // app.param('collectionName',
   //  function(req, res, next, collectionName) {

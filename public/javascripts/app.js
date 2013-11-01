@@ -16,6 +16,13 @@ angular.module('CCare',[])
           controller: 'reg3Ctrl',
           templateUrl: 'templates/worker-registration3.html'
         })
+    .when('/worker-login',{
+          controller: 'wloginCtrl',
+          templateUrl: 'templates/worker-login.html'
+        })
+    .when('/verifyEmail',{
+          templateUrl: 'templates/verifyEmail.html'
+        })
     .when('/worker-registration4',{
           controller: 'reg4Ctrl',
           templateUrl: 'templates/worker-registration4.html'
@@ -37,16 +44,28 @@ angular.module('CCare',[])
     };
 
     $scope.submit = function(){
-      console.log(workerApplication);
-      $http.post('/worker-signup', workerApplication)
-        .success(function(err){
-            if(err){
-               /* show username in use */
-            } else{
-              $location.path('/verifyEmail');
-            }
-        })
+      $http({
+        method: 'GET',
+        url: '/worker-sign-up/checkEmail', 
+        params: {email: workerApplication.email}
+      })
+        .success(function(data,status){
+          console.log(data)
+          if(data){
+            $scope.finalizeSignup();
+          } else{
+            $scope.error1 = 'Error: that email is already in use'
+          }
+        });
     };
+
+    $scope.finalizeSignup = function(){
+      $http.post('/worker-signup-initial', workerApplication)
+        .success(function(data,status){
+          $location.path('/verifyEmail');
+      });      
+    }
+
   })
   .controller('reg2Ctrl',function($scope,$http, workerApplication){
     $scope.caregiver = false;
