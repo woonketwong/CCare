@@ -196,6 +196,7 @@ exports.workerSignup = function(req, res){
   });
 };
 
+
 exports.workerReadInfo = function(req, res){
   mongoose.connect('mongodb://localhost/test');
   var jobApplicantModel = mongoose.model('JobApplicant');
@@ -233,7 +234,7 @@ var sendEmail = function(name, email, message){
     subject: "Pending Confirmation", // Subject line
     text: "Thank you for your registration. Please click the following link to v", // plaintext body
     html: "<h1>Hello Applicant!<\/h1><p>Thank you for your registration. Please click the following link to complete your signup process</p><a href='"+ message +"' >Click here</a>" // html body
-  }
+  };
 
   smtpTransport.sendMail(mailOptions, function(error, response){
     if(error){
@@ -242,4 +243,37 @@ var sendEmail = function(name, email, message){
       console.log("Message sent: " + response.message);
     }
   });
-}
+};
+
+exports.workerLogin = function(req, res){
+  console.log('------------------------------------------------redirecting to worker login');
+  // res.redirect('#/worker-portal');
+  // mongoose.connect('mongodb://localhost/test');
+  // var jobApplicantModel = mongoose.model('JobApplicant');
+  // console.log("Email:",req.query.email);
+  // jobApplicantModel.findOne({email: req.body.email}, 'email', 
+  //   function (err, result) {
+  //     if (err) {
+  //       console.log("ERROR - checkEmailIfExists aborted!!");
+  //     }
+  //     if (result === null) { 
+  //         mongoose.disconnect();
+  //         res.writeHead(200);
+  //         res.end('true');
+  //     } else{
+  //       mongoose.disconnect();
+  //       res.writeHead(202);
+  //       res.end('false');
+  //     }
+  // });
+};
+
+
+
+
+
+
+
+
+
+
