@@ -12,6 +12,9 @@
     "mongoose": "latest",
     "passport": "latest",
     "passport-local": "latest",
-    "connect-flash": "latest"
+    "connect-flash": "latest",
+    "nodemailer": "latest",
+    "password-hash": "latest",
+    "q": "latest"
   }
 }
