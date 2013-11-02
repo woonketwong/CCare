@@ -8,14 +8,21 @@
     <div class="well">
       <div class="form-group control-group">
         <label for="inputEmail">Describe your ideal patient.</label>
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea ng-model="idealPatient" class="form-control" rows="3"></textarea>
       </div>
     </div>
 
     <div class="well">
       <div class="form-group control-group">
         <label for="inputEmail">Describe your ideal work environment</label>
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea ng-model="workEnvironment" class="form-control" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="well">
+      <div class="form-group control-group">
+        <label for="inputEmail">What are your hobbies and interests?</label>
+        <textarea ng-model="interests" placeholder="Example: Sports, Reading, Computers, Travel..." class="form-control" rows="3"></textarea>
       </div>
     </div>
 

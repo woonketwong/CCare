@@ -12,6 +12,7 @@ module.exports = function(app,passport){
   app.get('/worker-login-fail', home.loginFail);
   // app.get('/getProfile', home.getProfile);
   //app.post('/worker-login', home.workerLogin);
+  app.get('/sessionData', home.sessionData);
   app.post("/worker-login", 
     passport.authenticate('local',{
   	  successRedirect : "#/workerPortal",
@@ -19,4 +20,5 @@ module.exports = function(app,passport){
   	})
   );
   app.get('/collections/:collectionName', home.index);
+  app.post('/12345', home.dothings);
 };

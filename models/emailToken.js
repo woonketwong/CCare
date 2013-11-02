@@ -4,6 +4,7 @@ var emailTokenSchema = mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  phone: String,
   token: String
 })
 

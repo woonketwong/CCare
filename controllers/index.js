@@ -24,7 +24,7 @@ exports.loginFail = function(req, res){
 }
 
 exports.workerSignupVerify = function(req, res){
-  EmailToken.findOne({token: req.params['token']}, 'name email password', 
+  EmailToken.findOne({token: req.params['token']}, 'name email password phone', 
     function (err, result) {
       if (err) {
         // TODO: should add token regeneration logic here
@@ -39,7 +39,8 @@ exports.workerSignupVerify = function(req, res){
         var newUser = new JobApplicant({
           name: result.name,
           email: result.email,
-          password: result.password
+          password: result.password,
+          phone: result.phone
         });
         console.log("RESULT***",result);
         JobApplicant.findOne({email: newUser}, 'email', 
@@ -70,6 +71,7 @@ exports.workerSignupInitial = function(req, res){
     name: req.body.name,
     email: req.body.email,
     password: passwordHash.generate(req.body.password),
+    phone: req.body.phone,
     token: ''
   });
   var token;
@@ -162,29 +164,15 @@ var sendEmail = function(name, email, message){
   });
 };
 
-exports.workerLogin = function(req, res){
-  console.log('------------------------------------------------redirecting to worker login');
-  // res.redirect('#/worker-portal');
-  //
-  // var jobApplicantModel = mongoose.model('JobApplicant');
-  // console.log("Email:",req.query.email);
-  // jobApplicantModel.findOne({email: req.body.email}, 'email', 
-  //   function (err, result) {
-  //     if (err) {
-  //       console.log("ERROR - checkEmailIfExists aborted!!");
-  //     }
-  //     if (result === null) { 
-  //         
-  //         res.writeHead(200);
-  //         res.end('true');
-  //     } else{
-  //       mongoose.disconnect();
-  //       res.writeHead(202);
-  //       res.end('false');
-  //     }
-  // });
-};
+  exports.sessionData = function(req,res){
+    res.json(req.user);
+  }
 
+  exports.dothings = function(req,res){
+    console.log(req.body);
+    res.writeHead(200);
+    res.end();
+  }
 
 // exports.getProfile = function(req,res){
 //   res.json(req.session.askedBefore);

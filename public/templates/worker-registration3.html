@@ -11,7 +11,7 @@
         <div class="well">
           <div class="form-group">
             <label >Number of years worked as a professional caregiver.</label>
-            <select>
+            <select ng-model="yearsExperience">
               <option>0</option>
               <option>1</option>
               <option>2</option>
@@ -28,7 +28,7 @@
         <div class="well">
           <div class="form-group control-group">
             <label for="inputEmail">Enter the name of your previous employer</label>
-            <input ng-model="email" class="form-control" id="InputEmail" placeholder="Employer Name" >
+            <input ng-model="employerName" class="form-control" placeholder="Employer Name" >
           </div>
         </div>
 
@@ -41,13 +41,13 @@
                         <input type="checkbox" value="option1" ng-model="PCA"> PCA
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option2"> CHHA (Home Health Aide)
+                        <input type="checkbox" ng-model="CHHA" value="option2"> CHHA (Home Health Aide)
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> CNA
+                        <input type="checkbox" ng-model="CNA" value="option3"> CNA
                     </label>
                     <label class="checkbox span2">
-                        <input type="checkbox" value="option3"> LPN
+                        <input type="checkbox" ng-model="LPN" value="option3"> LPN
                     </label>
                 </div>
           </div>
@@ -61,65 +61,65 @@
                     <table class='table'>
                       <tr>
                         <td><label class="checkbox span1">
-                            <input type="checkbox" value="option1"> Arabic
+                            <input type="checkbox" ng-model="Arabic" value="option1"> Arabic
                         </label></td>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option2"> Chinese Cantonese
+                            <input type="checkbox" ng-model="Chinese_Cantonese" value="option2"> Chinese Cantonese
                         </label></td>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Chinese Mandarin
-                        </label></td>
-                      </tr>
-                      <tr>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Farsi
-                        </label></td>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Filipino
-                        </label></td>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> French
+                            <input type="checkbox" ng-model="Chinese_Mandarin" value="option3"> Chinese Mandarin
                         </label></td>
                       </tr>
                       <tr>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Greek
+                            <input type="checkbox" ng-model="Farsi" value="option3"> Farsi
                         </label></td>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Hebrew
+                            <input type="checkbox" ng-model="Filipino" value="option3"> Filipino
                         </label></td>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Hindu
-                        </label></td>
-                      </tr>
-                      <tr>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Italian
-                        </label></td>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Japanese
-                        </label></td>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Korean
+                            <input type="checkbox" ng-model="French" value="option3"> French
                         </label></td>
                       </tr>
                       <tr>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Polish
+                            <input type="checkbox" ng-model="Greek" value="option3"> Greek
                         </label></td>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Russian
+                            <input type="checkbox" ng-model="Hebrew" value="option3"> Hebrew
                         </label></td>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Spanish
+                            <input type="checkbox" ng-model="Hindu" value="option3"> Hindu
                         </label></td>
                       </tr>
                       <tr>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Swahili
+                            <input type="checkbox" ng-model="Italian" value="option3"> Italian
                         </label></td>
                         <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Vietnamese
+                            <input type="checkbox" ng-model="Japanese" value="option3"> Japanese
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" ng-model="Korean" value="option3"> Korean
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" ng-model="Polish" value="option3"> Polish
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" ng-model="Russian" value="option3"> Russian
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" ng-model="Spanish" value="option3"> Spanish
+                        </label></td>
+                      </tr>
+                      <tr>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" ng-model="Swahili" value="option3"> Swahili
+                        </label></td>
+                        <td><label class="checkbox span2">
+                            <input type="checkbox" ng-model="Vietnamese" value="option3"> Vietnamese
                         </label></td>
                       </tr>
                     </table>
@@ -225,7 +225,7 @@
         </div>
 
 
-        <a href="#/worker-registration4"><button type="submit" class="btn btn-default">Next...</button></a>
+        <a ng-click="processFormData()"><button type="submit" class="btn btn-default">Next...</button></a>
         </form>
       </div>
       

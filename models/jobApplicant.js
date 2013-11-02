@@ -6,6 +6,7 @@ var jobApplicantSchema = mongoose.Schema({
     name: String,
     email: String,
     password: String,
+    phone: String,
     accountCreated: Boolean,
     preferences: {
       hourlyRate: Number, 
@@ -18,9 +19,14 @@ var jobApplicantSchema = mongoose.Schema({
         LPN: Boolean,
         CNA: Boolean
       },
-      //ADD SCHEDULE INFO
-      homeCareInterest: Boolean,
-      facilityCareInterest: Boolean,
+      fullTime: Boolean,
+      partTime: Boolean,
+      dayShift: Boolean,
+      nightShift: Boolean,
+      weekDays: Boolean,
+      weekEnds: Boolean,
+      homeCare: Boolean,
+      facilityCare: Boolean,
       workRadius: Number,
       carAvailable: Boolean,
       yearsExperience: Number,
@@ -54,7 +60,8 @@ var jobApplicantSchema = mongoose.Schema({
 
       },
       idealPatient: String,
-      idealWorkEnvironment: String
+      idealWorkEnvironment: String,
+      interests: String
     }
 });
 
