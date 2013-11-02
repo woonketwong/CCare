@@ -124,38 +124,38 @@ angular.module('CCare',[])
     $scope.processFormData = function(){
       workerProfile.preferences.yearsExperience = $scope.yearsExperience;
       workerProfile.preferences.employerName = $scope.employerName;
-      workerProfile.certifications.PCA = $scope.PCA;
-      workerProfile.certifications.CHHA = $scope.CHHA;
-      workerProfile.certifications.CNA = $scope.CNA;
-      workerProfile.certifications.LPN = $scope.LPN;
-      workerProfile.languages.Arabic = $scope.Arabic
-      workerProfile.languages.Chinese_Cantonese = $scope.Chinese_Cantonese
-      workerProfile.languages.Chinese_Mandarin = $scope.Chinese_Mandarin
-      workerProfile.languages.Farsi = $scope.Farsi
-      workerProfile.languages.Filipino = $scope.Filipino
-      workerProfile.languages.French = $scope.French
-      workerProfile.languages.Greek = $scope.Greek
-      workerProfile.languages.Hebrew = $scope.Hebrew
-      workerProfile.languages.Hindu = $scope.Hindu
-      workerProfile.languages.Italian = $scope.Italian
-      workerProfile.languages.Japanese = $scope.Japanese
-      workerProfile.languages.Korean = $scope.Korean
-      workerProfile.languages.Polish = $scope.Polish
-      workerProfile.languages.Russian = $scope.Russian
-      workerProfile.languages.Spanish = $scope.Spanish
-      workerProfile.languages.Swahili = $scope.Swahili
-      workerProfile.languages.Vietnamese = $scope.Vietnamese
+      workerProfile.preferences.certifications.PCA = $scope.PCA;
+      workerProfile.preferences.certifications.CHHA = $scope.CHHA;
+      workerProfile.preferences.certifications.CNA = $scope.CNA;
+      workerProfile.preferences.certifications.LPN = $scope.LPN;
+      workerProfile.preferences.languages.Arabic = $scope.Arabic
+      workerProfile.preferences.languages.Chinese_Cantonese = $scope.Chinese_Cantonese
+      workerProfile.preferences.languages.Chinese_Mandarin = $scope.Chinese_Mandarin
+      workerProfile.preferences.languages.Farsi = $scope.Farsi
+      workerProfile.preferences.languages.Filipino = $scope.Filipino
+      workerProfile.preferences.languages.French = $scope.French
+      workerProfile.preferences.languages.Greek = $scope.Greek
+      workerProfile.preferences.languages.Hebrew = $scope.Hebrew
+      workerProfile.preferences.languages.Hindu = $scope.Hindu
+      workerProfile.preferences.languages.Italian = $scope.Italian
+      workerProfile.preferences.languages.Japanese = $scope.Japanese
+      workerProfile.preferences.languages.Korean = $scope.Korean
+      workerProfile.preferences.languages.Polish = $scope.Polish
+      workerProfile.preferences.languages.Russian = $scope.Russian
+      workerProfile.preferences.languages.Spanish = $scope.Spanish
+      workerProfile.preferences.languages.Swahili = $scope.Swahili
+      workerProfile.preferences.languages.Vietnamese = $scope.Vietnamese
 
       $location.path('worker-registration4')
     }
   })
   .controller('reg4Ctrl',function($scope,$http, workerProfile, $location){
     $scope.submit = function(){
-      workerProfile.idealPatient = $scope.idealPatient
-      workerProfile.idealWorkEnvironment = $scope.workEnvironment
-      workerProfile.interests = $scope.interests
+      workerProfile.preferences.idealPatient = $scope.idealPatient
+      workerProfile.preferences.idealWorkEnvironment = $scope.workEnvironment
+      workerProfile.preferences.interests = $scope.interests
 
-      $http.post('/12345', workerProfile);
+      $http.post('/worker-updateInfo', workerProfile);
       $location.path('workerPortal')
     }
   })
@@ -189,14 +189,12 @@ angular.module('CCare',[])
       //return object
     return {
       preferences: {
-        jobType:{}
-      },
-      certifications: {},
-      languages: {}
-    };
-    
+        jobType:{},
+        certifications: {},
+        languages: {}
+      }};
     })
-  .service('workerPreferences', function () {
+  .service('workerApplication', function () {
       //return object
     return {};
     })

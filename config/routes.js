@@ -20,5 +20,5 @@ module.exports = function(app,passport){
   	})
   );
   app.get('/collections/:collectionName', home.index);
-  app.post('/12345', home.dothings);
+  app.post('/worker-updateInfo', home.updateInfo);
 };

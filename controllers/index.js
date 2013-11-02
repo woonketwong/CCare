@@ -122,6 +122,20 @@ exports.workerSignup = function(req, res){
 
 };
 
+exports.updateInfo = function(req, res){
+  // to do - data validation
+  JobApplicant.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
+    if (err){
+      console.log("ERROR in updating Info");
+      res.writeHead(400);
+    } else {
+      console.log("SUCCESS in updating info")
+      res.writeHead(201);
+    }
+    res.end();
+  });
+}
+
 
 exports.workerReadInfo = function(req, res){
   var jobApplicantModel = mongoose.model('JobApplicant');
@@ -168,11 +182,13 @@ var sendEmail = function(name, email, message){
     res.json(req.user);
   }
 
-  exports.dothings = function(req,res){
-    console.log(req.body);
-    res.writeHead(200);
-    res.end();
-  }
+  // exports.dothings = function(req,res){
+  //   console.log(req.user.email)
+  //   console.log(req.user);
+  //   console.log(req.body);
+  //   res.writeHead(200);
+  //   res.end();
+  // }
 
 // exports.getProfile = function(req,res){
 //   res.json(req.session.askedBefore);
