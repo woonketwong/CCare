@@ -4,9 +4,16 @@ angular.module('CCare',[])
     .when('/',{
           templateUrl: 'templates/index.html'
         })
+    .when('/employer-registration',{
+          controller: 'employerRegCtrl',
+          templateUrl: 'templates/employer-registration.html'
+        })
     .when('/worker-registration',{
           controller: 'reg1Ctrl',
           templateUrl: 'templates/worker-registration.html'
+        })
+    .when('/aboutUs',{
+          templateUrl: 'templates/aboutUs.html'
         })
     .when('/worker-registration2',{
           controller: 'reg2Ctrl',
@@ -159,6 +166,48 @@ angular.module('CCare',[])
       $http.post('/worker-updateInfo', workerProfile);
       $location.path('workerPortal')
     }
+  })
+  .controller('employerRegCtrl',function($scope,$http, workerApplication, $location){
+    $scope.processFormData = function(){
+      if($scope.name){
+        $scope.error1 = ''
+        if($scope.password1===$scope.password2 && $scope.password1){
+          $scope.error2 = ''
+          if($scope.email){
+            workerApplication['name'] = $scope.name;
+            workerApplication['password'] = $scope.password1;
+            workerApplication['email'] = $scope.email;
+            console.log($scope.phone);
+            workerApplication['phone'] = $scope.phone;
+            $scope.submit();
+          } else{$scope.error3 = 'Error: You must enter an email';}
+        } else{$scope.error1 = 'Error: Your passwords do not match';}
+      }else{$scope.error2 = 'Error: You must enter a company name';}
+    };
+
+    $scope.submit = function(){
+      $http({
+        method: 'GET',
+        url: '/worker-sign-up/checkEmail', 
+        params: {email: workerApplication.email}
+      })
+        .success(function(data,status){
+          console.log(data)
+          if(data){
+            $scope.finalizeSignup();
+          } else{
+            $scope.error1 = 'Error: that email is already in use'
+          }
+        });
+    };
+
+    $scope.finalizeSignup = function(){
+      $http.post('/worker-signup-initial', workerApplication)
+        .success(function(data,status){
+          $location.path('/verifyEmail');
+      });      
+    }
+
   })
   .controller('LoginController',function($scope, $http, $location, loginFactory){
     $scope.currentUser = loginFactory.getLoggedInUser();
