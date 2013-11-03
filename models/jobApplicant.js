@@ -29,6 +29,7 @@ var jobApplicantSchema = mongoose.Schema({
       facilityCare: Boolean,
       workRadius: Number,
       carAvailable: Boolean,
+      education: String,
       yearsExperience: Number,
       previousEmployerName: String,
       certifications:{

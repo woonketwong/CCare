@@ -122,6 +122,7 @@ angular.module('CCare',[])
   })
   .controller('reg3Ctrl',function($scope,$http, $location, workerProfile){
     $scope.processFormData = function(){
+      workerProfile.preferences.education = $scope.education;
       workerProfile.preferences.yearsExperience = $scope.yearsExperience;
       workerProfile.preferences.employerName = $scope.employerName;
       workerProfile.preferences.certifications.PCA = $scope.PCA;

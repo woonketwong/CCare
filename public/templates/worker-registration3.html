@@ -1,13 +1,28 @@
 <div class="container">
 
-      <div class="well hero-spacer">
-        <h3>Your Caregiver Profile, Continued</h3>
-      </div>
+  <div class="well hero-spacer">
+    <h3>Your Caregiver Profile, Continued</h3>
+  </div>
 
 
-        <form role="form">
+    <form role="form">
 
       <div class="row">
+        <div class="well">
+          <div class="form-group">
+            <label>What is your education experience?</label>
+            <select ng-model="education">
+              <option>Some high school</option>
+              <option>High school diploma</option>
+              <option>Some college</option>
+              <option>Undergraduate degree</option>
+              <option>Graduate degree</option>
+            </select>
+          </div>
+          </div>
+        </div>
+      </div>
+
         <div class="well">
           <div class="form-group">
             <label >Number of years worked as a professional caregiver.</label>
@@ -20,10 +35,7 @@
               <option>5+</option>
             </select>
           </div>
-          </div>
         </div>
-      </div>
-
 
         <div class="well">
           <div class="form-group control-group">
@@ -31,7 +43,6 @@
             <input ng-model="employerName" class="form-control" placeholder="Employer Name" >
           </div>
         </div>
-
 
         <div class="well">
           <h4 class="pull-left">Which of the following certifications do you currently have?</h4>
@@ -130,7 +141,7 @@
 
 
           <div class="well">
-          <h4 class="pull-left">Select all of the specializations you'd like to highlight for an employer:</h4>
+          <h4 class="pull-left">Select the experience that you have:</h4>
               <div class="clearfix"></div>
                 <div class="checkbox-columns">
                     <table class='table'>
@@ -178,6 +189,17 @@
                             <input type="checkbox" value="option3"> Experience: Assisted Living
                         </label></td>
                       </tr>
+                    </table>
+                </div>
+          </div>
+        </div>
+
+
+        <div class="well">
+          <h4 class="pull-left">Select the certifications you have completed:</h4>
+              <div class="clearfix"></div>
+                <div class="checkbox-columns">
+                    <table class='table'>
                       <tr>
                         <td><label class="checkbox span2">
                             <input type="checkbox" value="option3"> Completed: State Fingerprint Background
@@ -203,20 +225,6 @@
                       <tr>
                         <td><label class="checkbox span2">
                             <input type="checkbox" value="option3"> Completed: TB Test/Chest X-Ray
-                        </label></td>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Available: Work With Clients Owning Cats
-                        </label></td>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Available: Work With Clients Owning Dogs
-                        </label></td>
-                      </tr>
-                      <tr>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Available: Work With Clients That Smoke
-                        </label></td>
-                        <td><label class="checkbox span2">
-                            <input type="checkbox" value="option3"> Available: Lift 25+ Pounds
                         </label></td>
                       </tr>
                     </table>

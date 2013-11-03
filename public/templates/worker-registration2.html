@@ -9,6 +9,16 @@
 
         <div class="well">
           <div class="form-group">
+            <label for="inputEmail">What is your street name and number</label>
+            <input ng-model="street" class="form-control" placeholder="E.g. 123 Main Street" >
+            <br>
+            <label for="inputEmail">City, State, and Zip</label>
+            <input ng-model="street" class="form-control" placeholder="E.g. San Francisco, CA 94103" >
+          </div>
+        </div>
+
+        <div class="well">
+          <div class="form-group">
             <label for="exampleInputEmail1">Your Hourly Rate, Homecare and Hospital Jobs</label>
             <select ng-model="hourlyRate">
               <option>$8.00-$10.00</option>
@@ -20,12 +30,14 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Your Daily Rate, Live-in Homecare Jobs</label>
+            <label for="exampleInputEmail1">Your Hourly Rate, Live-in Homecare Jobs</label>
             <select ng-model="dailyRate">
-              <option>$60.00-$80.00</option>
-              <option>$80.00-$100.00</option>
-              <option>$120.00-$140.00</option>
-              <option>$140.00-$160.00</option>
+              <option>$8.00-$10.00</option>
+              <option>$10.00-$12.00</option>
+              <option>$12.00-$14.00</option>
+              <option>$14.00-$16.00</option>
+              <option>$18.00-$20.00</option>
+              <option>$20.00-$22.00</option>
             </select>
           </div>
         </div>
@@ -148,6 +160,30 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="well">
+            <h4 class="pull-left">Which are you available to work with?</h4>
+            <div class="clearfix"></div>
+            <label class="checkbox span2">
+              <input type="checkbox" ng-model="catsOk" value="option3"> Available: Work With Clients Owning Cats
+              </label>
+              <label class="checkbox span2">
+                  <input type="checkbox" ng-model="dogsOk" value="option3"> Available: Work With Clients Owning Dogs
+              </label>
+              <label class="checkbox span2">
+                  <input type="checkbox" ng-model="smokeOK" value="option3"> Available: Work With Clients That Smoke
+              </label>
+              <label class="checkbox span2">
+                  <input type="checkbox" ng-modle="lift25ok" value="option3"> Available: Lift 25+ Pounds
+              </label>
+          </div>
+        </div>
+
+
+
         <a ng-click="processFormData()"><button class="btn btn-default">Next...</button></a>
         </form>
       </div>
+
+
+
