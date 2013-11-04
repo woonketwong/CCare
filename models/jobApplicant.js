@@ -28,6 +28,10 @@ var jobApplicantSchema = mongoose.Schema({
       homeCare: Boolean,
       facilityCare: Boolean,
       workRadius: Number,
+      catsOk: Boolean,
+      dogsOk: Boolean,
+      smokeOk: Boolean,
+      lift25ok: Boolean,
       carAvailable: Boolean,
       education: String,
       yearsExperience: Number,
@@ -58,11 +62,33 @@ var jobApplicantSchema = mongoose.Schema({
         Vietnamese: Boolean
       },
       specializations:{
-
+        Alzheimers: Boolean,
+        Handicapped: Boolean,
+        Hospice: Boolean,
+        Gastronomy: Boolean,
+        Breathing: Boolean,
+        Hoyer: Boolean,
+        SpecialMeal: Boolean,
+        ChildCare: Boolean,
+        Psychiatric: Boolean,
+        Geriatric: Boolean,
+        Homecare: Boolean,
+        AssistedLiving: Boolean,
+        Fingerprints: Boolean,
+        AHCALevel2: Boolean,
+        CPR: Boolean,
+        FirstAid: Boolean,
+        BLS: Boolean,
+        TBTest: Boolean
       },
       idealPatient: String,
       idealWorkEnvironment: String,
-      interests: String
+      interests: String,
+      patientMatchScore: Number,
+      scheduleMatchScore: Number,
+      workCloseToHomeScore: Number,
+      workEnvironmentScore: Number,
+      employer: Boolean
     }
 });
 

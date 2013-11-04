@@ -1,4 +1,4 @@
-angular.module('CCare',[])
+var myApp =  angular.module('CCare',[])
   .config(function($routeProvider,$locationProvider){
   $routeProvider
     .when('/',{
@@ -95,34 +95,50 @@ angular.module('CCare',[])
     $scope.PCA = false;
     $scope.LPN = false;
     $scope.CNA = false;
+    $scope.doAddress = function(){
+      $http.defaults.useXDomain = true;
+      $http({
 
+        url: "http://maps.googleapis.com/maps/api/geocode/json",
+        method: "GET",
+        params: {
+          address : $scope.street + " " + $scope.cityStateZip
+          }
+        }).success(function(data1,data2){
+          console.log(data1);
+          console.log(data2);
+        })
+    };
     $scope.processFormData = function(){
-      
       try{
-      if($scope.hourlyRate) workerProfile.preferences.hourlyRate = parseInt($scope.hourlyRate.replace('$',''));
-      if($scope.dailyRate) workerProfile.preferences.dailyRate = parseInt($scope.dailyRate.replace('$',''))
-      workerProfile.preferences.jobType.caregiver = $scope.caregiver
-      workerProfile.preferences.jobType.CHHA = $scope.CHHA
-      workerProfile.preferences.jobType.STNA = $scope.STNA
-      workerProfile.preferences.jobType.PCA = $scope.PCA
-      workerProfile.preferences.jobType.LPN = $scope.LPN
-      workerProfile.preferences.jobType.CNA = $scope.CNA
-      workerProfile.preferences.fullTime = $scope.fullTime
-      workerProfile.preferences.partTime = $scope.partTime
-      workerProfile.preferences.dayShift = $scope.dayShift
-      workerProfile.preferences.nightShift = $scope.nightShift
-      workerProfile.preferences.weekDays = $scope.weekDays
-      workerProfile.preferences.weekEnds = $scope.weekEnds
-      workerProfile.preferences.homeCare = $scope.homeCare
-      workerProfile.preferences.facilityCare = $scope.facilityCare
-      workerProfile.preferences.range = parseInt($scope.range.split(" ")[2])
-      if($scope.carAvailable === 'yes'){
-        workerProfile.preferences.carAvailable = true;
-      } else{
-        workerProfile.preferences.carAvailable = false;
-      }
-    }catch(e){}
-      // console.log(workerProfile);
+        if($scope.hourlyRate) workerProfile.preferences.hourlyRate = parseInt($scope.hourlyRate.replace('$',''));
+        if($scope.dailyRate) workerProfile.preferences.dailyRate = parseInt($scope.dailyRate.replace('$',''))
+        workerProfile.preferences.jobType.caregiver = $scope.caregiver
+        workerProfile.preferences.jobType.CHHA = $scope.CHHA
+        workerProfile.preferences.jobType.STNA = $scope.STNA
+        workerProfile.preferences.jobType.PCA = $scope.PCA
+        workerProfile.preferences.jobType.LPN = $scope.LPN
+        workerProfile.preferences.jobType.CNA = $scope.CNA
+        workerProfile.preferences.fullTime = $scope.fullTime
+        workerProfile.preferences.partTime = $scope.partTime
+        workerProfile.preferences.dayShift = $scope.dayShift
+        workerProfile.preferences.nightShift = $scope.nightShift
+        workerProfile.preferences.weekDays = $scope.weekDays
+        workerProfile.preferences.weekEnds = $scope.weekEnds
+        workerProfile.preferences.homeCare = $scope.homeCare
+        workerProfile.preferences.facilityCare = $scope.facilityCare
+        workerProfile.preferences.range = parseInt($scope.range.split(" ")[2])
+        workerProfile.preferences.catsOK = $scope.catsOk;
+        workerProfile.preferences.dogsOk = $scope.dogsOk;
+        workerProfile.preferences.smokeOk = $scope.smokeOk;
+        workerProfile.preferences.lift25ok = $scope.lift25ok;
+        if($scope.carAvailable === 'yes'){
+          workerProfile.preferences.carAvailable = true;
+        } else{
+          workerProfile.preferences.carAvailable = false;
+        }
+      }catch(e){}
+      
       $location.path('/worker-registration3');
     }
     
@@ -141,18 +157,41 @@ angular.module('CCare',[])
       workerProfile.preferences.languages.Chinese_Mandarin = $scope.Chinese_Mandarin
       workerProfile.preferences.languages.Farsi = $scope.Farsi
       workerProfile.preferences.languages.Filipino = $scope.Filipino
-      workerProfile.preferences.languages.French = $scope.French
-      workerProfile.preferences.languages.Greek = $scope.Greek
-      workerProfile.preferences.languages.Hebrew = $scope.Hebrew
-      workerProfile.preferences.languages.Hindu = $scope.Hindu
-      workerProfile.preferences.languages.Italian = $scope.Italian
-      workerProfile.preferences.languages.Japanese = $scope.Japanese
-      workerProfile.preferences.languages.Korean = $scope.Korean
-      workerProfile.preferences.languages.Polish = $scope.Polish
-      workerProfile.preferences.languages.Russian = $scope.Russian
-      workerProfile.preferences.languages.Spanish = $scope.Spanish
-      workerProfile.preferences.languages.Swahili = $scope.Swahili
-      workerProfile.preferences.languages.Vietnamese = $scope.Vietnamese
+      workerProfile.preferences.languages.French = $scope.French;
+      workerProfile.preferences.languages.Greek = $scope.Greek;
+      workerProfile.preferences.languages.Hebrew = $scope.Hebrew;
+      workerProfile.preferences.languages.Hindu = $scope.Hindu;
+      workerProfile.preferences.languages.Italian = $scope.Italian;
+      workerProfile.preferences.languages.Japanese = $scope.Japanese;
+      workerProfile.preferences.languages.Korean = $scope.Korean;
+      workerProfile.preferences.languages.Polish = $scope.Polish;
+      workerProfile.preferences.languages.Russian = $scope.Russian;
+      workerProfile.preferences.languages.Spanish = $scope.Spanish;
+      workerProfile.preferences.languages.Swahili = $scope.Swahili;
+      workerProfile.preferences.languages.Vietnamese = $scope.Vietnamese;
+      workerProfile.preferences.specializations.Alzheimers = $scope.Alzheimers;
+      workerProfile.preferences.specializations.Handicapped = $scope.Handicapped;
+      workerProfile.preferences.specializations.Hospice = $scope.Hospice;
+      workerProfile.preferences.specializations.Gastronomy = $scope.Gastronomy;
+      workerProfile.preferences.specializations.Breathing = $scope.Breathing;
+      workerProfile.preferences.specializations.Hoyer = $scope.Hoyer;
+      workerProfile.preferences.specializations.SpecialMeal = $scope.SpecialMeal;
+      workerProfile.preferences.specializations.ChildCare = $scope.ChildCare;
+      workerProfile.preferences.specializations.Psychiatric= $scope.Psychiatric;
+      workerProfile.preferences.specializations.Geriatric = $scope.Geriatric;
+      workerProfile.preferences.specializations.Homecare = $scope.Homecare;
+      workerProfile.preferences.specializations.AssistedLiving = $scope.AssistedLiving;
+      workerProfile.preferences.specializations.Fingerprints = $scope.Fingerprints;
+      workerProfile.preferences.specializations.AHCALevel2 = $scope.AHCALevel2;
+      workerProfile.preferences.specializations.CPR = $scope.CPR;
+      workerProfile.preferences.specializations.FirstAid = $scope.FirstAid;
+      workerProfile.preferences.specializations.BLS = $scope.BLS;
+      workerProfile.preferences.specializations.TBTest = $scope.TBTest;
+      workerProfile.preferences.patientMatchScore = $scope.patientMatchScore
+      workerProfile.preferences.scheduleMatchScore = $scope.scheduleMatchScore
+      workerProfile.preferences.workCloseToHomeScore = $scope.workCloseToHomeScore
+      workerProfile.preferences.workEnvironmentScore = $scope.workEnvironmentScore
+
 
       $location.path('worker-registration4')
     }
@@ -241,6 +280,7 @@ angular.module('CCare',[])
       preferences: {
         jobType:{},
         certifications: {},
+        specializations: {},
         languages: {}
       }};
     })
@@ -260,5 +300,10 @@ angular.module('CCare',[])
       return deferred.promise;
     };
     return factory;
-  })
-  ;
+  });
+
+myApp.config(['$httpProvider', function($httpProvider) {
+      $httpProvider.defaults.useXDomain = true;
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+]);

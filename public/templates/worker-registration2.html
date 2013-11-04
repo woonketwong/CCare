@@ -1,5 +1,6 @@
-
-
+<script type="text/javascript"
+      src="https://apis.google.com/js/auth.js?onload=init">
+    </script>
       <div class="well hero-spacer">
         <h3>Your Caregiver Profile</h3>
       </div>
@@ -13,10 +14,9 @@
             <input ng-model="street" class="form-control" placeholder="E.g. 123 Main Street" >
             <br>
             <label for="inputEmail">City, State, and Zip</label>
-            <input ng-model="street" class="form-control" placeholder="E.g. San Francisco, CA 94103" >
+            <input ng-model="cityStateZip" class="form-control" placeholder="E.g. San Francisco, CA 94103" >
           </div>
         </div>
-
         <div class="well">
           <div class="form-group">
             <label for="exampleInputEmail1">Your Hourly Rate, Homecare and Hospital Jobs</label>
@@ -171,12 +171,52 @@
                   <input type="checkbox" ng-model="dogsOk" value="option3"> Available: Work With Clients Owning Dogs
               </label>
               <label class="checkbox span2">
-                  <input type="checkbox" ng-model="smokeOK" value="option3"> Available: Work With Clients That Smoke
+                  <input type="checkbox" ng-model="smokeOk" value="option3"> Available: Work With Clients That Smoke
               </label>
               <label class="checkbox span2">
                   <input type="checkbox" ng-modle="lift25ok" value="option3"> Available: Lift 25+ Pounds
               </label>
           </div>
+        </div>
+
+        <div class="row">
+        <div class="well">
+          <div class="form-group">
+          <h4>On a scale from one to five, how important is each of the following to you?</h4>
+            <label for="exampleInputEmail1">Patient Match</label>
+            <select ng-model="patientMatchScore">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            <label for="exampleInputEmail1">Schedule Match</label>
+            <select ng-model="scheduleMatchScore">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            <label for="exampleInputEmail1">Working close to home</label>
+            <select ng-model="workCloseToHomeScore">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            <label for="exampleInputEmail1">Work Environment</label>
+            <select ng-model="workEnvironmentScore">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div
+        </div>
         </div>
 
 
