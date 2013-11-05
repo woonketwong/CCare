@@ -9,8 +9,7 @@ var config = require('./config/config.js');
 var router = require('./config/routes.js');
 var mongoose = require('mongoose');
 var util = require('util');
-var Passports = require("passports");
-var Passport = require("passport").Passport;
+var passport = require("passport")
 var port = process.env.PORT || 5000;
 var app = express();
 var fs = require('fs');
@@ -20,39 +19,6 @@ var _= require("underscore");
 ////////////////////////////////////////
 //Database initialization
 ////////////////////////////////////////
-
-var passports = new Passports();
-
-passports._getConfig = function _getConfig(req, cb) {
-  return cb(null, req.host, {
-    realm: req.host,
-  });
-};
-
-var createInstance = function _createInstance() {
-  var instance = new Passport();
-
-  // instance.use("basic", new BasicStrategy(options, function(name, password, done) {
-  //   return done(null, {name: name});
-  // }));
-
-  // instance.serializeUser(function(user, cb) {
-  //   user.realm = options.realm;
-
-  //   cb(null, JSON.stringify(user));
-  // });
-
-  instance.deserializeUser(function(id, cb) {
-    cb(null, JSON.parse(id));
-  });
-
-  return instance;
-};
-
-var passport = createInstance();
-var passportEmployer = createInstance();
-require('./config/passport')(passport, config);
-require('./config/passportEmployer')(passportEmployer, config);
 
 var uristring =
 process.env.MONGOLAB_URI ||
@@ -73,9 +39,11 @@ fs.readdirSync(models_dir).forEach(function (file) {
   require(models_dir+'/'+ file);
 });
 
-console.log("RESULT***", passportEmployer === passport);
 
 var app = express();
+
+
+require('./config/passport')(passport, config);
 
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
@@ -88,8 +56,6 @@ app.configure(function () {
   app.use(express.session({ secret: 'keyboard cat' }));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(passportEmployer.initialize());
-  app.use(passportEmployer.session());
   app.use(express.methodOverride());
   app.use(flash());
   app.use(app.router);
@@ -114,11 +80,6 @@ app.use(function(req, res, next){
   }
   res.type('txt').send('Not found');
 });
-
-passport.testing();
-passportEmployer.testing();
-
-require('./config/routes.js')(app, passport, passportEmployer);
 
 http.createServer(app).listen(port, function(){
   console.log('Express server listening on port ' + port);

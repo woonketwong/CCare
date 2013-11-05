@@ -11,7 +11,7 @@ module.exports = function(app,passport, passportEmployer){
   app.get('/worker-login-success', home.loginSuccess);
   app.get('/worker-login-fail', home.loginFail);
   app.post("/worker-login", 
-    passport.authenticate('local',{
+    passport.authenticate('user',{
   	  successRedirect : "#/workerPortal",
   		failureRedirect : "#/worker-login-fail"
   	})
@@ -25,7 +25,7 @@ module.exports = function(app,passport, passportEmployer){
   app.get('/employer-login-success', employer.loginSuccess);
   app.get('/employer-login-fail', employer.loginFail);
   app.post("/employer-login", 
-    passportEmployer.authenticate('local',{
+    passportEmployer.authenticate('employer',{
       successRedirect : "#/employerPortal",
       failureRedirect : "#/employer-login-fail"
     })

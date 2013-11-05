@@ -9,21 +9,26 @@ module.exports = function (passport, config) {
 	  done(null, user.id);
   });
 
-  passport.testing = function(){
-    console.log("*************In passport");
-  };
-
   passport.deserializeUser(function(id, done) {
 	  JobApplicant.findOne({ _id: id }, function (err, user) {
   	  done(err, user);
 	 });
   });
 
-  passport.use(new LocalStrategy({
+  passport.use('jobApplicant', new LocalStrategy({
 	  usernameField: 'email',
 	  passwordField: 'password'
   },
   function(email, password, done) {
     JobApplicant.isValidUserPassword(email, password, done);
   }));
+
+  passport.use('employer', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(email, password, done) {
+    JobApplicant.isValidUserPassword(email, password, done);
+  }));
+
 }

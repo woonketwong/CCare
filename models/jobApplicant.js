@@ -127,7 +127,7 @@ jobApplicantSchema.statics.isValidUserPassword = function(email, rawPassword, do
         message : 'Incorrect password'
       });
     } else {
-      console.log('login successful');
+      console.log('job applicant login successful');
       return done(null, data);
     }
   });

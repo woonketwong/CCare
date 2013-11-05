@@ -46,7 +46,7 @@ employerSchema.statics.isValidUserPassword = function(email, rawPassword, done) 
         message : 'Incorrect password'
       });
     } else {
-      console.log('login successful');
+      console.log('employer login successful');
       return done(null, data);
     }
   });
