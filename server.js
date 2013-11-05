@@ -10,6 +10,7 @@ var router = require('./config/routes.js');
 var mongoose = require('mongoose');
 var util = require('util');
 var passport = require("passport");
+var passportEmployer = require("passport");
 var port = process.env.PORT || 5000;
 var app = express();
 var fs = require('fs');
@@ -38,6 +39,7 @@ fs.readdirSync(models_dir).forEach(function (file) {
 });
 
 require('./config/passport')(passport, config)
+require('./config/passportEmployer')(passportEmployer, config)
 
 var app = express();
 
@@ -52,6 +54,8 @@ app.configure(function () {
   app.use(express.session({ secret: 'keyboard cat' }));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(passportEmployer.initialize());
+  app.use(passportEmployer.session());
   app.use(express.methodOverride());
   app.use(flash());
   app.use(app.router);
@@ -77,19 +81,7 @@ app.use(function(req, res, next){
   res.type('txt').send('Not found');
 });
 
-require('./config/routes.js')(app, passport);
-
-  //var JobApplicant = mongoose.model('JobApplicant', jobApplicantSchema);
-  //var newJobApplicant = new JobApplicant({name: 'Adam'});
-
-  //newJobApplicant.save(function (err, data) {
-    //if (err) console.log("ERR!!!");
-    //console.log("DATA!!",data);
-  //});
-// });
-///////////////////////////////////////////
-
-// config(app);
+require('./config/routes.js')(app, passport, passportEmployer);
 
 http.createServer(app).listen(port, function(){
   console.log('Express server listening on port ' + port);
