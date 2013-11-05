@@ -5,6 +5,7 @@ var jobApplicantSchema = mongoose.Schema({
     name: String,
     email: String,
     password: String,
+    account: String,
     phone: String,
     accountCreated: Boolean,
     preferences: {

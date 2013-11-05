@@ -1,15 +1,11 @@
-
 /* GET home page */
 var mongoose = require('mongoose');
 var passwordHash = require('password-hash');
 var crypto = require('crypto');
 var q = require('q');
-var JobApplicant = require('../models/jobApplicant.js');
-var EmailToken = require('../models/emailToken.js');
 var sendEmail = require('../util/sendEmail.js');
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
-};
+var Employer = require('../models/employer.js');
+var EmailToken = require('../models/emailToken.js');
 
 exports.loginSuccess = function(req, res){
   console.log('login success route');
@@ -23,38 +19,35 @@ exports.loginFail = function(req, res){
   res.end('fail');
 }
 
-exports.workerSignupVerify = function(req, res){
+exports.employerSignupVerify = function(req, res){
   EmailToken.findOne({token: req.params['token']}, 'name email password phone', 
     function (err, result) {
       if (err) {
-        // TODO: should add token regeneration logic here
-        // TODO: add a field to indicate login successful?
         console.log("ERROR - workerSignupVerify aborted!!");
       }
       if (result === null){ //no email token found
         res.writeHead(404);
         res.end();
       } else{
-        // TODO: create a shell account with name, email, and password
-        var newUser = new JobApplicant({
+        var newUser = new Employer({
           name: result.name,
           email: result.email,
           password: result.password,
           phone: result.phone
         });
         console.log("RESULT***",result);
-        JobApplicant.findOne({email: newUser}, 'email', 
+        Employer.findOne({email: newUser}, 'email', 
           function (err, result) {
             if (err) {
-              console.log("ERROR - creating (workerSignupVerify) user aborted!!");
+              console.log("ERROR - creating employerSignupVerify user aborted!!");
             }
             if (result === null) { // create user
               console.log('result is null, we are creating a new user');
               newUser.save(function (err, data) {
                 if (err) console.log("ERR!!!");
-                  console.log('** workerSignupVerify is successful ** ');
+                  console.log('** employerSignupVerify is successful ** ');
                   console.log("Result Obj***", data);
-                  res.redirect('#/worker-login?email='+newUser.email);
+                  res.redirect('#/employer-login?email='+newUser.email);
               });
             } else{
               console.log('That user exists: ', result);
@@ -66,7 +59,7 @@ exports.workerSignupVerify = function(req, res){
   });
 }
 
-exports.workerSignupInitial = function(req, res){
+exports.employerSignupInitial = function(req, res){
   var newEmailToken = new EmailToken({
     name: req.body.name,
     email: req.body.email,
@@ -103,7 +96,7 @@ exports.workerSignupInitial = function(req, res){
 exports.checkEmailIfExists = function(req,res){
  
   console.log("Email:",req.query.email);
-  JobApplicant.findOne({email: req.body.email}, 'email', 
+  Employer.findOne({email: req.body.email}, 'email', 
     function (err, result) {
       if (err) {
         console.log("ERROR - checkEmailIfExists aborted!!");
@@ -118,13 +111,9 @@ exports.checkEmailIfExists = function(req,res){
   });
 };
 
-exports.workerSignup = function(req, res){
-
-};
-
 exports.updateInfo = function(req, res){
   // to do - data validation
-  JobApplicant.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
+  Employer.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
     if (err){
       console.log("ERROR in updating Info");
       res.writeHead(400);
@@ -137,10 +126,9 @@ exports.updateInfo = function(req, res){
 }
 
 
-exports.workerReadInfo = function(req, res){
-  var jobApplicantModel = mongoose.model('JobApplicant');
-  var newUser = new jobApplicantModel(req.body);
-  jobApplicantModel.findOne({name: newUser.name, email: newUser.email}, 'name email', 
+exports.employerReadInfo = function(req, res){
+  var employer = new Employer(req.body);
+  Employer.findOne({name: employer.name, email: employer.email}, 'name email', 
     function (err, result) {
       if (err) {
         console.log("ERROR - read worker info aborted!!");
@@ -156,19 +144,6 @@ exports.workerReadInfo = function(req, res){
 exports.sessionData = function(req,res){
   res.json(req.user);
 }
-
-  // exports.dothings = function(req,res){
-  //   console.log(req.user.email)
-  //   console.log(req.user);
-  //   console.log(req.body);
-  //   res.writeHead(200);
-  //   res.end();
-  // }
-
-// exports.getProfile = function(req,res){
-//   res.json(req.session.askedBefore);
-//   req.session.askedBefore = true;
-// };
 
 
 

@@ -1,24 +1,34 @@
 var home = require('../controllers/index.js');
 var user = require('../controllers/user.js');
+var employer = require('../controllers/employer.js');
 
-module.exports = function(app,passport){
+module.exports = function(app,passport, passportEmployer){
   app.get('/', home.index);
   app.post('/worker-signup-initial', home.workerSignupInitial);
   app.get('/worker-sign-up/checkEmail', home.checkEmailIfExists);
   app.get('/worker-signup-initial/:token', home.workerSignupVerify);
-  //app.post('/worker-signup-complete', home.workerSignupComplete);
   app.get('/worker-signup', home.workerReadInfo);
   app.get('/worker-login-success', home.loginSuccess);
   app.get('/worker-login-fail', home.loginFail);
-  // app.get('/getProfile', home.getProfile);
-  //app.post('/worker-login', home.workerLogin);
-  app.get('/sessionData', home.sessionData);
   app.post("/worker-login", 
     passport.authenticate('local',{
   	  successRedirect : "#/workerPortal",
   		failureRedirect : "#/worker-login-fail"
   	})
   );
-  app.get('/collections/:collectionName', home.index);
   app.post('/worker-updateInfo', home.updateInfo);
+
+  app.post('/employer-signup-initial', employer.employerSignupInitial);
+  app.get('/employer-sign-up/checkEmail', employer.checkEmailIfExists);
+  app.get('/employer-signup-initial/:token', employer.employerSignupVerify);
+  app.get('/employer-signup', employer.employerReadInfo);
+  app.get('/employer-login-success', employer.loginSuccess);
+  app.get('/employer-login-fail', employer.loginFail);
+  app.post("/employer-login", 
+    passportEmployer.authenticate('local',{
+      successRedirect : "#/employerPortal",
+      failureRedirect : "#/employer-login-fail"
+    })
+  );
+  app.post('/employer-updateInfo', employer.updateInfo);
 };
