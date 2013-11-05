@@ -27,6 +27,14 @@ var myApp =  angular.module('CCare',[])
           controller: 'wLoginCtrl',
           templateUrl: 'templates/worker-login.html'
         })
+    .when('/employer-login',{
+          controller: 'eLoginCtrl',
+          templateUrl: 'templates/employer-login.html'
+        })
+    .when('/employer-login-fail',{
+          controller: 'eLoginCtrl',
+          templateUrl: 'templates/employer-login-fail.html'
+        })
     .when('/worker-login-fail',{
           controller: 'wLoginCtrl',
           templateUrl: 'templates/worker-login-fail.html'
@@ -220,37 +228,34 @@ var myApp =  angular.module('CCare',[])
     };
 
     $scope.submit = function(){
-      console.log('email check', {email: $scope.email})
-      // $http({
-      //   method: 'GET',
-      //   url: '/employer-sign-up/checkEmail', //REPLACE WITH CORRECT EMAIL
-      //   params: {email: $scope.email}
-      // })
-      //   .success(function(data,status){
-      //     console.log(data)
-      //     if(data){
-      //       $scope.finalizeSignup();
-      //     } else{
-      //       $scope.error1 = 'Error: that email is already in use'
-      //     }
-      //   });
+      $http({
+        method: 'GET',
+        url: '/employer-sign-up/checkEmail', //REPLACE WITH CORRECT EMAIL
+        params: {email: $scope.email}
+      })
+        .success(function(data,status){
+          console.log(data)
+          if(data){
+            $scope.finalizeSignup();
+          } else{
+            $scope.error1 = 'Error: that email is already in use'
+          }
+        });
     };
 
     $scope.finalizeSignup = function(){
       employerApplication = {
         name: $scope.name,
         email: $scope.email,
-        password: $scope.password,
+        password: $scope.password1,
         phone: $scope.phone,
         comments: $scope.comments
       }
-      console.log('final signup',employerApplication)
-      // $http.post('/employer-signup-initial', employerApplication)
-      //   .success(function(data,status){
-      //     $location.path('/verifyEmail');
-      // });      
+      $http.post('/employer-signup-initial', employerApplication)
+        .success(function(data,status){
+          $location.path('/verifyEmail');
+      });
     }
-
   })
   .controller('LoginController',function($scope, $http, $location, loginFactory){
     $scope.currentUser = loginFactory.getLoggedInUser();
@@ -265,6 +270,18 @@ var myApp =  angular.module('CCare',[])
         password: $scope.password
       };
       $http.post('/worker-login', obj).success(function(data,data2){
+        console.log(data)
+        console.log(data2);
+      })
+    };
+  })
+  .controller('eLoginCtrl'  ,function($scope, $http, $location){
+    $scope.submit = function(){
+      var obj = {
+        email: $scope.email,
+        password: $scope.password
+      };
+      $http.post('/employer-login', obj).success(function(data,data2){
         console.log(data)
         console.log(data2);
       })

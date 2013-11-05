@@ -36,7 +36,7 @@ exports.employerSignupVerify = function(req, res){
           phone: result.phone
         });
         console.log("RESULT***",result);
-        Employer.findOne({email: newUser}, 'email', 
+        Employer.findOne({email: newUser}, 'emaierl', 
           function (err, result) {
             if (err) {
               console.log("ERROR - creating employerSignupVerify user aborted!!");
@@ -68,7 +68,7 @@ exports.employerSignupInitial = function(req, res){
     token: ''
   });
   var token;
-
+  console.log(req.body);
   function createToken(){
     var deferred = q.defer();
     crypto.randomBytes(20, function(ex, buf) {
