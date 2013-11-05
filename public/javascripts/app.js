@@ -5,7 +5,7 @@ var myApp =  angular.module('CCare',[])
           templateUrl: 'templates/index.html'
         })
     .when('/employer-registration',{
-          controller: 'employerRegCtrl',
+          controller: 'empRegCtrl',
           templateUrl: 'templates/employer-registration.html'
         })
     .when('/worker-registration',{
@@ -206,18 +206,13 @@ var myApp =  angular.module('CCare',[])
       $location.path('workerPortal')
     }
   })
-  .controller('employerRegCtrl',function($scope,$http, workerApplication, $location){
+  .controller('empRegCtrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
       if($scope.name){
         $scope.error1 = ''
         if($scope.password1===$scope.password2 && $scope.password1){
           $scope.error2 = ''
           if($scope.email){
-            workerApplication['name'] = $scope.name;
-            workerApplication['password'] = $scope.password1;
-            workerApplication['email'] = $scope.email;
-            console.log($scope.phone);
-            workerApplication['phone'] = $scope.phone;
             $scope.submit();
           } else{$scope.error3 = 'Error: You must enter an email';}
         } else{$scope.error1 = 'Error: Your passwords do not match';}
@@ -225,26 +220,35 @@ var myApp =  angular.module('CCare',[])
     };
 
     $scope.submit = function(){
-      $http({
-        method: 'GET',
-        url: '/worker-sign-up/checkEmail', 
-        params: {email: workerApplication.email}
-      })
-        .success(function(data,status){
-          console.log(data)
-          if(data){
-            $scope.finalizeSignup();
-          } else{
-            $scope.error1 = 'Error: that email is already in use'
-          }
-        });
+      console.log('email check', {email: $scope.email})
+      // $http({
+      //   method: 'GET',
+      //   url: '/employer-sign-up/checkEmail', //REPLACE WITH CORRECT EMAIL
+      //   params: {email: $scope.email}
+      // })
+      //   .success(function(data,status){
+      //     console.log(data)
+      //     if(data){
+      //       $scope.finalizeSignup();
+      //     } else{
+      //       $scope.error1 = 'Error: that email is already in use'
+      //     }
+      //   });
     };
 
     $scope.finalizeSignup = function(){
-      $http.post('/worker-signup-initial', workerApplication)
-        .success(function(data,status){
-          $location.path('/verifyEmail');
-      });      
+      employerApplication = {
+        name: $scope.name,
+        email: $scope.email,
+        password: $scope.password,
+        phone: $scope.phone,
+        comments: $scope.comments
+      }
+      console.log('final signup',employerApplication)
+      // $http.post('/employer-signup-initial', employerApplication)
+      //   .success(function(data,status){
+      //     $location.path('/verifyEmail');
+      // });      
     }
 
   })

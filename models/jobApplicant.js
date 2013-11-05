@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-// var hash = require('../util/hash');
 var passwordHash = require('password-hash');
 
 var jobApplicantSchema = mongoose.Schema({
