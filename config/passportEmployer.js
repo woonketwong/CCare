@@ -8,6 +8,10 @@ module.exports = function (passport, config) {
 	  done(null, user.id);
   });
 
+  passport.testing = function(){
+    console.log("*************In passportEmployer");
+  };
+
   passport.deserializeUser(function(id, done) {
 	  Employer.findOne({ _id: id }, function (err, user) {
   	  done(err, user);
