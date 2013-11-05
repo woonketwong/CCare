@@ -2,7 +2,7 @@ var home = require('../controllers/index.js');
 var user = require('../controllers/user.js');
 var employer = require('../controllers/employer.js');
 
-module.exports = function(app,passport, passportEmployer){
+module.exports = function(app,passport){
   app.get('/', home.index);
   app.post('/worker-signup-initial', home.workerSignupInitial);
   app.get('/worker-sign-up/checkEmail', home.checkEmailIfExists);
@@ -11,7 +11,7 @@ module.exports = function(app,passport, passportEmployer){
   app.get('/worker-login-success', home.loginSuccess);
   app.get('/worker-login-fail', home.loginFail);
   app.post("/worker-login", 
-    passport.authenticate('user',{
+    passport.authenticate('jobApplicant',{
   	  successRedirect : "#/workerPortal",
   		failureRedirect : "#/worker-login-fail"
   	})
@@ -25,7 +25,7 @@ module.exports = function(app,passport, passportEmployer){
   app.get('/employer-login-success', employer.loginSuccess);
   app.get('/employer-login-fail', employer.loginFail);
   app.post("/employer-login", 
-    passportEmployer.authenticate('employer',{
+    passport.authenticate('employer',{
       successRedirect : "#/employerPortal",
       failureRedirect : "#/employer-login-fail"
     })
