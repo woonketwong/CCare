@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var JobApplicant = mongoose.model('JobApplicant');
+var Employer = mongoose.model('Employer');
 var LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function (passport, config) {
@@ -28,7 +29,7 @@ module.exports = function (passport, config) {
     passwordField: 'password'
   },
   function(email, password, done) {
-    JobApplicant.isValidUserPassword(email, password, done);
+    Employer.isValidUserPassword(email, password, done);
   }));
 
 }

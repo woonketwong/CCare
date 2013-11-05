@@ -81,6 +81,8 @@ app.use(function(req, res, next){
   res.type('txt').send('Not found');
 });
 
+router(app, passport);
+
 http.createServer(app).listen(port, function(){
   console.log('Express server listening on port ' + port);
 });
