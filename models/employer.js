@@ -26,7 +26,7 @@ employerSchema.statics.signup = function(name, email, password, phone, comments,
   });
 }
 
-employerSchema.statics.isValidEmployerPassword = function(email, rawPassword, done) {
+employerSchema.statics.isValidUserPassword = function(email, rawPassword, done) {
   console.log("is valid employer password")
   this.findOne({email : email}, 'email password', function(err, data){
     console.log(data)
