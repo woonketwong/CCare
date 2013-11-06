@@ -14,7 +14,6 @@ var port = process.env.PORT || 5000;
 var app = express();
 var fs = require('fs');
 var flash = require("connect-flash");
-var _= require("underscore");
 
 ////////////////////////////////////////
 //Database initialization

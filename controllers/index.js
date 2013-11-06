@@ -170,11 +170,3 @@ exports.sessionData = function(req,res){
 //   req.session.askedBefore = true;
 // };
 
-
-
-
-
-
-
-
-

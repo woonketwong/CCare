@@ -1,6 +1,7 @@
 var home = require('../controllers/index.js');
 var user = require('../controllers/user.js');
 var employer = require('../controllers/employer.js');
+var jobPost = require('../controllers/jobPost.js');
 
 module.exports = function(app,passport){
   app.get('/', home.index);
@@ -31,4 +32,6 @@ module.exports = function(app,passport){
     })
   );
   app.post('/employer-updateInfo', employer.updateInfo);
+
+  app.post('/jobPost', jobPost.write);
 };

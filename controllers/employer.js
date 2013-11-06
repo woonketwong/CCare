@@ -36,7 +36,7 @@ exports.employerSignupVerify = function(req, res){
           phone: result.phone
         });
         console.log("RESULT***",result);
-        Employer.findOne({email: newUser}, 'emaierl', 
+        Employer.findOne({email: newUser}, 'email', 
           function (err, result) {
             if (err) {
               console.log("ERROR - creating employerSignupVerify user aborted!!");
