@@ -15,7 +15,6 @@ var app = express();
 var fs = require('fs');
 var flash = require("connect-flash");
 
-
 ////////////////////////////////////////
 //Database initialization
 ////////////////////////////////////////
