@@ -10,9 +10,16 @@ module.exports = function (passport, config) {
   });
 
   passport.deserializeUser(function(id, done) {
-	  JobApplicant.findOne({ _id: id }, function (err, user) {
-  	  done(err, user);
-	 });
+
+    if (Employer.find({"_id": id}).count()){
+      Employer.findOne({ _id: id }, function (err, user) {
+        done(err, user);
+      });
+    } else {
+	    JobApplicant.findOne({ _id: id }, function (err, user) {
+  	    done(err, user);
+      });
+	  }
   });
 
   passport.use('jobApplicant', new LocalStrategy({
