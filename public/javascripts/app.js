@@ -27,14 +27,6 @@ var myApp =  angular.module('CCare',[])
           controller: 'wLoginCtrl',
           templateUrl: 'templates/worker-login.html'
         })
-    .when('/employer-login',{
-          controller: 'eLoginCtrl',
-          templateUrl: 'templates/employer-login.html'
-        })
-    .when('/employer-login-fail',{
-          controller: 'eLoginCtrl',
-          templateUrl: 'templates/employer-login-fail.html'
-        })
     .when('/worker-login-fail',{
           controller: 'wLoginCtrl',
           templateUrl: 'templates/worker-login-fail.html'
@@ -53,6 +45,20 @@ var myApp =  angular.module('CCare',[])
     .when('/worker-registration4',{
           controller: 'reg4Ctrl',
           templateUrl: 'templates/worker-registration4.html'
+        })
+    .when('/employer-login',{
+          controller: 'eLoginCtrl',
+          templateUrl: 'templates/employer-login.html'
+        })
+    .when('/employer-login-fail',{
+          controller: 'eLoginCtrl',
+          templateUrl: 'templates/employer-login-fail.html'
+        })
+    .when('/employerPortal',{
+          templateUrl: 'templates/employerPortal.html'
+        })
+    .when('/postJob',{
+          templateUrl: 'templates/postJob.html'
         });
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
