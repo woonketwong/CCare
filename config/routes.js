@@ -18,6 +18,8 @@ module.exports = function(app,passport){
   );
   app.post('/worker-updateInfo', home.updateInfo);
 
+  app.get('/asdf', home.sessionData);
+
   app.post('/employer-signup-initial', employer.employerSignupInitial);
   app.get('/employer-sign-up/checkEmail', employer.checkEmailIfExists);
   app.get('/employer-signup-initial/:token', employer.employerSignupVerify);

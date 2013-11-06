@@ -58,6 +58,7 @@ var myApp =  angular.module('CCare',[])
           templateUrl: 'templates/employerPortal.html'
         })
     .when('/postJob',{
+          controller: 'postJobCtrl',
           templateUrl: 'templates/postJob.html'
         });
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
@@ -300,6 +301,28 @@ var myApp =  angular.module('CCare',[])
         console.log(data2);
       })
     };
+  })
+  .controller('postJobCtrl',function($scope, $http, $location){
+    var job = {};
+    job.positionName = $scope.positionName;
+    job.duties = $scope.duties;
+    job.longitude = 45;
+    job.latitude = 90;
+    job.experience.education = $scope.education;
+    job.experience.Alzheimers = $scope.Alzheimers;
+    job.experience.Handicapped = $scope.Handicapped;
+    job.experience.Hospice = $scope.Hospice
+    job.experience.Gastronomy = $scope.Gastronomy
+    job.experience.Breathing = $scope.Breathing;
+    job.experience.Hoyer = $scope.Hoyer;
+    job.experience.SpecialMeal = $scope.SpecialMeal;
+    job.experience.ChildCare = $scope.ChildCare;
+    job.experience.Psychiatric = $scope.Psychiatric;
+    job.experience.Geriatric = $scope.Geriatric;
+    job.experience.Homecare = $scope.Homecare;
+    job.experience.AssistedLiving = $scope.AssistedLiving
+
+
   })
   .service('workerProfile', function () {
       //return object

@@ -154,6 +154,8 @@ exports.workerReadInfo = function(req, res){
 };
 
 exports.sessionData = function(req,res){
+  console.log("user",req.user);
+  console.log("session",req.session);
   res.json(req.user);
 }
 
