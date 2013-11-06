@@ -7,13 +7,13 @@ exports.write = function(req, res){
   console.log('REQ Body:', req.body);
 
   var newJobPost = new JobPost(req.body);
-
+  console.log("req.user LOG:", req.user)
   newJobPost.employerId = req.user._id;
   newJobPost.save(function (err, data) {
     if (err) {
   	  console.log("ERROR in creating job post!!!");
       res.writeHead(403);
-      res.end('error');
+      res.end('error in creating job post');
     } else {
       console.log('** Job post is created successfully ** ');
       res.redirect('#/employerPortal');

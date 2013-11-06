@@ -304,6 +304,7 @@ var myApp =  angular.module('CCare',[])
   })
   .controller('postJobCtrl',function($scope, $http, $location){
     var job = {};
+    job.experience = {};
     job.positionName = $scope.positionName;
     job.duties = $scope.duties;
     job.longitude = 45;
@@ -322,7 +323,11 @@ var myApp =  angular.module('CCare',[])
     job.experience.Homecare = $scope.Homecare;
     job.experience.AssistedLiving = $scope.AssistedLiving
 
-
+    $scope.submit = function(){
+      $http.post('/jobPost',job).error(function(err){
+        if(err) console.log(err);
+      });
+    }
   })
   .service('workerProfile', function () {
       //return object

@@ -34,6 +34,5 @@ module.exports = function(app,passport){
     })
   );
   app.post('/employer-updateInfo', employer.updateInfo);
-
   app.post('/jobPost', jobPost.write);
 };
