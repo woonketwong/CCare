@@ -305,26 +305,29 @@ var myApp =  angular.module('CCare',[])
   .controller('postJobCtrl',function($scope, $http, $location){
     var job = {};
     job.experience = {};
-    job.positionName = $scope.positionName;
-    job.duties = $scope.duties;
-    job.longitude = 45;
-    job.latitude = 90;
-    job.experience.education = $scope.education;
-    job.experience.Alzheimers = $scope.Alzheimers;
-    job.experience.Handicapped = $scope.Handicapped;
-    job.experience.Hospice = $scope.Hospice
-    job.experience.Gastronomy = $scope.Gastronomy
-    job.experience.Breathing = $scope.Breathing;
-    job.experience.Hoyer = $scope.Hoyer;
-    job.experience.SpecialMeal = $scope.SpecialMeal;
-    job.experience.ChildCare = $scope.ChildCare;
-    job.experience.Psychiatric = $scope.Psychiatric;
-    job.experience.Geriatric = $scope.Geriatric;
-    job.experience.Homecare = $scope.Homecare;
-    job.experience.AssistedLiving = $scope.AssistedLiving
 
     $scope.submit = function(){
-      $http.post('/jobPost',job).error(function(err){
+      job.positionName = $scope.positionName;
+      job.duties = $scope.duties;
+      job.longitude = 45;
+      job.latitude = 90;
+      job.experience.education = $scope.education;
+      job.experience.Alzheimers = $scope.Alzheimers;
+      job.experience.Handicapped = $scope.Handicapped;
+      job.experience.Hospice = $scope.Hospice
+      job.experience.Gastronomy = $scope.Gastronomy
+      job.experience.Breathing = $scope.Breathing;
+      job.experience.Hoyer = $scope.Hoyer;
+      job.experience.SpecialMeal = $scope.SpecialMeal;
+      job.experience.ChildCare = $scope.ChildCare;
+      job.experience.Psychiatric = $scope.Psychiatric;
+      job.experience.Geriatric = $scope.Geriatric;
+      job.experience.Homecare = $scope.Homecare;
+      job.experience.AssistedLiving = $scope.AssistedLiving
+
+      $http.post('/jobPost',job).success(function(){
+        $location.path('/employerPortal');
+      }).error(function(err){
         if(err) console.log(err);
       });
     }
