@@ -4,12 +4,8 @@ var JobPost = require('../models/jobPost.js');
 
 exports.write = function(req, res){
   
-  console.log('REQ Body:', req.body);
-  console.log("req.user LOG:", req.user);
-  console.log("req.session LOG:", req.session);
-
   var newJobPost = new JobPost(req.body);
-  newJobPost.employerId = req.user._id;
+  newJobPost.employerID = req.user._id;
   newJobPost.save(function (err, data) {
     if (err) {
   	  console.log("ERROR in creating job post!!!");
@@ -21,5 +17,21 @@ exports.write = function(req, res){
     }
   });
 }
+
+exports.read = function(req, res){
+  JobPost.find({employerID: req.user._id},
+    function (err, result) {
+      console.log("Job Post Read Result:", result);
+      if (err) {
+        console.log("ERROR - reading employer job post aborted!!");
+	    res.writeHead(500);
+	    res.end();
+	  } else {
+	    console.log("Success in reading employer job post");
+	    res.send(result);
+	  }
+  });
+}
+
 
 
