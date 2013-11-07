@@ -314,12 +314,25 @@ var myApp =  angular.module('CCare',[])
   .controller('postJobCtrl',function($scope, $http, $location){
     var job = {};
     job.experience = {};
+    var longitude, latitude;
 
     $scope.submit = function(){
+      var street = $scope.street.replace(/ /g,"+");
+      var cityStateZip = $scope.cityStateZip.replace(/ /g,"+");
+      $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true')
+        .success(function(data) {
+          console.log('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true');
+          latitude = data.results[0].geometry.location.lat;
+          longitude = data.results[0].geometry.location.lng;
+          $scope.postJob();
+        })
+    }
+
+    $scope.postJob = function(){
       job.positionName = $scope.positionName;
       job.duties = $scope.duties;
-      job.longitude = 45;
-      job.latitude = 90;
+      job.longitude = longitude;
+      job.latitude = latitude;
       job.experience.education = $scope.education;
       job.experience.Alzheimers = $scope.Alzheimers;
       job.experience.Handicapped = $scope.Handicapped;
