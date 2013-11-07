@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container" ng-controller="ePortalCtrl">
 
 <div>
   <div class="well hero-spacer">
@@ -10,10 +10,16 @@
     </div>
 
     <table class="table">
-      <th>
-        <tr>
-        </tr>
-      </th>
+      <tr>
+        <th>Position Number</th>
+        <th>Position Name</th>
+        <th>Duties</th>
+      </tr>
+      <tr ng-repeat="job in jobs">
+        <td>[{{#index+1}}]</td>
+        <td>{{job.positionName}}</td>
+        <td>{{job.duties}}</td>
+      </tr>
     </table>
   </div>
 </div>
