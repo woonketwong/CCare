@@ -305,7 +305,7 @@ var myApp =  angular.module('CCare',[])
   })
   .controller('ePortalCtrl'  ,function($scope, $http, $location){
     $scope.getJobData = function(){
-      $http.get('/jobData').success(function(data,data2){
+      $http.get('/jobPost').success(function(data,data2){
         console.log(data)
         console.log(data2);
       })
