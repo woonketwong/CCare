@@ -10,18 +10,22 @@ module.exports = function (passport, config) {
   });
 
   passport.deserializeUser(function(id, done) {
-
-    if (Employer.find({"_id": id}).count()){
-      Employer.findOne({ _id: id }, function (err, user) {
-        done(err, user);
-      });
-    } else {
-	    JobApplicant.findOne({ _id: id }, function (err, user) {
-  	    done(err, user);
-      });
-	  }
+    Employer.where({ "_id": id }).count(function (err, count) {
+      if (err) return console.log("deseriazelizeUser Error!!");
+      
+      console.log("****Count:", count);
+      if (count){
+        Employer.findOne({ "_id": id }, function (err, user) {
+          done(err, user);
+        });
+      } else {
+        JobApplicant.findOne({ "_id": id }, function (err, user) {
+         done(err, user);
+        });
+      }
+    })
   });
-
+  
   passport.use('jobApplicant', new LocalStrategy({
 	  usernameField: 'email',
 	  passwordField: 'password'

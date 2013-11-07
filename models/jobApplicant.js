@@ -20,6 +20,8 @@ var jobApplicantSchema = mongoose.Schema({
         CNA: Boolean
       },
       fullTime: Boolean,
+      longitude: Number,
+      latitude: Number,
       partTime: Boolean,
       dayShift: Boolean,
       nightShift: Boolean,

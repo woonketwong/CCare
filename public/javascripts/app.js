@@ -112,19 +112,15 @@ var myApp =  angular.module('CCare',[])
     $scope.LPN = false;
     $scope.CNA = false;
     $scope.doAddress = function(){
-      $http.defaults.useXDomain = true;
-      $http({
-
-        url: "http://maps.googleapis.com/maps/api/geocode/json",
-        method: "GET",
-        params: {
-          address : $scope.street + " " + $scope.cityStateZip
-          }
-        }).success(function(data1,data2){
-          console.log(data1);
-          console.log(data2);
+      var street = $scope.street.replace(/ /g,"+");
+      var cityStateZip = $scope.cityStateZip.replace(/ /g,"+");
+      $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true')
+        .success(function(data) {
+          console.log('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true');
+          workerProfile.preferences.latitude = data.results[0].geometry.location.lat;
+          workerProfile.preferences.longitude = data.results[0].geometry.location.lng;
         })
-    };
+    }
     $scope.processFormData = function(){
       try{
         if($scope.hourlyRate) workerProfile.preferences.hourlyRate = parseInt($scope.hourlyRate.replace('$',''));
@@ -155,6 +151,7 @@ var myApp =  angular.module('CCare',[])
         }
       }catch(e){}
       
+      $scope.doAddress();
       $location.path('/worker-registration3');
     }
     
