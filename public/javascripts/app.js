@@ -55,7 +55,7 @@ var myApp =  angular.module('CCare',[])
           templateUrl: 'templates/employer-login-fail.html'
         })
     .when('/employerPortal',{
-          controller:'ePortalCtrl'
+          controller:'ePortalCtrl',
           templateUrl: 'templates/employerPortal.html'
         })
     .when('/postJob',{
@@ -305,9 +305,8 @@ var myApp =  angular.module('CCare',[])
   })
   .controller('ePortalCtrl'  ,function($scope, $http, $location){
     $scope.getJobData = function(){
-      $http.get('/jobPost').success(function(data,data2){
-        console.log(data)
-        console.log(data2);
+      $http.get('/jobPost').success(function(data){
+        $scope.jobs = data;
       })
     };
     $scope.jobs = $scope.getJobData();
