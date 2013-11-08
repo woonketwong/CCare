@@ -143,6 +143,16 @@ exports.employerReadInfo = function(req, res){
 
 exports.sessionData = function(req,res){
   res.json(req.user);
+};
+
+
+exports.listEmployers = function(req,res){
+  console.log('hi')
+  Employer.find({},'name _id', function(err,result){
+    if(err) console.log(err);
+    console.log(result);
+    res.json(result);
+  })
 }
 
 

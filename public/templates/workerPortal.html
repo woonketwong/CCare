@@ -4,12 +4,38 @@
   <div class="well hero-spacer">
     <h3>Employee Portal</h3>
   </div>
-  <div class="row">
     <div class="well">
       <a href="#/worker-registration2">Update Your Profile</a>
-      <button class="btn" ng-click="sessionData()">get session data</button>
     </div>
-  </div>
 </div>
 
+<div ng-controller="jobListCtrl">
 
+
+
+  <span> I am looking for jobs within...</span>
+    <select class="searchField" ng-model="range">
+            <option>up to 5 miles</option>
+            <option>up to 10 miles</option>
+            <option>up to 20 miles</option>
+            <option>up to 30 miles</option>
+            <option>up to 50 miles</option>
+    </select>
+
+  <span> of... </span>
+  <input type="text" ng-model="loc" class="form-control searchField searchInput" placeholder="Your Location">
+  <button ng-click="search()">search</button>
+  <table class="table">
+    <tr>
+      <th>Position Number</th>
+      <th>Position Name</th>
+      <th>Duties</th>
+    </tr>
+    <tr ng-repeat="job in jobs">
+      <td>[{{$index+1}}]</td>
+      <td>{{job.positionName}}</td>
+      <td>{{job.duties}}</td>
+  </table>
+</div>
+
+<!-- location, company name, full time/part time, pay rate, benefit, facility or agency -->

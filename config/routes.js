@@ -11,6 +11,8 @@ module.exports = function(app,passport){
   app.get('/worker-signup', home.workerReadInfo);
   app.get('/worker-login-success', home.loginSuccess);
   app.get('/worker-login-fail', home.loginFail);
+
+  app.get('/allJobPost', home.allJobsList);
   app.post("/worker-login", 
     passport.authenticate('jobApplicant',{
   	  successRedirect : "#/workerPortal",
@@ -31,6 +33,8 @@ module.exports = function(app,passport){
       failureRedirect : "#/employer-login-fail"
     })
   );
+
+  app.get('/listEmployers', employer.listEmployers)
   app.post('/employer-updateInfo', employer.updateInfo);
   app.get('/sessionData', home.sessionData)
   app.post('/jobPost', jobPost.write);

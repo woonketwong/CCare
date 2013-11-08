@@ -61,7 +61,11 @@ var myApp =  angular.module('CCare',[])
     .when('/postJob',{
           controller: 'postJobCtrl',
           templateUrl: 'templates/postJob.html'
-        });
+        })
+    .when('/listEmployers',{
+          controller: 'listEmployersCtrl',
+          templateUrl: 'templates/listEmployers.html'
+        })
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
       if($scope.name){
@@ -292,13 +296,10 @@ var myApp =  angular.module('CCare',[])
       })
     };
   })
-  .controller('wPortalCtrl'  ,function($scope, $http, $location){
-    $scope.sessionData = function(){
-      $http.get('/sessionData').success(function(data,data2){
-        console.log(data)
-        console.log(data2);
-      })
-    };
+  .controller('wPortalCtrl'  ,function($scope, $http, $location, serialize){
+
+
+
   })
   .controller('ePortalCtrl'  ,function($scope, $http, $location){
     $scope.getJobData = function(){
@@ -306,6 +307,29 @@ var myApp =  angular.module('CCare',[])
         $scope.jobs = data;
       })
     };
+    $scope.jobs = $scope.getJobData();
+  })
+  .controller('jobListCtrl'  ,function($scope, $http, $location, serialize){
+    $scope.getJobData = function(){
+      $http.get('/allJobPost').success(function(data){
+        $scope.jobs = data;
+      })
+    };
+    $scope.search = function(){
+      console.log($scope.loc);
+      var loc = $scope.loc.replace(/ /g,"+");
+      $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + loc +  '&sensor=true')
+        .success(function(data) {
+          var obj = {};
+          obj.lat = data.results[0].geometry.location.lat;
+          obj.lng = data.results[0].geometry.location.lng;
+          $http.get('/searchJobs?'+serialize(obj), {'aa': '123'})
+            .success(function(data){
+              $scope.jobs = data
+          })
+      })
+    }
+      
     $scope.jobs = $scope.getJobData();
   })
   .controller('postJobCtrl',function($scope, $http, $location){
@@ -327,9 +351,12 @@ var myApp =  angular.module('CCare',[])
 
     $scope.postJob = function(){
       job.positionName = $scope.positionName;
+      job.yearsExperience = $scope.yearsExperience
+      job.hourlyRate = $scope.hourlyRate
       job.duties = $scope.duties;
       job.longitude = longitude;
       job.latitude = latitude;
+      job.positionType = $scope.positionType;
       job.experience.education = $scope.education;
       job.experience.Alzheimers = $scope.Alzheimers;
       job.experience.Handicapped = $scope.Handicapped;
@@ -377,6 +404,15 @@ var myApp =  angular.module('CCare',[])
       return deferred.promise;
     };
     return factory;
+  })
+  .factory('serialize',function(){
+    return function(obj) {
+        var str = [];
+        for(var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
+      }
+
   });
 
 myApp.config(['$httpProvider', function($httpProvider) {

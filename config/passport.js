@@ -12,8 +12,6 @@ module.exports = function (passport, config) {
   passport.deserializeUser(function(id, done) {
     Employer.where({ "_id": id }).count(function (err, count) {
       if (err) return console.log("deseriazelizeUser Error!!");
-      
-      console.log("****Count:", count);
       if (count){
         Employer.findOne({ "_id": id }, function (err, user) {
           done(err, user);
@@ -25,7 +23,7 @@ module.exports = function (passport, config) {
       }
     })
   });
-  
+
   passport.use('jobApplicant', new LocalStrategy({
 	  usernameField: 'email',
 	  passwordField: 'password'

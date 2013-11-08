@@ -7,6 +7,8 @@ var q = require('q');
 var JobApplicant = require('../models/jobApplicant.js');
 var EmailToken = require('../models/emailToken.js');
 var sendEmail = require('../util/sendEmail.js');
+var JobPost = require('../models/jobPost.js');
+
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
@@ -158,6 +160,23 @@ exports.sessionData = function(req,res){
   console.log("session",req.session);
   res.json(req.user);
 }
+
+exports.allJobsList = function(req,res){
+  JobPost.find(
+    function (err, result) {
+      console.log("Job Post Read Result:", result);
+      if (err) {
+        console.log("ERROR - reading employer job post aborted!!");
+      res.writeHead(500);
+      res.end();
+    } else {
+      console.log("Success in reading employer job post");
+      res.send(result);
+    }
+  });
+}
+
+
 
   // exports.dothings = function(req,res){
   //   console.log(req.user.email)

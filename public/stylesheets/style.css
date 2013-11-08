@@ -57,3 +57,12 @@ select {
   word-spacing: 0px;
   writing-mode: lr-tb;
 }
+
+.searchField{
+  display:inline;
+  width: 30%;
+}
+
+.searchInput{
+  margin-bottom: 10px;
+}
