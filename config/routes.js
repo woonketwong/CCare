@@ -39,4 +39,6 @@ module.exports = function(app,passport){
   app.get('/sessionData', home.sessionData)
   app.post('/jobPost', jobPost.write);
   app.get('/jobPost', jobPost.read);
+
+  app.get('/searchJobs', jobPost.employeeRead);
 };

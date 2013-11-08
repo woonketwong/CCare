@@ -8,6 +8,7 @@ var jobApplicantSchema = mongoose.Schema({
     account: String,
     phone: String,
     accountCreated: Boolean,
+    coords: { type: [], index: '2dsphere'},
     preferences: {
       hourlyRate: Number, 
       dailyRate: Number,
@@ -135,5 +136,20 @@ jobApplicantSchema.statics.isValidUserPassword = function(email, rawPassword, do
   });
 };
 
+jobApplicantSchema.pre('save', function (next) {
+  if (this.isNew && Array.isArray(this.coords) && 0 === this.coords.length) {
+    this.coords = undefined;
+  }
+  next();
+})
+
 var JobApplicant = mongoose.model('JobApplicant', jobApplicantSchema);
 module.exports = JobApplicant;
+
+
+
+
+
+
+
+

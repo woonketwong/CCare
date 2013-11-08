@@ -53,7 +53,7 @@ exports.workerSignupVerify = function(req, res){
             if (result === null) { // create user
               console.log('result is null, we are creating a new user');
               newUser.save(function (err, data) {
-                if (err) console.log("ERR!!!");
+                if (err) console.log("ERR!!! - ",err);
                   console.log('** workerSignupVerify is successful ** ');
                   console.log("Result Obj***", data);
                   res.redirect('#/worker-login?email='+newUser.email);
@@ -126,9 +126,10 @@ exports.workerSignup = function(req, res){
 
 exports.updateInfo = function(req, res){
   // to do - data validation
+  req.body.coords = [req.body.preferences.longitude, req.body.preferences.latitude];
   JobApplicant.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
     if (err){
-      console.log("ERROR in updating Info");
+      console.log("ERROR in updating Info - ", err);
       res.writeHead(400);
     } else {
       console.log("SUCCESS in updating info")
