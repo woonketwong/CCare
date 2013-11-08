@@ -312,6 +312,7 @@ var myApp =  angular.module('CCare',[])
         $scope.jobs = data;
       })
     };
+
     $scope.search = function(){
       var loc = $scope.loc.replace(/ /g,"+");
       var range = $scope.range.split(' ')[2]
@@ -323,7 +324,8 @@ var myApp =  angular.module('CCare',[])
           obj.lng = data.results[0].geometry.location.lng;
           $http.get('/searchJobs?'+serialize(obj), {'aa': '123'})
             .success(function(data){
-              $scope.jobs = data
+              $scope.jobs = data;
+              $scope.locationLookup
           })
       })
     }
@@ -348,9 +350,11 @@ var myApp =  angular.module('CCare',[])
 
     $scope.postJob = function(){
       job.positionName = $scope.positionName;
-      job.yearsExperience = $scope.yearsExperience
-      job.hourlyRate = $scope.hourlyRate
+      job.yearsExperience = $scope.yearsExperience;
+      job.hourlyRate = $scope.hourlyRate;
+      job.cityState = $scope.cityStateZip;
       job.duties = $scope.duties;
+      job.employerType = $scope.employerType;
       job.longitude = longitude;
       job.latitude = latitude;
       job.positionType = $scope.positionType;

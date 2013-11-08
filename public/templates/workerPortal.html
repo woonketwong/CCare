@@ -32,10 +32,48 @@
       <th>Duties</th>
     </tr>
     <tr ng-repeat="job in jobs">
-      <td>[{{$index+1}}]</td>
-      <td>{{job.positionName}}</td>
-      <td>{{job.duties}}</td>
+      <div>Company Name: <span>Allertech</span></div>
+      <div>Job Title: <span>{{job.positionName}}</span></div>
+      <div>Employment Type: <span>{{job.positionType}}</span></div>
+      <div>Description: <span>{{job.duties}}</span></div>
+      <div>Location: <span>{{job.cityStateZip}}</span></div>
+      <div>Facility or Agency: <span>{{job.employerType}}</span></div>
+    </tr>
   </table>
 </div>
 
-<!-- location, company name, full time/part time, pay rate, benefit, facility or agency -->
+<!-- locationX, company name, full time/part timeX, pay rateX, benefit, facility or agencyX -->
+
+
+  employerID: String,
+  positionName: String,
+  duties: String,
+  longitude: Number,
+  latitude: Number,
+  hourlyRate: String,
+  yearsExperience: String,
+  positionType: String,
+  experience: {
+    education: String,
+    Alzheimers: Boolean,
+    Handicapped: Boolean,
+    Hospice: Boolean,
+    Gastronom: Boolean,
+    Breathing: Boolean,
+    Hoyer: Boolean,
+    SpecialMeal: Boolean,
+    ChildCare: Boolean,
+    Psychiatric: Boolean,
+    Geriatric: Boolean,
+    Homecare: Boolean,
+    AssistedLiving: Boolean
+  }
+})
+
+
+
+
+
+
+
+
