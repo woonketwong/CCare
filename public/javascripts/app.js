@@ -297,9 +297,6 @@ var myApp =  angular.module('CCare',[])
     };
   })
   .controller('wPortalCtrl'  ,function($scope, $http, $location, serialize){
-
-
-
   })
   .controller('ePortalCtrl'  ,function($scope, $http, $location){
     $scope.getJobData = function(){
@@ -316,11 +313,12 @@ var myApp =  angular.module('CCare',[])
       })
     };
     $scope.search = function(){
-      console.log($scope.loc);
       var loc = $scope.loc.replace(/ /g,"+");
+      var range = $scope.range.split(' ')[2]
       $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + loc +  '&sensor=true')
         .success(function(data) {
           var obj = {};
+          obj.range = range;
           obj.lat = data.results[0].geometry.location.lat;
           obj.lng = data.results[0].geometry.location.lng;
           $http.get('/searchJobs?'+serialize(obj), {'aa': '123'})
@@ -329,7 +327,6 @@ var myApp =  angular.module('CCare',[])
           })
       })
     }
-      
     $scope.jobs = $scope.getJobData();
   })
   .controller('postJobCtrl',function($scope, $http, $location){
