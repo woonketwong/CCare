@@ -323,6 +323,7 @@ var myApp =  angular.module('CCare',[])
           obj.lng = data.results[0].geometry.location.lng;
           $http.get('/searchJobs?'+serialize(obj), {'aa': '123'})
             .success(function(data){
+              console.log(data);
               $scope.jobs = data
           })
       })
