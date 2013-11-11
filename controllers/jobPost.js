@@ -34,7 +34,7 @@ exports.read = function(req, res){
   });
 };
 
-exports.employeeRead = function(req, res){
+exports.search = function(req, res){
   console.log("***search params from employee:", req.query);
   var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
   var rangeInMeter = req.query.range/3963;
@@ -56,7 +56,7 @@ exports.employeeRead = function(req, res){
   // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
   JobPost
     .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
-    .where({positionName: "Sunnyvale Starbucks"})
+    // .where({positionName: "Sunnyvale Starbucks"})
     .exec(callback);
 };
 
