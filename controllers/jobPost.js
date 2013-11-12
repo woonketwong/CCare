@@ -56,12 +56,12 @@ exports.search = function(req, res){
   // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
   JobPost
     .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
-    // .where({positionName: "Sunnyvale Starbucks"})
+    .where({positionType: req.query.positionType})
+    .where('yearsExperience').gte(req.query.yearsExperience)
     .exec(callback);
 };
 
 // find({geo: { $nearSphere: this.geo, $maxDistance: 0.01} }, cb);
-
 // { 'coords': { $near : { $geometry : { type : 'Point' ,coordinates : coordsArg } }, $maxDistance : rangeInMeter} }
 
 
