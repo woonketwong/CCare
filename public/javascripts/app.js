@@ -330,6 +330,25 @@ var myApp =  angular.module('CCare',[])
     }
     $scope.jobs = $scope.getJobData();
   })
+  .controller('employeeListCtrl'  ,function($scope, $http, $location, serialize){
+    $scope.search = function(){
+      var loc = $scope.loc.replace(/ /g,"+");
+      var range = $scope.range.split(' ')[2]
+      $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + loc +  '&sensor=true')
+        .success(function(data) {
+          var obj = {};
+          obj.range = range;
+          obj.lat = data.results[0].geometry.location.lat;
+          obj.lng = data.results[0].geometry.location.lng;
+          $http.get('/searchEmployees?'+serialize(obj), {'aa': '123'})
+            .success(function(data){
+              console.log(data);
+              $scope.employees = data
+          })
+      })
+    }
+    // $scope.jobs = $scope.getJobData();
+  })
   .controller('postJobCtrl',function($scope, $http, $location){
     var job = {};
     job.experience = {};

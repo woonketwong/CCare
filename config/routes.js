@@ -20,6 +20,7 @@ module.exports = function(app,passport){
   	})
   );
   app.post('/worker-updateInfo', home.updateInfo);
+  app.get('/searchEmployees', home.search);
   
   app.post('/employer-signup-initial', employer.employerSignupInitial);
   app.get('/employer-sign-up/checkEmail', employer.checkEmailIfExists);
@@ -40,5 +41,5 @@ module.exports = function(app,passport){
   app.post('/jobPost', jobPost.write);
   app.get('/jobPost', jobPost.read);
 
-  app.get('/searchJobs', jobPost.employeeRead);
+  app.get('/searchJobs', jobPost.search);
 };
