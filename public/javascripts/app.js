@@ -314,11 +314,16 @@ var myApp =  angular.module('CCare',[])
     };
     $scope.search = function(){
       var loc = $scope.loc.replace(/ /g,"+");
-      var range = $scope.range.split(' ')[2]
+      var range = $scope.range.split(' ')[2];
+      var positionType = $scope.positionType;
+      var yearsExperience = $scope.yearsExperience[0];
       $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + loc +  '&sensor=true')
         .success(function(data) {
           var obj = {};
           obj.range = range;
+          obj.yearsExperience = yearsExperience;
+          obj.positionType = positionType;
+          obj.yearsExperience = yearsExperience;
           obj.lat = data.results[0].geometry.location.lat;
           obj.lng = data.results[0].geometry.location.lng;
           $http.get('/searchJobs?'+serialize(obj), {'aa': '123'})
@@ -334,6 +339,7 @@ var myApp =  angular.module('CCare',[])
     $scope.search = function(){
       var loc = $scope.loc.replace(/ /g,"+");
       var range = $scope.range.split(' ')[2]
+      var positionType = $scope.positionType;
       $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + loc +  '&sensor=true')
         .success(function(data) {
           var obj = {};
