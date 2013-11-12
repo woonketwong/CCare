@@ -11,7 +11,6 @@ module.exports = function(app,passport){
   app.get('/worker-signup', home.workerReadInfo);
   app.get('/worker-login-success', home.loginSuccess);
   app.get('/worker-login-fail', home.loginFail);
-
   app.get('/allJobPost', home.allJobsList);
   app.post("/worker-login", 
     passport.authenticate('jobApplicant',{
@@ -20,7 +19,6 @@ module.exports = function(app,passport){
   	})
   );
   app.post('/worker-updateInfo', home.updateInfo);
-  
   app.post('/employer-signup-initial', employer.employerSignupInitial);
   app.get('/employer-sign-up/checkEmail', employer.checkEmailIfExists);
   app.get('/employer-signup-initial/:token', employer.employerSignupVerify);
