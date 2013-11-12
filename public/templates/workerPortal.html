@@ -11,8 +11,6 @@
 
 <div ng-controller="jobListCtrl">
 
-
-
   <span> I am looking for jobs within...</span>
     <select class="searchField" ng-model="range">
             <option>up to 5 miles</option>
@@ -24,6 +22,22 @@
 
   <span> of... </span>
   <input type="text" ng-model="loc" class="form-control searchField searchInput" placeholder="Your Location">
+  </br>
+  <span>Year of Experience</span>
+    <select class="searchField" ng-model="yearsExperience">
+            <option>1+</option>
+            <option>2+</option>
+            <option>3+</option>
+            <option>4+</option>
+            <option>5+</option>
+    </select>
+  </br>
+  <span> Position Type</span>
+    <select class="searchField" ng-model="positionType">
+            <option>Full Time</option>
+            <option>Part Time</option>
+    </select>
+
   <button ng-click="search()">search</button>
   <table class="table">
     <tr>

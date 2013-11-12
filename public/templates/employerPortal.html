@@ -25,3 +25,31 @@
 </div>
 
 
+<div ng-controller="employeeListCtrl">
+
+  <span> I am looking for employees within...</span>
+    <select class="searchField" ng-model="range">
+            <option>up to 5 miles</option>
+            <option>up to 10 miles</option>
+            <option>up to 20 miles</option>
+            <option>up to 30 miles</option>
+            <option>up to 50 miles</option>
+    </select>
+
+  <span> of... </span>
+  <input type="text" ng-model="loc" class="form-control searchField searchInput" placeholder="Your Location">
+  <button ng-click="search()">search</button>
+  <table class="table">
+    <tr>
+      <th>Employee Name</th>
+      <th>Employee Email</th>
+      <th>Employee Phone</th>
+    </tr>
+    <tr ng-repeat="employee in employees">
+      <td>{{employee.name}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.phone}}</td>
+  </table>
+</div>
+
+

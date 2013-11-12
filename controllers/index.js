@@ -53,7 +53,7 @@ exports.workerSignupVerify = function(req, res){
             if (result === null) { // create user
               console.log('result is null, we are creating a new user');
               newUser.save(function (err, data) {
-                if (err) console.log("ERR!!!");
+                if (err) console.log("ERR!!! - ",err);
                   console.log('** workerSignupVerify is successful ** ');
                   console.log("Result Obj***", data);
                   res.redirect('#/worker-login?email='+newUser.email);
@@ -126,9 +126,10 @@ exports.workerSignup = function(req, res){
 
 exports.updateInfo = function(req, res){
   // to do - data validation
+  req.body.coords = [req.body.preferences.longitude, req.body.preferences.latitude];
   JobApplicant.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
     if (err){
-      console.log("ERROR in updating Info");
+      console.log("ERROR in updating Info - ", err);
       res.writeHead(400);
     } else {
       console.log("SUCCESS in updating info")
@@ -176,7 +177,31 @@ exports.allJobsList = function(req,res){
   });
 }
 
+exports.search = function(req, res){
+  console.log("***search params from employer:", req.query);
+  var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
+  var rangeInMeter = req.query.range/3963;
 
+  console.log("coordsArg:", coordsArg);
+  console.log("rangeInMeter:", rangeInMeter);
+  var callback = function (err, result) {
+      console.log("Employee List:", result);
+      if (err) {
+        console.log("ERROR - reading employee list aborted!! - ", err);
+        res.writeHead(500);
+        res.end();
+      } else {
+        console.log("Success in reading employee list post");
+        res.send(result);
+      }
+  };
+
+  // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
+  JobApplicant
+    .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
+    // .where({positionName: "Sunnyvale Starbucks"})
+    .exec(callback);
+};
 
   // exports.dothings = function(req,res){
   //   console.log(req.user.email)

@@ -11,6 +11,7 @@ var jobPostSchema = mongoose.Schema({
   employerType: String,
   yearsExperience: String,
   positionType: String,
+  coords: { type: [], index: '2d'},
   experience: {
     education: String,
     Alzheimers: Boolean,
@@ -26,7 +27,15 @@ var jobPostSchema = mongoose.Schema({
     Homecare: Boolean,
     AssistedLiving: Boolean
   }
-})
+});
+
+
+jobPostSchema.pre('save', function (next) {
+  if (this.isNew && Array.isArray(this.coords) && 0 === this.coords.length) {
+    this.coords = undefined;
+  }
+  next();
+});
 
 var JobPost = mongoose.model('JobPost', jobPostSchema);
 module.exports = JobPost;
