@@ -2,6 +2,7 @@ var home = require('../controllers/index.js');
 var user = require('../controllers/user.js');
 var employer = require('../controllers/employer.js');
 var jobPost = require('../controllers/jobPost.js');
+var admin = require('../controllers/admin.js')
 
 module.exports = function(app,passport){
   app.get('/', home.index);
@@ -36,6 +37,9 @@ module.exports = function(app,passport){
       failureRedirect : "#/employer-login-fail"
     })
   );
+
+  app.get('/adminPanel', admin.allInfo)
+  app.post('/deleteEntry', admin.deleteEntry);
 
   app.get('/listEmployers', employer.listEmployers)
   app.post('/employer-updateInfo', employer.updateInfo);

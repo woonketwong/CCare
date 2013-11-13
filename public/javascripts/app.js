@@ -66,6 +66,10 @@ var myApp =  angular.module('CCare',[])
           controller: 'listEmployersCtrl',
           templateUrl: 'templates/listEmployers.html'
         })
+    .when('/admin',{
+          controller: 'adminCtrl',
+          templateUrl: 'templates/admin.html'
+        })
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
       if($scope.name){
@@ -403,6 +407,21 @@ var myApp =  angular.module('CCare',[])
         if(err) console.log(err);
       });
     }
+  })
+  .controller('adminCtrl'  ,function($scope, $http, $location,$route){
+
+    $http.get('/adminPanel').success(function(data){
+      $scope.applicants = data.applicants;
+      $scope.employers = data.employers;
+      $scope.posts = data.posts;
+    })
+
+    $scope.deleteItem = function(id,table){
+      var data = {'id':id, 'table':table}
+      $http.post('/deleteEntry',data)
+      $route.reload();
+    }
+
   })
   .service('workerProfile', function () {
       //return object
