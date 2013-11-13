@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var q = require('q');
 var JobApplicant = require('../models/jobApplicant.js');
 var EmailToken = require('../models/emailToken.js');
-var sendEmail = require('../util/sendEmail.js');
+var mailer = require('../util/sendEmail.js');
 var JobPost = require('../models/jobPost.js');
 
 exports.index = function(req, res){
@@ -93,11 +93,23 @@ exports.workerSignupInitial = function(req, res){
   createToken().then(function(){
     newEmailToken.token = token;
     newEmailToken.save(function (err) {
-      if (err) console.log("ERR!!!");
-      var message = req.protocol + "://" + req.get('host') + req.url + "/" + newEmailToken.token;;
-      sendEmail(newEmailToken.name, newEmailToken.email, message);
-      res.writeHead(200);
-      res.end();
+      if (err) console.log("ERROR in saving new email token!!!");
+      var confirmationLink = req.protocol + "://" + req.get('host') + req.url + "/" + newEmailToken.token;;
+      var locals = {
+        email: newEmailToken.email,
+        subject: 'Verify your Credentialed Care account',
+        name: newEmailToken.name,
+        confirmationLink: confirmationLink
+      };
+      mailer.sendOne('registrationVerif', locals, function(err, responseStatus, html, text){
+        if (err){
+          console.log("ERROR in sending registration verification email to job applicant!!!");
+          res.writeHead(500);
+        } else {
+          res.writeHead(200);
+        }
+          res.end();
+      });
     });
   })
 };

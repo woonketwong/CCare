@@ -61,6 +61,13 @@ app.configure(function () {
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
+//if in development
+console.log("Current ENV:", app.get('env'));
+if (' development' == app.get(' env')){ 
+  app.use( express.errorHandler()); 
+}
+
+
 app.use(function(err, req, res, next){
   console.log("ERROR:",err);
   res.status(err.status || 500);
@@ -81,6 +88,14 @@ app.use(function(req, res, next){
 });
 
 router(app, passport);
+
+// for admin route
+// app.get('/admin', function( req, res, next){ 
+//   if (! req.query._token) return next( new Error(' no token provided'));
+//   }, 
+//   function( req, res, next){ 
+//     res.render(' admin');
+// });
 
 http.createServer(app).listen(port, function(){
   console.log('Express server listening on port ' + port);

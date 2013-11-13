@@ -1,22 +1,24 @@
 {
-  "name": "application-name",
+  "name": "CredentialedCare",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.3",
+    "express": "~3.4.3",
     "jade": "*",
     "mongodb": "latest",
     "mongoose": "latest",
     "passport": "latest",
     "passport-local": "latest",
     "connect-flash": "latest",
-    "nodemailer": "latest",
+    "email-templates": "0.0.5",
+    "nodemailer": "0.3.x",
     "password-hash": "latest",
     "q": "latest",
     "underscore": "latest",
-    "passports": "latest"
+    "passports": "latest",
+    "should": "latest"
   }
 }
