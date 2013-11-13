@@ -1,21 +1,14 @@
-// all environments
-// var path = require('path');
-// var express = require('express');
-
-// module.exports = function(app){
-//   app.set('port', process.env.PORT || 3000);
-//   app.set('views', path.join(__dirname, '../views'));
-//   app.set('view engine', 'jade');
-//   app.use(express.favicon());
-//   app.use(express.logger('dev'));
-//   app.use(express.bodyParser());
-//   app.use(express.methodOverride());
-//   app.use(app.router);
-//   app.use(express.static(path.join(__dirname, '../public')));
-
-//   // development only
-//   if ('development' == app.get('env')) {
-//     app.use(express.errorHandler());
-//   }
-
-// };
+module.exports = {
+ // db: {
+ //   production: "mongodb://user:pass@example.com:1234/stroeski-prod",
+ //   development: "mongodb://localhost/storeski-dev",
+ //   test: "mongodb://localhost/storeski-test",
+ // },
+ mailer: {
+   auth: {
+      user: "credentialedcaredev@gmail.com",
+      pass: "credentialed"
+   },
+   defaultFromAddress: 'Credentialed Care <credentialedcaredev@gmail.com>'
+ }
+};
