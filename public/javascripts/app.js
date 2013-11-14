@@ -167,7 +167,7 @@ var myApp =  angular.module('CCare',[])
   .controller('reg3Ctrl',function($scope,$http, $location, workerProfile){
     $scope.processFormData = function(){
       workerProfile.preferences.education = $scope.education;
-      workerProfile.preferences.yearsExperience = $scope.yearsExperience;
+      workerProfile.preferences.yearsExperience = $scope.yearsExperience[0];
       workerProfile.preferences.employerName = $scope.employerName;
       workerProfile.preferences.certifications.PCA = $scope.PCA;
       workerProfile.preferences.certifications.CHHA = $scope.CHHA;
@@ -223,7 +223,7 @@ var myApp =  angular.module('CCare',[])
       workerProfile.preferences.idealWorkEnvironment = $scope.workEnvironment
       workerProfile.preferences.interests = $scope.interests
 
-      $http.post('/worker-updateInfo', workerProfile);
+      $http.post('/worker/worker-updateInfo', workerProfile);
       $location.path('workerPortal')
     }
   })
@@ -304,7 +304,7 @@ var myApp =  angular.module('CCare',[])
   })
   .controller('ePortalCtrl'  ,function($scope, $http, $location){
     $scope.getJobData = function(){
-      $http.get('/jobPost').success(function(data){
+      $http.get('/employer/jobPost').success(function(data){
         $scope.jobs = data;
       })
     };
@@ -312,7 +312,7 @@ var myApp =  angular.module('CCare',[])
   })
   .controller('jobListCtrl'  ,function($scope, $http, $location, serialize){
     $scope.getJobData = function(){
-      $http.get('/allJobPost').success(function(data){
+      $http.get('/worker/allJobPost').success(function(data){
         $scope.jobs = data;
       })
     };
@@ -331,7 +331,7 @@ var myApp =  angular.module('CCare',[])
           obj.yearsExperience = yearsExperience;
           obj.lat = data.results[0].geometry.location.lat;
           obj.lng = data.results[0].geometry.location.lng;
-          $http.get('/searchJobs?'+serialize(obj), {'aa': '123'})
+          $http.get('/worker/searchJobs?'+serialize(obj), {'aa': '123'})
             .success(function(data){
               $scope.locationLookup
               $scope.jobs = data
@@ -351,7 +351,7 @@ var myApp =  angular.module('CCare',[])
           obj.range = range;
           obj.lat = data.results[0].geometry.location.lat;
           obj.lng = data.results[0].geometry.location.lng;
-          $http.get('/searchEmployees?'+serialize(obj), {'aa': '123'})
+          $http.get('/employer/searchEmployees?'+serialize(obj), {'aa': '123'})
             .success(function(data){
               console.log(data);
               $scope.employees = data
@@ -401,7 +401,7 @@ var myApp =  angular.module('CCare',[])
       job.experience.Homecare = $scope.Homecare;
       job.experience.AssistedLiving = $scope.AssistedLiving
 
-      $http.post('/jobPost',job).success(function(){
+      $http.post('/employer/jobPost',job).success(function(){
         $location.path('/employerPortal');
       }).error(function(err){
         if(err) console.log(err);

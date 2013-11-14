@@ -19,6 +19,8 @@
     "q": "latest",
     "underscore": "latest",
     "passports": "latest",
-    "should": "latest"
+    "should": "latest",
+    "superagent": "latest",
+    "expect.js": "latest"
   }
 }

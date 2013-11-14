@@ -1,4 +1,3 @@
-
 /* GET home page */
 var mongoose = require('mongoose');
 var passwordHash = require('password-hash');
@@ -81,8 +80,6 @@ exports.workerSignupInitial = function(req, res){
   function createToken(){
     var deferred = q.defer();
     crypto.randomBytes(20, function(ex, buf) {
-      console.log("buf**", buf);
-      console.log("buf.toString**", buf.toString('hex'));
       token = buf.toString('hex');
       // console.log("TOKEN generated1", token);
       deferred.resolve('deferred resolved!!');
@@ -132,26 +129,6 @@ exports.checkEmailIfExists = function(req,res){
   });
 };
 
-exports.workerSignup = function(req, res){
-
-};
-
-exports.updateInfo = function(req, res){
-  // to do - data validation
-  req.body.coords = [req.body.preferences.longitude, req.body.preferences.latitude];
-  JobApplicant.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
-    if (err){
-      console.log("ERROR in updating Info - ", err);
-      res.writeHead(400);
-    } else {
-      console.log("SUCCESS in updating info")
-      res.writeHead(201);
-    }
-    res.end();
-  });
-}
-
-
 exports.workerReadInfo = function(req, res){
   var jobApplicantModel = mongoose.model('JobApplicant');
   var newUser = new jobApplicantModel(req.body);
@@ -168,63 +145,5 @@ exports.workerReadInfo = function(req, res){
   });
 };
 
-exports.sessionData = function(req,res){
-  console.log("user",req.user);
-  console.log("session",req.session);
-  res.json(req.user);
-}
 
-exports.allJobsList = function(req,res){
-  JobPost.find(
-    function (err, result) {
-      console.log("Job Post Read Result:", result);
-      if (err) {
-        console.log("ERROR - reading employer job post aborted!!");
-      res.writeHead(500);
-      res.end();
-    } else {
-      console.log("Success in reading employer job post");
-      res.send(result);
-    }
-  });
-}
-
-exports.search = function(req, res){
-  console.log("***search params from employer:", req.query);
-  var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
-  var rangeInMeter = req.query.range/3963;
-
-  console.log("coordsArg:", coordsArg);
-  console.log("rangeInMeter:", rangeInMeter);
-  var callback = function (err, result) {
-      console.log("Employee List:", result);
-      if (err) {
-        console.log("ERROR - reading employee list aborted!! - ", err);
-        res.writeHead(500);
-        res.end();
-      } else {
-        console.log("Success in reading employee list post");
-        res.send(result);
-      }
-  };
-
-  // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
-  JobApplicant
-    .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
-    // .where({positionName: "Sunnyvale Starbucks"})
-    .exec(callback);
-};
-
-  // exports.dothings = function(req,res){
-  //   console.log(req.user.email)
-  //   console.log(req.user);
-  //   console.log(req.body);
-  //   res.writeHead(200);
-  //   res.end();
-  // }
-
-// exports.getProfile = function(req,res){
-//   res.json(req.session.askedBefore);
-//   req.session.askedBefore = true;
-// };
 
