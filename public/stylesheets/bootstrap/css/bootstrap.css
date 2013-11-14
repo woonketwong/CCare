@@ -4489,18 +4489,21 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
+  background-color: #FFFFFF;
   border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: #000000;
+  font-size: 30px;
 }
 
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
   color: #ffffff;
-  background-color: transparent;
+  background-color: black;
+  border-radius: 8px;
+  font-size: 30px;
 }
 
 .navbar-inverse .navbar-text {
@@ -4513,15 +4516,17 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
+  color: #000000;
+  background-color: black;
+  border-radius: 8px;
   color: #ffffff;
-  background-color: transparent;
 }
 
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
   color: #ffffff;
-  background-color: #080808;
+  background-color: #000000;
 }
 
 .navbar-inverse .navbar-nav > .disabled > a,
@@ -4922,7 +4927,7 @@ a.list-group-item.active > .badge,
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: rgb(247, 203, 56);
 }
 
 .jumbotron h1 {

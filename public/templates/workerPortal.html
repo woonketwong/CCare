@@ -2,16 +2,14 @@
 
 <div>
   <div class="well hero-spacer">
-    <h3>Employee Portal</h3>
+    <h3 style="display:inline;">Employee Portal</h3>
+    <a href="#/worker-registration2" class="right"><button type="button" class="btn btn-primary">Update Your Profile</button></a>
   </div>
-    <div class="well">
-      <a href="#/worker-registration2">Update Your Profile</a>
-    </div>
 </div>
 
 <div ng-controller="jobListCtrl">
 
-  <span> I am looking for jobs within...</span>
+  <span> I am looking for employees within...</span>
     <select class="searchField" ng-model="range">
             <option>up to 5 miles</option>
             <option>up to 10 miles</option>
@@ -39,14 +37,14 @@
     </select>
 
   <button ng-click="search()">search</button>
-  <table class="table">
+  <table class="table table-hover">
     <tr>
       <th>Position Number</th>
       <th>Position Name</th>
       <th>Duties</th>
     </tr>
     <tr ng-repeat="job in jobs">
-      <div>Company Name: <span>Allertech</span></div>
+      <div>Company Name: <span></span></div>
       <div>Job Title: <span>{{job.positionName}}</span></div>
       <div>Employment Type: <span>{{job.positionType}}</span></div>
       <div>Description: <span>{{job.duties}}</span></div>
@@ -56,33 +54,6 @@
   </table>
 </div>
 
-<!-- locationX, company name, full time/part timeX, pay rateX, benefit, facility or agencyX -->
-
-
-  employerID: String,
-  positionName: String,
-  duties: String,
-  longitude: Number,
-  latitude: Number,
-  hourlyRate: String,
-  yearsExperience: String,
-  positionType: String,
-  experience: {
-    education: String,
-    Alzheimers: Boolean,
-    Handicapped: Boolean,
-    Hospice: Boolean,
-    Gastronom: Boolean,
-    Breathing: Boolean,
-    Hoyer: Boolean,
-    SpecialMeal: Boolean,
-    ChildCare: Boolean,
-    Psychiatric: Boolean,
-    Geriatric: Boolean,
-    Homecare: Boolean,
-    AssistedLiving: Boolean
-  }
-})
 
 
 

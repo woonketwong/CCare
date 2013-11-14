@@ -15,10 +15,10 @@ head
 
 
     link(href='stylesheets/bootstrap/css/bootstrap.css', rel='stylesheet')
-    link(href='stylesheets/style.css', rel='stylesheet')
     link(href='stylesheets/bootstrap/css/heroic-features.css', rel='stylesheet')
+    link(href='stylesheets/style.css', rel='stylesheet')
   body(ng-app='CCare')
-    nav.navbar.navbar-fixed-top.navbar-inverse(role='navigation')
+    nav.navbar-inverse.navbar-fixed-top.navbar(role='navigation')
       .container
         .navbar-header
           button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
@@ -28,17 +28,35 @@ head
             span.icon-bar
           a.navbar-brand(href='#/') Credentialed Care
         .collapse.navbar-collapse.navbar-ex1-collapse
-          ul.nav.navbar-nav
+          ul.nav.navbar-nav.right
             li
-              a(href='#aboutUs') About
+              a(href='#')
+                span.glyphicon.glyphicon-home
+                |  Home
             li
-              a(href='#worker-registration') Apply-Caregiver
-            li
-              a(href='#employer-registration') Apply-Employer
-            li
-              a(href='#worker-login') Worker Login
-            li
-              a(href='#employer-login') Employer Login
+              a(href='#/aboutUs')
+                span.glyphicon.glyphicon-question-sign
+                |  About
+            li(ng-hide='loggedIn')
+              a(href='#/worker-login')
+                span.glyphicon.glyphicon-play
+                |  Worker Login
+            li(ng-hide='loggedIn')
+              a(href='#/employer-login')
+                span.glyphicon.glyphicon-home
+                |  Employer Login
+            li(ng-hide='!eLoggedIn')
+              a(href='#/employerPortal')
+                span.glyphicon.glyphicon-home
+                |  My Portal
+            li(ng-hide='!wLoggedIn')
+              a(href='#/workerPortal')
+                span.glyphicon.glyphicon-home
+                |  My Portal
+            li(ng-hide='!loggedIn')
+              a(href='#/logout')
+                span.glyphicon.glyphicon-home
+                |  Sign Out
     .container(ng-view)
     footer
       .row

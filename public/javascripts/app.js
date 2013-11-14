@@ -70,6 +70,10 @@ var myApp =  angular.module('CCare',[])
           controller: 'adminCtrl',
           templateUrl: 'templates/admin.html'
         })
+    .when('/logout',{
+          controller: 'logoutCtrl',
+          templateUrl: 'templates/logout.html'
+        })
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
       if($scope.name){
@@ -120,14 +124,16 @@ var myApp =  angular.module('CCare',[])
     $scope.LPN = false;
     $scope.CNA = false;
     $scope.doAddress = function(){
-      var street = $scope.street.replace(/ /g,"+");
-      var cityStateZip = $scope.cityStateZip.replace(/ /g,"+");
-      $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true')
-        .success(function(data) {
-          console.log('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true');
-          workerProfile.preferences.latitude = data.results[0].geometry.location.lat;
-          workerProfile.preferences.longitude = data.results[0].geometry.location.lng;
-        })
+      if($scope.cityStateZip){
+        var street = $scope.street.replace(/ /g,"+");
+        var cityStateZip = $scope.cityStateZip.replace(/ /g,"+");
+        $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true')
+          .success(function(data) {
+            console.log('http://maps.googleapis.com/maps/api/geocode/json?address=' + street + '+' + cityStateZip + '&sensor=true');
+            workerProfile.preferences.latitude = data.results[0].geometry.location.lat;
+            workerProfile.preferences.longitude = data.results[0].geometry.location.lng;
+          })
+      }
     }
     $scope.processFormData = function(){
       try{
@@ -173,41 +179,12 @@ var myApp =  angular.module('CCare',[])
       workerProfile.preferences.certifications.CHHA = $scope.CHHA;
       workerProfile.preferences.certifications.CNA = $scope.CNA;
       workerProfile.preferences.certifications.LPN = $scope.LPN;
-      workerProfile.preferences.languages.Arabic = $scope.Arabic
-      workerProfile.preferences.languages.Chinese_Cantonese = $scope.Chinese_Cantonese
-      workerProfile.preferences.languages.Chinese_Mandarin = $scope.Chinese_Mandarin
-      workerProfile.preferences.languages.Farsi = $scope.Farsi
-      workerProfile.preferences.languages.Filipino = $scope.Filipino
-      workerProfile.preferences.languages.French = $scope.French;
-      workerProfile.preferences.languages.Greek = $scope.Greek;
-      workerProfile.preferences.languages.Hebrew = $scope.Hebrew;
-      workerProfile.preferences.languages.Hindu = $scope.Hindu;
-      workerProfile.preferences.languages.Italian = $scope.Italian;
-      workerProfile.preferences.languages.Japanese = $scope.Japanese;
-      workerProfile.preferences.languages.Korean = $scope.Korean;
-      workerProfile.preferences.languages.Polish = $scope.Polish;
-      workerProfile.preferences.languages.Russian = $scope.Russian;
-      workerProfile.preferences.languages.Spanish = $scope.Spanish;
-      workerProfile.preferences.languages.Swahili = $scope.Swahili;
-      workerProfile.preferences.languages.Vietnamese = $scope.Vietnamese;
-      workerProfile.preferences.specializations.Alzheimers = $scope.Alzheimers;
-      workerProfile.preferences.specializations.Handicapped = $scope.Handicapped;
-      workerProfile.preferences.specializations.Hospice = $scope.Hospice;
-      workerProfile.preferences.specializations.Gastronomy = $scope.Gastronomy;
-      workerProfile.preferences.specializations.Breathing = $scope.Breathing;
-      workerProfile.preferences.specializations.Hoyer = $scope.Hoyer;
-      workerProfile.preferences.specializations.SpecialMeal = $scope.SpecialMeal;
-      workerProfile.preferences.specializations.ChildCare = $scope.ChildCare;
-      workerProfile.preferences.specializations.Psychiatric= $scope.Psychiatric;
-      workerProfile.preferences.specializations.Geriatric = $scope.Geriatric;
-      workerProfile.preferences.specializations.Homecare = $scope.Homecare;
-      workerProfile.preferences.specializations.AssistedLiving = $scope.AssistedLiving;
-      workerProfile.preferences.specializations.Fingerprints = $scope.Fingerprints;
-      workerProfile.preferences.specializations.AHCALevel2 = $scope.AHCALevel2;
-      workerProfile.preferences.specializations.CPR = $scope.CPR;
-      workerProfile.preferences.specializations.FirstAid = $scope.FirstAid;
-      workerProfile.preferences.specializations.BLS = $scope.BLS;
-      workerProfile.preferences.specializations.TBTest = $scope.TBTest;
+      for(var key in $scope.language){
+        workerProfile.preferences.languages[key] = true;
+      }
+      for(var keys in $scope.spec){
+        workerProfile.preferences.specializations[key] = true;
+      }
       workerProfile.preferences.patientMatchScore = $scope.patientMatchScore
       workerProfile.preferences.scheduleMatchScore = $scope.scheduleMatchScore
       workerProfile.preferences.workCloseToHomeScore = $scope.workCloseToHomeScore
@@ -270,45 +247,24 @@ var myApp =  angular.module('CCare',[])
       });
     }
   })
-  .controller('LoginController',function($scope, $http, $location, loginFactory){
-    $scope.currentUser = loginFactory.getLoggedInUser();
-    $scope.updateLocation = function(){
-      $scope.urlHash = $location.url();
-    };
-  })
-  .controller('wLoginCtrl'  ,function($scope, $http, $location){
-    $scope.submit = function(){
-      var obj = {
-        email: $scope.email,
-        password: $scope.password
-      };
-      $http.post('/worker-login', obj).success(function(data,data2){
-        console.log(data)
-        console.log(data2);
+  .controller('wPortalCtrl'  ,function($scope, $http, $location, serialize, $rootScope){
+    $rootScope.wLoggedIn = true;
+    $rootScope.loggedIn = true;
+    $scope.getJobData = function(){
+      $http.get('/jobPost').success(function(data){
+        $scope.jobs = data;
       })
     };
   })
-  .controller('eLoginCtrl'  ,function($scope, $http, $location){
-    $scope.submit = function(){
-      var obj = {
-        email: $scope.email,
-        password: $scope.password
-      };
-      $http.post('/employer-login', obj).success(function(data,data2){
-        console.log(data)
-        console.log(data2);
-      })
-    };
-  })
-  .controller('wPortalCtrl'  ,function($scope, $http, $location, serialize){
-  })
-  .controller('ePortalCtrl'  ,function($scope, $http, $location){
+  .controller('ePortalCtrl'  ,function($scope, $http, $location, $rootScope){
     $scope.getJobData = function(){
       $http.get('/jobPost').success(function(data){
         $scope.jobs = data;
       })
     };
     $scope.jobs = $scope.getJobData();
+    $rootScope.eLoggedIn = true;
+    $rootScope.loggedIn = true;
   })
   .controller('jobListCtrl'  ,function($scope, $http, $location, serialize){
     $scope.getJobData = function(){
@@ -409,7 +365,6 @@ var myApp =  angular.module('CCare',[])
     }
   })
   .controller('adminCtrl'  ,function($scope, $http, $location,$route){
-
     $http.get('/adminPanel').success(function(data){
       $scope.applicants = data.applicants;
       $scope.employers = data.employers;
@@ -421,6 +376,15 @@ var myApp =  angular.module('CCare',[])
       $http.post('/deleteEntry',data)
       $route.reload();
     }
+
+  })
+  .controller('logoutCtrl'  ,function($scope, $http, $location,$route, $rootScope){
+    $http.get('/logout');
+    $rootScope.loggedIn = false;
+    $rootScope.wLoggedIn = false;
+    $rootScope.eLoggedIn = false;
+
+    $location.path('/');
 
   })
   .service('workerProfile', function () {
@@ -437,19 +401,6 @@ var myApp =  angular.module('CCare',[])
       //return object
     return {};
     })
-  .factory('loginFactory', function($http, $q) {
-    var factory = {};
-
-    factory.getLoggedInUser = function(){
-      var deferred = $q.defer();
-      $http.get('/_/loggedin/user').success(function(data){
-        factory.currentUser = data;
-        deferred.resolve(data);
-      });
-      return deferred.promise;
-    };
-    return factory;
-  })
   .factory('serialize',function(){
     return function(obj) {
         var str = [];
@@ -459,6 +410,12 @@ var myApp =  angular.module('CCare',[])
       }
 
   });
+
+myApp.run(function($rootScope) {
+  $rootScope.loggedIn = false;
+  $rootScope.wLoggedIn = false;
+  $rootScope.eLoggedIn = false;
+});
 
 myApp.config(['$httpProvider', function($httpProvider) {
       $httpProvider.defaults.useXDomain = true;
