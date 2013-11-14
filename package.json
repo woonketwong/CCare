@@ -21,6 +21,8 @@
     "passports": "latest",
     "should": "latest",
     "superagent": "latest",
-    "expect.js": "latest"
+    "expect.js": "latest",
+    "mailcomposer": "latest",
+    "simplesmtp": "latest"
   }
 }
