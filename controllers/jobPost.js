@@ -3,7 +3,6 @@ var Employer = require('../models/employer.js');
 var JobPost = require('../models/jobPost.js');
 
 exports.write = function(req, res){
-  
   req.body.coords = [req.body.longitude, req.body.latitude];
   var newJobPost = new JobPost(req.body);
   newJobPost.employerID = req.user._id;
@@ -35,12 +34,9 @@ exports.read = function(req, res){
 };
 
 exports.search = function(req, res){
-  console.log("***search params from employee:", req.query);
   var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
   var rangeInMeter = req.query.range/3963;
 
-  console.log("coordsArg:", coordsArg);
-  console.log("rangeInMeter:", rangeInMeter);
   var callback = function (err, result) {
       console.log("Job Post Read Result:", result);
       if (err) {

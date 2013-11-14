@@ -28,7 +28,7 @@ describe('Mailer: sendEmail', function(done){
       responseStatus.should.include("OK");
       text.should.include("Hello " + locals.name + "! Thank you for your registration. Please click the following link to complete your signup process " +locals.confirmationLink);
       html.should.include("<h1>Hello " + locals.name + 
-      	"!<\\/h1><p>Thank you for your registration. Please click the following link to complete your signup process</p><a href=\"" + locals.confirmationLink + "\">Click here</a>");
+      	"!</h1><p>Thank you for your registration. Please click the following link to complete your signup process</p><a href=\"" + locals.confirmationLink + "\">Click here</a>");
       done();
     });    
   })

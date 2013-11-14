@@ -6,6 +6,7 @@ var q = require('q');
 var mailer = require('../util/sendEmail.js');
 var Employer = require('../models/employer.js');
 var EmailToken = require('../models/emailToken.js');
+var JobApplicant = require('../models/jobApplicant.js');
 
 exports.loginSuccess = function(req, res){
   console.log('login success route');
@@ -95,6 +96,7 @@ exports.employerSignupInitial = function(req, res){
       mailer.sendOne('registrationVerif', locals, function(err, responseStatus, html, text){
         if (err){
           console.log("ERROR in sending registration verification email to job applicant!!!");
+          console.log("ERR message:",err);
           res.writeHead(500);
         } else {
           res.writeHead(200);
@@ -137,33 +139,58 @@ exports.updateInfo = function(req, res){
 }
 
 
-exports.employerReadInfo = function(req, res){
-  var employer = new Employer(req.body);
-  Employer.findOne({name: employer.name, email: employer.email}, 'name email', 
-    function (err, result) {
-      if (err) {
-        console.log("ERROR - read worker info aborted!!");
-      }
-      if (result !== null) {
-        console.log("*****DATA*****",data);
-        res.writeHead(200);
-        res.end(result);
-      }
-  });
-};
+// exports.employerReadInfo = function(req, res){
+//   var employer = new Employer(req.body);
+//   Employer.findOne({name: employer.name, email: employer.email}, 'name email', 
+//     function (err, result) {
+//       if (err) {
+//         console.log("ERROR - read worker info aborted!!");
+//       }
+//       if (result !== null) {
+//         console.log("*****DATA*****",data);
+//         res.writeHead(200);
+//         res.end(result);
+//       }
+//   });
+// };
 
 exports.sessionData = function(req,res){
   res.json(req.user);
 };
 
-exports.listEmployers = function(req,res){
-  console.log('hi')
-  Employer.find({},'name _id', function(err,result){
-    if(err) console.log(err);
-    console.log(result);
-    res.json(result);
-  })
-}
+// exports.listEmployers = function(req,res){
+//   console.log('hi')
+//   Employer.find({},'name _id', function(err,result){
+//     if(err) console.log(err);
+//     console.log(result);
+//     res.json(result);
+//   })
+// }
+
+
+exports.search = function(req, res){
+
+  var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
+  var rangeInMeter = req.query.range/3963;
+
+  var callback = function (err, result) {
+    if (err) {
+      console.log("ERROR - reading employee list aborted!! - ", err);
+      console.log("ERROR MSG:", err)
+      res.writeHead(500);
+      res.end();
+    } else {
+      console.log("Success in reading employee list post");
+      res.send(result);
+    }
+  };
+
+  // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
+  JobApplicant
+    .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
+    // .where({positionName: "Sunnyvale Starbucks"})
+    .exec(callback);
+};
 
 
 
