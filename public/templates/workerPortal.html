@@ -9,7 +9,7 @@
 
 <div ng-controller="jobListCtrl">
 
-  <span> I am looking for employees within...</span>
+  <span> I am looking for jobs within...</span>
     <select class="searchField" ng-model="range">
             <option>up to 5 miles</option>
             <option>up to 10 miles</option>
@@ -44,12 +44,12 @@
       <th>Duties</th>
     </tr>
     <tr ng-repeat="job in jobs">
-      <div>Company Name: <span></span></div>
-      <div>Job Title: <span>{{job.positionName}}</span></div>
-      <div>Employment Type: <span>{{job.positionType}}</span></div>
-      <div>Description: <span>{{job.duties}}</span></div>
-      <div>Location: <span>{{job.cityStateZip}}</span></div>
-      <div>Facility or Agency: <span>{{job.employerType}}</span></div>
+      <td>Company Name: <span></span></td>
+      <td>Job Title: <span>{{job.positionName}}</span></td>
+      <td>Employment Type: <span>{{job.positionType}}</span></td>
+      <td>Description: <span>{{job.duties}}</span></td>
+      <td>Location: <span>{{job.cityStateZip}}</span></td>
+      <td>Facility or Agency: <span>{{job.employerType}}</span></td>
     </tr>
   </table>
 </div>
