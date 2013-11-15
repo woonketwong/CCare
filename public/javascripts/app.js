@@ -78,6 +78,10 @@ var myApp =  angular.module('CCare',[])
           controller: 'wProfileCtrl',
           templateUrl: 'templates/workerProfile.html'
         })
+    .when('/jobProfile',{
+          controller: 'jProfileCtrl',
+          templateUrl: 'templates/jobProfile.html'
+        })
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
       if($scope.name){
@@ -274,7 +278,7 @@ var myApp =  angular.module('CCare',[])
       $location.path('/workerProfile');
     }
   })
-  .controller('jobListCtrl'  ,function($scope, $http, $location, serialize){
+  .controller('jobListCtrl'  ,function($scope, $http, $location, serialize, activeJob){
     $scope.getJobData = function(){
       $http.get('/worker/allJobPost').success(function(data){
         $scope.jobs = data;
@@ -284,15 +288,12 @@ var myApp =  angular.module('CCare',[])
     $scope.search = function(){
       var loc = $scope.loc.replace(/ /g,"+");
       var range = $scope.range.split(' ')[2];
-      var positionType = $scope.positionType;
-      var yearsExperience = $scope.yearsExperience[0];
       $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + loc +  '&sensor=true')
         .success(function(data) {
           var obj = {};
           obj.range = range;
-          obj.yearsExperience = yearsExperience;
-          obj.positionType = positionType;
-          obj.yearsExperience = yearsExperience;
+          if($scope.positionType) obj.positionType = $scope.positionType;
+          if($scope.yearsExperience) obj.yearsExperience = $scope.yearsExperience[0];
           obj.lat = data.results[0].geometry.location.lat;
           obj.lng = data.results[0].geometry.location.lng;
           console.log(obj);
@@ -302,6 +303,11 @@ var myApp =  angular.module('CCare',[])
               $scope.jobs = data
           })
       })
+
+      $scope.getJob = function(job){
+        activeJob.job = job;
+        $location.path('/jobProfile');
+      };
     }
     $scope.jobs = $scope.getJobData();
   })
@@ -374,17 +380,10 @@ var myApp =  angular.module('CCare',[])
     }
   })
   .controller('wProfileCtrl'  ,function($scope, $http, $location,$route,activeProfile){
-      
-
-      $scope.worker = activeProfile.active
-
-
-
-
-
-
-
-
+      $scope.worker = activeProfile.active;
+  })
+  .controller('jProfileCtrl'  ,function($scope, $http, $location,$route,activeJob){
+      $scope.job = activeJob.job;
   })
   .controller('adminCtrl'  ,function($scope, $http, $location,$route){
     $http.get('/adminPanel').success(function(data){
@@ -420,6 +419,10 @@ var myApp =  angular.module('CCare',[])
     return {};
     })
   .service('activeProfile', function () {
+      //return object
+    return {};
+    })
+  .service('activeJob', function () {
       //return object
     return {};
     })

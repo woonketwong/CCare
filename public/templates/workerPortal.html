@@ -45,7 +45,7 @@
       <th>Years Experience Required</th>
       <th>Hourly Rate</th>
     </tr>
-    <tr ng-repeat="job in jobs">
+    <tr ng-repeat="job in jobs" ng-click="getJob(job)" style="cursor:pointer;">
       <td>{{job.positionName}}</td>
       <td>{{job.positionType}}</td>
       <td>{{job.employerType}}</td>
