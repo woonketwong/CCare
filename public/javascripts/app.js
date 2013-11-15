@@ -251,7 +251,7 @@ var myApp =  angular.module('CCare',[])
     $rootScope.wLoggedIn = true;
     $rootScope.loggedIn = true;
     $scope.getJobData = function(){
-      $http.get('/jobPost').success(function(data){
+      $http.get('/worker/jobPost').success(function(data){
         $scope.jobs = data;
       })
     };

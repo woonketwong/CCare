@@ -14,15 +14,15 @@ var port = process.env.PORT || 5000;
 var app = express();
 var fs = require('fs');
 var flash = require("connect-flash");
+var uristring;
+
+// Initialize process.env.NODE_ENV
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 ////////////////////////////////////////
 //Database initialization
 ////////////////////////////////////////
-
-var uristring =
-process.env.MONGOLAB_URI ||
-process.env.MONGOHQ_URL ||
-'mongodb://localhost/HelloMongoose';
+uristring = config['db'][process.env.NODE_ENV];
 
 mongoose.connect(uristring, function(err, res){
   if (err) {

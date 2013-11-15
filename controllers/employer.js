@@ -181,6 +181,7 @@ exports.search = function(req, res){
       res.end();
     } else {
       console.log("Success in reading employee list post");
+      console.log("Result:", result);
       res.send(result);
     }
   };

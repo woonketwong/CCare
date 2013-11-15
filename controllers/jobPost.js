@@ -53,7 +53,7 @@ exports.search = function(req, res){
   JobPost
     .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
     .where({positionType: req.query.positionType})
-    .where('yearsExperience').gte(req.query.yearsExperience)
+    .where('yearsExperience').lte(req.query.yearsExperience)
     .exec(callback);
 };
 
