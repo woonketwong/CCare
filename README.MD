@@ -21,9 +21,26 @@ The NODE_ENV environment variable specifies the setup of the app. There are thre
 2) Development
    The NODE_ENV is set to "Development" while developing features locally. This is done with:
 
-   $NODE_ENV=test nodemon server.js
+   NODE_ENV=development nodemon server.js
 
 3) Testing
-   The NODE_ENV is set to "test" while running tests under the ./test directory. This is done with:
+   The NODE_ENV is set to "test" while running tests under the ./test directory. This environment variable is used to select the test database (instead of production or development database) while in testing mode. This is configured in ./package.json:
 
-   NODE_ENV=test mocha test -R spec
+   ...
+   ...
+   ...
+   "scripts": {
+     "test": "NODE_ENV=test node_modules/.bin/mocha -w"
+   }
+   ...
+   ...
+   ...
+
+   The tool used for testing is MOCHA. Its spec is at https://npmjs.org/package/mocha. 
+   Its configuration is stored at ./test/mocha.opts.
+
+   The command to run the test suite is:
+   >npm test
+
+   This will start a test runner. Any time a file is changed it will run the test suite.
+

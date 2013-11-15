@@ -4,7 +4,7 @@ module.exports = {
                 process.env.MONGOHQ_URL  ||
                 'mongodb://localhost/HelloMongoose',
     development: 'mongodb://localhost/HelloMongoose',
-    test: "mongodb://localhost/HelloMongoose",
+    test: "mongodb://localhost/test",
   },
   mailer: {
     auth: {
