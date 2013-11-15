@@ -63,8 +63,9 @@ module.exports = function(app,passport){
   // define protected worker routes
   //**********************************
   app.get('/worker/allJobPost', jobApplicant.allJobsList);
-  app.post('/worker/worker-updateInfo', jobApplicant.updateInfo);
+  app.get('/worker/jobPost', jobPost.read);
   app.get('/worker/searchJobs', jobPost.search);
+  app.post('/worker/worker-updateInfo', jobApplicant.updateInfo);
   // app.get('/worker-signup', home.workerReadInfo);
   // app.get('/worker-login-success', home.loginSuccess);
   // app.get('/worker-login-fail', home.loginFail);

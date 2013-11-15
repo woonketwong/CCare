@@ -9,7 +9,6 @@ var employerSchema = mongoose.Schema({
         comments: String
 });
 
-
 employerSchema.statics.signup = function(name, email, password, phone, comments, done){
   console.log("In employerApplicantSchema ");
   var employer = this;

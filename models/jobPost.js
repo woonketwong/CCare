@@ -29,7 +29,6 @@ var jobPostSchema = mongoose.Schema({
   }
 });
 
-
 jobPostSchema.pre('save', function (next) {
   if (this.isNew && Array.isArray(this.coords) && 0 === this.coords.length) {
     this.coords = undefined;
