@@ -21,9 +21,10 @@ The NODE_ENV environment variable specifies the setup of the app. There are thre
 2) Development
    The NODE_ENV is set to "Development" while developing features locally. This is done with:
 
-   $NODE_ENV=test nodemon server.js
+   NODE_ENV=development nodemon server.js
 
 3) Testing
    The NODE_ENV is set to "test" while running tests under the ./test directory. This is done with:
 
+   NODE_ENV=test nodemon server.js
    NODE_ENV=test mocha test -R spec
