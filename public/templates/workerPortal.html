@@ -39,26 +39,18 @@
   <button ng-click="search()">search</button>
   <table class="table table-hover">
     <tr>
-      <th>Position Number</th>
       <th>Position Name</th>
-      <th>Duties</th>
+      <th>Position Type</th>
+      <th>Position Hours</th>
+      <th>Years Experience Required</th>
+      <th>Hourly Rate</th>
     </tr>
     <tr ng-repeat="job in jobs">
-      <td>Company Name: <span></span></td>
-      <td>Job Title: <span>{{job.positionName}}</span></td>
-      <td>Employment Type: <span>{{job.positionType}}</span></td>
-      <td>Description: <span>{{job.duties}}</span></td>
-      <td>Location: <span>{{job.cityStateZip}}</span></td>
-      <td>Facility or Agency: <span>{{job.employerType}}</span></td>
+      <td>{{job.positionName}}</td>
+      <td>{{job.positionType}}</td>
+      <td>{{job.employerType}}</td>
+      <td>{{job.yearsExperience}}</td>
+      <td>{{job.hourlyRate}}</td>
     </tr>
   </table>
 </div>
-
-
-
-
-
-
-
-
-

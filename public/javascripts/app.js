@@ -287,6 +287,7 @@ var myApp =  angular.module('CCare',[])
           obj.yearsExperience = yearsExperience;
           obj.lat = data.results[0].geometry.location.lat;
           obj.lng = data.results[0].geometry.location.lng;
+          console.log(obj);
           $http.get('/worker/searchJobs?'+serialize(obj), {'aa': '123'})
             .success(function(data){
               $scope.locationLookup
