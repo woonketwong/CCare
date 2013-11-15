@@ -6,10 +6,9 @@ var jobPostSchema = mongoose.Schema({
   duties: String,
   longitude: Number,
   latitude: Number,
-  cityStateZip: String,
   hourlyRate: String,
   employerType: String,
-  yearsExperience: String,
+  yearsExperience: Number,
   positionType: String,
   coords: { type: [], index: '2d'},
   experience: {
