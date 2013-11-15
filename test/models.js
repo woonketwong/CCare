@@ -76,7 +76,7 @@ describe('JobApplicants: models', function(){
 			var email = "lincoln@gmail.com";
 			var password = "sha1$d4c79459$1$394b205f6h348fdb5dd6976ea912227e6fa4a352";
       var phone = "4081234567";
-      var coords = [-122.4089036, 37.7835939]
+      var coords = [-122.4089036, 37.7835939];
 
 			//Create an employer object to pass to Employer.create()
 			var jobApplicant = {
@@ -103,8 +103,38 @@ describe('JobApplicants: models', function(){
 	});
 });
 
-// { "__v" : 0, "_id" : ObjectId("52842cb66de88946f5000002"), "coords" : [  -122.4089036,  37.7835939 ], "email" : "woonketwong@hotmail.com", "name" : "Woon Ket", "password" : "sha1$0396bb0b$1$a3b4cad83cfce3a2426b756e0b2504aa2cfb71d5", "phone" : "4081234567", "preferences" : { "jobType" : { "caregiver" : false, "CHHA" : true, "STNA" : true, "PCA" : false, "LPN" : false, "CNA" : false }, "certifications" : { "LPN" : true }, "specializations" : { "SpecialMeal" : true, "Geriatric" : true, "Fingerprints" : true, "FirstAid" : true }, "languages" : { "Arabic" : false, "Chinese_Cantonese" : true, "Chinese_Mandarin" : true }, "hourlyRate" : 14, "dailyRate" : 8, "fullTime" : true, "dayShift" : true, "weekDays" : true, "weekEnds" : true, "homeCare" : true, "facilityCare" : true, "dogsOk" : true, "carAvailable" : false, "latitude" : 37.7835939, "longitude" : -122.4089036, "education" : "Some college", "yearsExperience" : 5, "idealPatient" : "nice", "idealWorkEnvironment" : "comfortable", "interests" : "Reading" } }
+describe('JobPosts: models', function(){
+	describe('#create()', function(){
+		it('should create a new job post', function(done){
+			var positionName = "Lincoln";
+			var yearsExperience = "lincoln@gmail.com";
+			var experience = { "education" : "High school diploma", "Alzheimers" : true };
+			var latitude = 37.7835939;
+			var longitude = -122.4089036;
 
+			//Create an employer object to pass to Employer.create()
+			var jobPost = {
+      	positionName: positionName,
+      	yearsExperience: yearsExperience,
+      	experience: experience,
+      	latitude: latitude,
+      	longitude: longitude
+			};
+			JobPost.create(jobPost, function(err, createdUser){
+				// Confirm that an error does not exist
+				should.not.exist(err);
+				// verify that the returned user is what we expect
+				createdUser.positionName.should.equal(positionName);
+				createdUser.yearsExperience.should.equal(yearsExperience);
+				createdUser.experience["education"].should.equal(experience["education"]);
+				createdUser.latitude.should.equal(latitude);
+				createdUser.longitude.should.equal(longitude);
+				// Call done to tell mocha that we are done with this test
+				done();
+			});
+		});
+	});
+});
 
 
 
