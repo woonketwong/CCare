@@ -24,5 +24,8 @@
     "expect.js": "latest",
     "mailcomposer": "latest",
     "simplesmtp": "latest"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test node_modules/.bin/mocha -w"
   }
 }

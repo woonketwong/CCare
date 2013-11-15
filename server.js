@@ -16,13 +16,17 @@ var fs = require('fs');
 var flash = require("connect-flash");
 var uristring;
 
-// Initialize process.env.NODE_ENV
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
+// log process.env.NODE_ENV
+
+console.log("****************************");
+console.log("* Current ENV:", app.get('env'));
+console.log("****************************");
 ////////////////////////////////////////
 //Database initialization
 ////////////////////////////////////////
-uristring = config['db'][process.env.NODE_ENV];
+app.set('dbUrl', config.db[app.get('env')]);
+uristring = app.get('dbUrl');
 
 mongoose.connect(uristring, function(err, res){
   if (err) {
@@ -34,7 +38,7 @@ mongoose.connect(uristring, function(err, res){
 
 var models_dir = __dirname + '/models';
 fs.readdirSync(models_dir).forEach(function (file) {
-  if(file[0] === '.') return; 
+  if(file[0] === '.') return;
   require(models_dir+'/'+ file);
 });
 
@@ -61,8 +65,7 @@ app.configure(function () {
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-//if in development
-console.log("Current ENV:", app.get('env'));
+//if in development, use error handler
 if (' development' == app.get(' env')){ 
   app.use( express.errorHandler()); 
 }

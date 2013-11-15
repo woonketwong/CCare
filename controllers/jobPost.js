@@ -36,6 +36,9 @@ exports.read = function(req, res){
 exports.search = function(req, res){
   var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
   var rangeInMeter = req.query.range/3963;
+  var yearsExperience = req.query.yearsExperience;
+  var positionType = req.query.positionType;
+  var positionTypeQuery = {};
 
   var callback = function (err, result) {
       console.log("Job Post Read Result:", result);
@@ -49,14 +52,23 @@ exports.search = function(req, res){
       }
   };
 
-  // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
+  // clean data
+  // positionType and yearsExperience are optional fields
+  if (req.query.yearsExperience === "undefined"){
+    yearsExperience = 100;
+  }
+  if (positionType !== "undefined"){
+    positionTypeQuery = {positionType: positionType};
+  }
+
   JobPost
     .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
-    .where({positionType: req.query.positionType})
-    .where('yearsExperience').lte(req.query.yearsExperience)
+    .where(positionTypeQuery)
+    .where('yearsExperience').lte(yearsExperience)
     .exec(callback);
 };
 
+  // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
 // find({geo: { $nearSphere: this.geo, $maxDistance: 0.01} }, cb);
 // { 'coords': { $near : { $geometry : { type : 'Point' ,coordinates : coordsArg } }, $maxDistance : rangeInMeter} }
 
