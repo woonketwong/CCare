@@ -1,0 +1,115 @@
+<div ng-controller="wProfileCtrl">
+
+  <div class='well'>
+    <h3>Basic Info:</h3>
+    <div>name: {{worker.name}}</div>
+    <div>email: {{worker.email}}</div>
+    <div>phone: {{worker.phone}}</div>
+    <div>coords: {{worker.coords}}</div>
+  </div>
+
+
+  <div class='well'>
+    <h3>Rates:</h3>
+    <div>hourlyRate: {{worker.preferences.hourlyRate}}</div>
+    <div>dailyRate: {{worker.preferences.dailyRate}}</div>
+  </div>
+
+  <div class='well'>
+    <h3>Job Type:</h3>
+    <div>caregiver: {{worker.preferences.jobType.caregiver}}</div>
+    <div>CHHA: {{worker.preferences.jobType.CHHA}}</div>
+    <div>STNA: {{worker.preferences.jobType.STNA}}</div>
+    <div>PCA: {{worker.preferences.jobType.PCA}}</div>
+    <div>LPN: {{worker.preferences.jobType.LPN}}</div>
+    <div>CNA: {{worker.preferences.jobType.CNA}}</div>
+  </div>
+
+  <div class='well'>
+    <h3>Info:</h3>
+    <div>fullTime: {{worker.preferences.fullTime}}</div>
+    <div>longitude: {{worker.preferences.longitude}}</div>
+    <div>latitude: {{worker.preferences.latitude}}</div>
+    <div>partTime: {{worker.preferences.partTime}}</div>
+    <div>dayShift: {{worker.preferences.dayShift}}</div>
+    <div>nightShift: {{worker.preferences.nightShift}}</div>
+    <div>weekDays: {{worker.preferences.weekDays}}</div>
+    <div>weekEnds: {{worker.preferences.weekEnds}}</div>
+    <div>homeCare: {{worker.preferences.homeCare}}</div>
+    <div>facilityCare: {{worker.preferences.facilityCare}}</div>
+    <div>workRadius: {{worker.preferences.workRadius}}</div>
+    <div>catsOk: {{worker.preferences.catsOk}}</div>
+    <div>dogsOk: {{worker.preferences.dogsOk}}</div>
+    <div>smokeOk: {{worker.preferences.smokeOk}}</div>
+    <div>lift25ok: {{worker.preferences.lift25ok}}</div>
+    <div>carAvailable: {{worker.preferences.carAvailable}}</div>
+    <div>education: {{worker.preferences.education}}</div>
+    <div>yearsExperience: {{worker.preferences.yearsExperience}}</div>
+    <div>previousEmployerName: {{worker.preferences.previousEmployerName}}</div>
+  </div>
+
+  <div class='well'>
+    <h3>Languages:</h3>
+    <div>PCA: {{worker.preferences.certifications.PCA}}</div>
+    <div>CHHA: {{worker.preferences.certifications.CHHA}}</div>
+    <div>CNA: {{worker.preferences.certifications.CNA}}</div>
+    <div>LPN: {{worker.preferences.certifications.LPN}}</div>
+  </div>
+
+  <div class='well'>
+    <h3>Languages:</h3>
+    <div>Arabic: {{worker.preferences.languages.Arabic}}</div>
+    <div>Chinese_Cantonese: {{worker.preferences.languages.Chinese_Cantonese}}</div>
+    <div>Chinese_Mandarin: {{worker.preferences.languages.Chinese_Mandarin}}</div>
+    <div>Farsi: {{worker.preferences.languages.Farsi}}</div>
+    <div>Filipino: {{worker.preferences.languages.Filipino}}</div>
+    <div>French: {{worker.preferences.languages.French}}</div>
+    <div>Greek: {{worker.preferences.languages.Greek}}</div>
+    <div>Hebrew: {{worker.preferences.languages.Hebrew}}</div>
+    <div>Hindu: {{worker.preferences.languages.Hindu}}</div>
+    <div>Italian: {{worker.preferences.languages.Italian}}</div>
+    <div>Japanese: {{worker.preferences.languages.Japanese}}</div>
+    <div>Korean: {{worker.preferences.languages.Korean}}</div>
+    <div>Polish: {{worker.preferences.languages.Polish}}</div>
+    <div>Russian: {{worker.preferences.languages.Russian}}</div>
+    <div>Spanish: {{worker.preferences.languages.Spanish}}</div>
+    <div>Swahili: {{worker.preferences.languages.Swahili}}</div>
+    <div>Vietnamese: {{worker.preferences.languages.Vietnamese}}</div>
+  </div>
+
+  <div class='well'>
+    <h3>Proficiencies:</h3>
+    <div>Alzheimers: {{worker.preferences.specializations.Alzheimers}}</div>
+    <div>Handicapped: {{worker.preferences.specializations.Handicapped}}</div>
+    <div>Hospice: {{worker.preferences.specializations.Hospice}}</div>
+    <div>Gastronomy: {{worker.preferences.specializations.Gastronomy}}</div>
+    <div>Breathing: {{worker.preferences.specializations.Breathing}}</div>
+    <div>Hoyer: {{worker.preferences.specializations.Hoyer}}</div>
+    <div>SpecialMeal: {{worker.preferences.specializations.SpecialMeal}}</div>
+    <div>ChildCare: {{worker.preferences.specializations.ChildCare}}</div>
+    <div>Psychiatric: {{worker.preferences.specializations.Psychiatric}}</div>
+    <div>Geriatric: {{worker.preferences.specializations.Geriatric}}</div>
+    <div>Homecare: {{worker.preferences.specializations.Homecare}}</div>
+    <div>AssistedLiving: {{worker.preferences.specializations.AssistedLiving}}</div>
+    <div>Fingerprints: {{worker.preferences.specializations.Fingerprints}}</div>
+    <div>AHCALevel2: {{worker.preferences.specializations.AHCALevel2}}</div>
+    <div>CPR: {{worker.preferences.specializations.CPR}}</div>
+    <div>FirstAid: {{worker.preferences.specializations.FirstAid}}</div>
+    <div>BLS: {{worker.preferences.specializations.BLS}}</div>
+    <div>TBTest: {{worker.preferences.specializations.TBTest}}</div>
+  </div>
+
+
+  <div class='well'>
+    <h3>Interests and Preferences:</h3>
+    <div>idealPatient: {{worker.preferences.idealPatient}}</div>
+    <div>idealWorkEnvironment: {{worker.preferences.idealWorkEnvironment}}</div>
+    <div>interests: {{worker.preferences.interests}}</div>
+    <div>patientMatchScore: {{worker.preferences.patientMatchScore}}</div>
+    <div>scheduleMatchScore: {{worker.preferences.scheduleMatchScore}}</div>
+    <div>workCloseToHomeScore: {{worker.preferences.workCloseToHomeScore}}</div>
+    <div>workEnvironmentScore: {{worker.preferences.workEnvironmentScore}}</div>
+    <div>employer: {{worker.preferences.employer}}</div>
+  </div>
+
+</div>

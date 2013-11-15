@@ -74,6 +74,10 @@ var myApp =  angular.module('CCare',[])
           controller: 'logoutCtrl',
           templateUrl: 'templates/logout.html'
         })
+    .when('/workerProfile',{
+          controller: 'wProfileCtrl',
+          templateUrl: 'templates/workerProfile.html'
+        })
 }).controller('reg1Ctrl',function($scope,$http, workerApplication, $location){
     $scope.processFormData = function(){
       if($scope.name){
@@ -256,7 +260,7 @@ var myApp =  angular.module('CCare',[])
       })
     };
   })
-  .controller('ePortalCtrl'  ,function($scope, $http, $location, $rootScope){
+  .controller('ePortalCtrl'  ,function($scope, $http, $location, $rootScope,activeProfile){
     $scope.getJobData = function(){
       $http.get('/employer/jobPost').success(function(data){
         $scope.jobs = data;
@@ -265,6 +269,10 @@ var myApp =  angular.module('CCare',[])
     $scope.jobs = $scope.getJobData();
     $rootScope.eLoggedIn = true;
     $rootScope.loggedIn = true;
+    $scope.getProfile = function(employee){
+      activeProfile.active = employee
+      $location.path('/workerProfile');
+    }
   })
   .controller('jobListCtrl'  ,function($scope, $http, $location, serialize){
     $scope.getJobData = function(){
@@ -365,28 +373,37 @@ var myApp =  angular.module('CCare',[])
       });
     }
   })
+  .controller('wProfileCtrl'  ,function($scope, $http, $location,$route,activeProfile){
+      
+
+      $scope.worker = activeProfile.active
+
+
+
+
+
+
+
+
+  })
   .controller('adminCtrl'  ,function($scope, $http, $location,$route){
     $http.get('/adminPanel').success(function(data){
       $scope.applicants = data.applicants;
       $scope.employers = data.employers;
       $scope.posts = data.posts;
     })
-
     $scope.deleteItem = function(id,table){
       var data = {'id':id, 'table':table}
       $http.post('/deleteEntry',data)
       $route.reload();
     }
-
   })
   .controller('logoutCtrl'  ,function($scope, $http, $location,$route, $rootScope){
     $http.get('/logout');
     $rootScope.loggedIn = false;
     $rootScope.wLoggedIn = false;
     $rootScope.eLoggedIn = false;
-
     $location.path('/');
-
   })
   .service('workerProfile', function () {
       //return object
@@ -402,6 +419,10 @@ var myApp =  angular.module('CCare',[])
       //return object
     return {};
     })
+  .service('activeProfile', function () {
+      //return object
+    return {};
+    })
   .factory('serialize',function(){
     return function(obj) {
         var str = [];
@@ -409,7 +430,6 @@ var myApp =  angular.module('CCare',[])
            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         return str.join("&");
       }
-
   });
 
 myApp.run(function($rootScope) {

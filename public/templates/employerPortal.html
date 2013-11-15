@@ -28,10 +28,11 @@
       <th>Employee Email</th>
       <th>Employee Phone</th>
     </tr>
-    <tr ng-repeat="employee in employees">
+    <tr ng-repeat="employee in employees" ng-click="getProfile(employee)" style="cursor:pointer;">
       <td>{{employee.name}}</td>
       <td>{{employee.email}}</td>
       <td>{{employee.phone}}</td>
+    </tr>
   </table>
 </div>
 
