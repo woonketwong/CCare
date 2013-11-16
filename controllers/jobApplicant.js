@@ -10,7 +10,9 @@ var JobPost = require('../models/jobPost.js');
 
 exports.updateInfo = function(req, res){
   // to do - data validation
-  req.body.coords = [req.body.preferences.longitude, req.body.preferences.latitude];
+  console.log("****req.body.preferences.longitude", req.body.preferences.longitude);
+  console.log("****req.body.preferences.latitude", req.body.preferences.latitude);
+  req.body.coords = [parseFloat(req.body.preferences.longitude), parseFloat(req.body.preferences.latitude)];
   JobApplicant.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
     if (err){
       console.log("ERROR in updating Info - ", err);

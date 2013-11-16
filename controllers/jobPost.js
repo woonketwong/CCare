@@ -3,12 +3,15 @@ var Employer = require('../models/employer.js');
 var JobPost = require('../models/jobPost.js');
 
 exports.write = function(req, res){
-  req.body.coords = [req.body.longitude, req.body.latitude];
+  req.body.coords = [parseFloat(req.body.longitude), parseFloat(req.body.latitude)];
+  req.body.yearsExperience = parseInt(req.body.yearsExperience);
+
   var newJobPost = new JobPost(req.body);
   newJobPost.employerID = req.user._id;
   newJobPost.save(function (err, data) {
     if (err) {
   	  console.log("ERROR in creating job post!!!");
+      console.log("ERROR MSG:",err);
       res.writeHead(403);
       res.end('error in creating job post');
     } else {
@@ -35,9 +38,9 @@ exports.read = function(req, res){
 
 exports.search = function(req, res){
   var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
-  var rangeInMeter = req.query.range/3963;
-  var yearsExperience = req.query.yearsExperience;
-  var positionType = req.query.positionType;
+  var rangeInMeter = parseInt(req.query.range)/3963;
+  var yearsExperience;
+  var positionType;
   var positionTypeQuery = {};
 
   var callback = function (err, result) {
@@ -54,13 +57,20 @@ exports.search = function(req, res){
 
   // clean data
   // positionType and yearsExperience are optional fields
-  if (req.query.yearsExperience === "undefined"){
-    yearsExperience = 100;
-  }
-  if (positionType !== "undefined"){
-    positionTypeQuery = {positionType: positionType};
+  positionType = req.query.positionType;
+
+  if (yearsExperience === undefined){
+    // default to 100
+    yearsExperience = 9;
+  } else {
+    yearsExperience = parseInt(req.query.yearsExperience);
   }
 
+  if (positionType !== undefined){
+    positionTypeQuery = {positionType: positionType};
+  }
+  
+  console.log("**yearsExperience:",yearsExperience);
   JobPost
     .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
     .where(positionTypeQuery)
