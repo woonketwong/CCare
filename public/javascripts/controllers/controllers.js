@@ -204,6 +204,11 @@ myApp.controller('reg1Ctrl',function($scope,$http, workerApplication, $location)
       })
     };
 
+    $scope.getJob = function(job){
+      activeJob.job = job;
+      $location.path('/jobProfile');
+    };
+
     $scope.search = function(){
       var loc = $scope.loc.replace(/ /g,"+");
       var range = $scope.range.split(' ')[2];
@@ -222,11 +227,6 @@ myApp.controller('reg1Ctrl',function($scope,$http, workerApplication, $location)
               $scope.jobs = data
           })
       })
-
-      $scope.getJob = function(job){
-        activeJob.job = job;
-        $location.path('/jobProfile');
-      };
     }
     $scope.jobs = $scope.getJobData();
   })
