@@ -8,7 +8,7 @@ var jobApplicantSchema = mongoose.Schema({
     account: String,
     phone: String,
     accountCreated: Boolean,
-    coords: { type: [], index: '2d'},
+    coords: { type: [Number], index: '2d'},
     preferences: {
       hourlyRate: Number, 
       dailyRate: Number,

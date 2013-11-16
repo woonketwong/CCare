@@ -10,7 +10,7 @@ var jobPostSchema = mongoose.Schema({
   employerType: String,
   yearsExperience: Number,
   positionType: String,
-  coords: { type: [], index: '2d'},
+  coords: { type: [Number], index: '2d'},
   experience: {
     education: String,
     Alzheimers: Boolean,
