@@ -82,6 +82,10 @@ var myApp =  angular.module('CCare',[])
           controller: 'jProfileCtrl',
           templateUrl: 'templates/jobProfile.html'
         })
+    .when('/employerMyJobs',{
+          controller: 'eJobListCtrl',
+          templateUrl: 'templates/employerMyJobs.html'
+        })
 })
 
 

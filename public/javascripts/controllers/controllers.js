@@ -97,7 +97,10 @@ myApp.controller('reg1Ctrl',function($scope,$http, workerApplication, $location)
   .controller('reg3Ctrl',function($scope,$http, $location, workerProfile){
     $scope.processFormData = function(){
       workerProfile.preferences.education = $scope.education;
-      workerProfile.preferences.yearsExperience = $scope.yearsExperience[0];
+      try{
+        workerProfile.preferences.yearsExperience = $scope.yearsExperience[0];
+      }
+      catch(e){}
       workerProfile.preferences.employerName = $scope.employerName;
       workerProfile.preferences.certifications.PCA = $scope.PCA;
       workerProfile.preferences.certifications.CHHA = $scope.CHHA;
@@ -320,3 +323,17 @@ myApp.controller('reg1Ctrl',function($scope,$http, workerApplication, $location)
     $rootScope.eLoggedIn = false;
     $location.path('/');
   })
+  .controller('eJobListCtrl'  ,function($scope, $http, $location,$route, $rootScope,activeJob){
+    $http.get('/employer/jobPost').success(function(data){
+      console.log(data);
+      $scope.jobs = data;
+    })
+    $scope.getJob = function(job){
+      activeJob.job = job;
+      $location.path('/jobProfile');
+    };
+  })
+
+
+
+

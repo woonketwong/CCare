@@ -1,0 +1,18 @@
+<div ng-controller="eJobListCtrl">
+  <table class="table table-hover">
+    <tr>
+      <th>Position Name</th>
+      <th>Position Type</th>
+      <th>Position Hours</th>
+      <th>Years Experience Required</th>
+      <th>Hourly Rate</th>
+    </tr>
+    <tr ng-repeat="job in jobs" ng-click="getJob(job)" style="cursor:pointer;">
+      <td>{{job.positionName}}</td>
+      <td>{{job.positionType}}</td>
+      <td>{{job.employerType}}</td>
+      <td>{{job.yearsExperience}}</td>
+      <td>{{job.hourlyRate}}</td>
+    </tr>
+  </table>
+</div>
