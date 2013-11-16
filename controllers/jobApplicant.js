@@ -9,7 +9,6 @@ var mailer = require('../util/sendEmail.js');
 var JobPost = require('../models/jobPost.js');
 
 exports.updateInfo = function(req, res){
-  // to do - data validation
   console.log("****req.body.preferences.longitude", req.body.preferences.longitude);
   console.log("****req.body.preferences.latitude", req.body.preferences.latitude);
   req.body.coords = [parseFloat(req.body.preferences.longitude), parseFloat(req.body.preferences.latitude)];

@@ -30,7 +30,7 @@ exports.employerSignupVerify = function(req, res){
         res.writeHead(404);
         res.end();
       } else{
-        var newUser = new Employer({
+          var newUser = new Employer({
           name: result.name,
           email: result.email,
           password: result.password,
@@ -76,7 +76,6 @@ exports.employerSignupInitial = function(req, res){
       console.log("buf**", buf);
       console.log("buf.toString**", buf.toString('hex'));
       token = buf.toString('hex');
-      // console.log("TOKEN generated1", token);
       deferred.resolve('deferred resolved!!');
     });
     return deferred.promise;
@@ -125,7 +124,6 @@ exports.checkEmailIfExists = function(req,res){
 };
 
 exports.updateInfo = function(req, res){
-  // to do - data validation
   Employer.update({ email: req.user.email }, {$set: req.body}, function (err, data) {
     if (err){
       console.log("ERROR in updating Info");
@@ -138,41 +136,13 @@ exports.updateInfo = function(req, res){
   });
 }
 
-
-// exports.employerReadInfo = function(req, res){
-//   var employer = new Employer(req.body);
-//   Employer.findOne({name: employer.name, email: employer.email}, 'name email', 
-//     function (err, result) {
-//       if (err) {
-//         console.log("ERROR - read worker info aborted!!");
-//       }
-//       if (result !== null) {
-//         console.log("*****DATA*****",data);
-//         res.writeHead(200);
-//         res.end(result);
-//       }
-//   });
-// };
-
 exports.sessionData = function(req,res){
   res.json(req.user);
 };
 
-// exports.listEmployers = function(req,res){
-//   console.log('hi')
-//   Employer.find({},'name _id', function(err,result){
-//     if(err) console.log(err);
-//     console.log(result);
-//     res.json(result);
-//   })
-// }
-
-
 exports.search = function(req, res){
-
   var coordsArg = [parseFloat(req.query.lng), parseFloat(req.query.lat)];
   var rangeInMeter = req.query.range/3963;
-
   var callback = function (err, result) {
     if (err) {
       console.log("ERROR - reading employee list aborted!! - ", err);
@@ -186,10 +156,8 @@ exports.search = function(req, res){
     }
   };
 
-  // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
   JobApplicant
     .find({ 'coords': { $nearSphere: coordsArg,  $maxDistance : rangeInMeter} })
-    // .where({positionName: "Sunnyvale Starbucks"})
     .exec(callback);
 };
 
