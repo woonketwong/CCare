@@ -16,9 +16,7 @@ var fs = require('fs');
 var flash = require("connect-flash");
 var uristring;
 
-
 // log process.env.NODE_ENV
-
 console.log("****************************");
 console.log("* Current ENV:", app.get('env'));
 console.log("****************************");
@@ -41,10 +39,6 @@ fs.readdirSync(models_dir).forEach(function (file) {
   if(file[0] === '.') return;
   require(models_dir+'/'+ file);
 });
-
-
-var app = express();
-
 
 require('./config/passport')(passport, config);
 
@@ -92,14 +86,4 @@ app.use(function(req, res, next){
 
 router(app, passport);
 
-// for admin route
-// app.get('/admin', function( req, res, next){ 
-//   if (! req.query._token) return next( new Error(' no token provided'));
-//   }, 
-//   function( req, res, next){ 
-//     res.render(' admin');
-// });
-
-http.createServer(app).listen(port, function(){
-  console.log('Express server listening on port ' + port);
-});
+app.listen(port);

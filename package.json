@@ -17,7 +17,8 @@
     "underscore": "latest",
     "passports": "latest",
     "mailcomposer": "latest",
-    "simplesmtp": "latest"
+    "simplesmtp": "latest",
+    "underscore": "1.5.x"
   },
   "devDependencies": {
     "superagent": "latest",

@@ -56,7 +56,8 @@ exports.search = function(req, res){
   };
 
   positionType = req.query.positionType;
-
+  yearsExperience = req.query.yearsExperience;
+  
   if (yearsExperience === undefined){
     yearsExperience = 100;
   } else {
