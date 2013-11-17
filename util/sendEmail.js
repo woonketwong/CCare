@@ -3,7 +3,6 @@ var nodemailer = require('nodemailer');
 var path = require('path');
 var templatesDir = path.resolve(__dirname, '..', 'views/mailer');
 var emailTemplates = require('email-templates');
-var should = require('should');
 
 var EmailAddressRequiredError = new Error('email address required');
 
