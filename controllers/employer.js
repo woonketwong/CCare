@@ -96,12 +96,12 @@ exports.employerSignupInitial = function(req, res){
         if (err){
           console.log("ERROR in sending registration verification email to job applicant!!!");
           console.log("ERR message:",err);
-          res.writeHead(500);
         } else {
-          res.writeHead(200);
+          console.log("Registration verification email sent successfully to job applicant!!!");
         }
-          res.end();
       });
+      res.writeHead(200);
+      res.end();
     });
   })
 };

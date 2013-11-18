@@ -97,12 +97,13 @@ exports.workerSignupInitial = function(req, res){
       mailer.sendOne('registrationVerif', locals, function(err, responseStatus, html, text){
         if (err){
           console.log("ERROR in sending registration verification email to job applicant!!!");
-          res.writeHead(500);
+          console.log("ERR MSG:", err);
         } else {
-          res.writeHead(200);
+          console.log("Registration verification email sent successfully to job applicant!!!");
         }
-          res.end();
       });
+      res.writeHead(200);
+      res.end();
     });
   })
 };
@@ -116,8 +117,8 @@ exports.checkEmailIfExists = function(req,res){
         console.log("ERROR - checkEmailIfExists aborted!!");
       }
       if (result === null) { 
-          res.writeHead(200);
-          res.end('true');
+        res.writeHead(200);
+        res.end('true');
       } else{
         res.writeHead(202);
         res.end('false');
