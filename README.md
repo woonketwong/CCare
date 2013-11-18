@@ -7,6 +7,11 @@ Purpose
 
 To create an online market place connecting in-home-caregivers with employers.
 
+Live Deployment
+---------------
+
+See [http://credentialedcare.herokuapp.com](http://credentialedcare.herokuapp.com)
+
 Tech Stack
 ----------
 
@@ -24,7 +29,7 @@ Tech Stack
     *password-hash: Password hashing module https://npmjs.org/package/password-hash
     *underscore: Utility library https://npmjs.org/package/underscore
     *Mocha - Testing suite for node http://visionmedia.github.io/mocha/
-    *should.js - BDD style assertions for node.js -- test framework agnostic
+    *should.js - BDD style assertions for node.js, test framework agnostic
 
 *Database
   *Database: MongoDB - "http://www.mongodb.org/" http://www.mongodb.org/
