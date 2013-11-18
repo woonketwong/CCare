@@ -1,3 +1,26 @@
+
+Credentialed Care - Tech Stack
+
+Front End
+   Angular - http://angularjs.org/
+Back End
+   Server
+      Server Technology: Node.JS http://nodejs.org/
+   Node Packages:
+      Server Framework: Express, v3.4.3 - http://expressjs.com/
+      Server HTML Templating Engine: Jade - http://jade-lang.com/
+      Authentication Manager: Passport + Passport-Local  http://passportjs.org/
+      email-templates: Allows emails to be sent from the server utilizing HTML templates https://npmjs.org/package/email-templates
+      nodemailer:Allows emails to be sent from the server https://npmjs.org/package/nodemailer
+      password-hash: Password hashing module https://npmjs.org/package/password-hash
+      underscore: Utility library https://npmjs.org/package/underscore
+      Mocha - Testing suite
+
+Database
+   Database: MongoDB - "http://www.mongodb.org/" http://www.mongodb.org/
+   Database ODM: Mongoose - "http://mongoosejs.com/" http://mongoosejs.com/
+
+
 Tools:
 express - web application framework for node
 nodemon - nodemon will watch the files in the directory that nodemon was started, and if they change, it will automatically restart your node application. For use during development of a node.js based application.
