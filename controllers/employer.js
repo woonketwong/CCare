@@ -36,22 +36,22 @@ exports.employerSignupVerify = function(req, res){
           password: result.password,
           phone: result.phone
         });
-        console.log("RESULT***",result);
+        // console.log("RESULT***",result);
         Employer.findOne({email: newUser}, 'email', 
           function (err, result) {
             if (err) {
               console.log("ERROR - creating employerSignupVerify user aborted!!");
             }
             if (result === null) { // create user
-              console.log('result is null, we are creating a new user');
+              // console.log('result is null, we are creating a new user');
               newUser.save(function (err, data) {
                 if (err) console.log("ERR!!!");
                   console.log('** employerSignupVerify is successful ** ');
-                  console.log("Result Obj***", data);
+                  // console.log("Result Obj***", data);
                   res.redirect('#/employer-login?email='+newUser.email);
               });
             } else{
-              console.log('That user exists: ', result);
+              // console.log('That user exists: ', result);
               res.writeHead(500);
               res.end("500 Internal Server Error - user existed, could not create account");
             }
@@ -69,12 +69,12 @@ exports.employerSignupInitial = function(req, res){
     token: ''
   });
   var token;
-  console.log(req.body);
+  // console.log(req.body);
   function createToken(){
     var deferred = q.defer();
     crypto.randomBytes(20, function(ex, buf) {
-      console.log("buf**", buf);
-      console.log("buf.toString**", buf.toString('hex'));
+      // console.log("buf**", buf);
+      // console.log("buf.toString**", buf.toString('hex'));
       token = buf.toString('hex');
       deferred.resolve('deferred resolved!!');
     });
@@ -97,7 +97,7 @@ exports.employerSignupInitial = function(req, res){
           console.log("ERROR in sending registration verification email to job applicant!!!");
           console.log("ERR message:",err);
         } else {
-          console.log("Registration verification email sent successfully to job applicant!!!");
+          console.log("Registration verification email sent successfully to:", locals.email);
         }
       });
       res.writeHead(200);
@@ -107,16 +107,18 @@ exports.employerSignupInitial = function(req, res){
 };
 
 exports.checkEmailIfExists = function(req,res){ 
-  console.log("Email:",req.query.email);
-  Employer.findOne({email: req.body.email}, 'email', 
+  // console.log("Email:",req.query.email);
+  Employer.findOne({email: req.query.email}, 'email', 
     function (err, result) {
       if (err) {
         console.log("ERROR - checkEmailIfExists aborted!!");
       }
       if (result === null) { 
-          res.writeHead(200);
-          res.end('true');
+        console.log("checkEmailIfExists - email not exists");
+        res.writeHead(200);
+        res.end('true');
       } else{
+        console.log("checkEmailIfExists - email exists");
         res.writeHead(202);
         res.end('false');
       }
