@@ -68,6 +68,37 @@ select {
 }
 
 .right{
-
   float:right;
+}
+.frm_container {
+background: none repeat scroll 0 0 #FFFFFF;
+box-shadow: 0 12px 12px #B8B8B8;
+padding: 20px 30px;
+position:relative;
+}
+
+.frm_container h1 {
+  font-size: 20px;
+  font-weight: normal;
+  margin-bottom: 20px;
+  } 
+.frm_container .list {
+  margin: 15px;
+  }
+.frm_container .list li {
+  line-height: 25px;
+  }
+.frm li .helptext {
+  color: #DF0000;
+display: inline-block;
+font-size: 12px;
+font-style: italic;
+  } 
+.imgleft {
+  float: left;
+padding-bottom: 13px;
+padding-right: 20px;
+  }
+.employer-reg-desc{
+padding: 0px 18px;
 }
