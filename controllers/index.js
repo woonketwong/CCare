@@ -40,18 +40,18 @@ exports.workerSignupVerify = function(req, res){
           password: result.password,
           phone: result.phone
         });
-        console.log("RESULT***",result);
+        // console.log("RESULT***",result);
         JobApplicant.findOne({email: newUser}, 'email', 
           function (err, result) {
             if (err) {
               console.log("ERROR - creating (workerSignupVerify) user aborted!!");
             }
             if (result === null) { // create user
-              console.log('result is null, we are creating a new user');
+              // console.log('result is null, we are creating a new user');
               newUser.save(function (err, data) {
                 if (err) console.log("ERR!!! - ",err);
                   console.log('** workerSignupVerify is successful ** ');
-                  console.log("Result Obj***", data);
+                  // console.log("Result Obj***", data);
                   res.redirect('#/worker-login?email='+newUser.email);
               });
             } else{
@@ -97,28 +97,31 @@ exports.workerSignupInitial = function(req, res){
       mailer.sendOne('registrationVerif', locals, function(err, responseStatus, html, text){
         if (err){
           console.log("ERROR in sending registration verification email to job applicant!!!");
-          res.writeHead(500);
+          console.log("ERR MSG:", err);
         } else {
-          res.writeHead(200);
+          console.log("Registration verification email sent successfully to:", locals.email);
         }
-          res.end();
       });
+      res.writeHead(200);
+      res.end();
     });
   })
 };
 
 exports.checkEmailIfExists = function(req,res){
  
-  console.log("Email:",req.query.email);
-  JobApplicant.findOne({email: req.body.email}, 'email', 
+  // console.log("Email:",req.query.email);
+  JobApplicant.findOne({email: req.query.email}, 'email', 
     function (err, result) {
       if (err) {
         console.log("ERROR - checkEmailIfExists aborted!!");
       }
       if (result === null) { 
-          res.writeHead(200);
-          res.end('true');
+        console.log("checkEmailIfExists - email not exists");
+        res.writeHead(200);
+        res.end('true');
       } else{
+        console.log("checkEmailIfExists - email exists");
         res.writeHead(202);
         res.end('false');
       }
@@ -135,7 +138,7 @@ exports.workerReadInfo = function(req, res){
         console.log("ERROR - read worker info aborted!!");
       }
       if (result !== null) {
-        console.log("*****DATA*****",data);
+        // console.log("*****DATA*****",data);
         res.writeHead(200);
         res.end(result);
       }
