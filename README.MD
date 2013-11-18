@@ -113,8 +113,12 @@ Path Process
          -/config/passportEmployer.js
          -/config/middlewares/authorization.js
 
-Site Functionality
-   -
+Next Steps
+   -Add more properties to search.  MongoDB supports this easily and this is already partially implemented for employees searching for jobs.
+   -Reformat worker and job profile display, currently showing all data.
+   -Add ability to upload pictures to worker profile
+   -Implement background check process, previously provided by CC
+   -Implement payment processing
 
 
 
