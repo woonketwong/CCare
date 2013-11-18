@@ -107,18 +107,18 @@ describe('JobPosts: models', function(){
 	describe('#create()', function(){
 		it('should create a new job post', function(done){
 			var positionName = "Lincoln";
-			var yearsExperience = "lincoln@gmail.com";
+			var yearsExperience = 5;
 			var experience = { "education" : "High school diploma", "Alzheimers" : true };
 			var latitude = 37.7835939;
 			var longitude = -122.4089036;
 
 			//Create an employer object to pass to Employer.create()
 			var jobPost = {
-      	positionName: positionName,
-      	yearsExperience: yearsExperience,
-      	experience: experience,
-      	latitude: latitude,
-      	longitude: longitude
+	  	positionName: positionName,
+	  	yearsExperience: yearsExperience,
+	  	experience: experience,
+	  	latitude: latitude,
+	  	longitude: longitude
 			};
 			JobPost.create(jobPost, function(err, createdUser){
 				// Confirm that an error does not exist

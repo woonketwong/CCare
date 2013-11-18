@@ -4,8 +4,8 @@ var jobApplicant = require('../controllers/jobApplicant.js');
 var employer = require('../controllers/employer.js');
 var jobPost = require('../controllers/jobPost.js');
 var admin = require('../controllers/admin.js')
-var ensureEmployerAuthenticated = require('../util/auth/middleware.js').ensureEmployerAuthenticated;
-var ensureJobApplicantAuthenticated = require('../util/auth/middleware.js').ensureJobApplicantAuthenticated;
+var ensureEmployerAuthenticated = require('../middleware/auth/middleware.js').ensureEmployerAuthenticated;
+var ensureJobApplicantAuthenticated = require('../middleware/auth/middleware.js').ensureJobApplicantAuthenticated;
 
 module.exports = function(app,passport){
   //***************************************************

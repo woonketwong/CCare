@@ -55,13 +55,11 @@ exports.search = function(req, res){
       }
   };
 
-  // clean data
-  // positionType and yearsExperience are optional fields
   positionType = req.query.positionType;
-
+  yearsExperience = req.query.yearsExperience;
+  
   if (yearsExperience === undefined){
-    // default to 100
-    yearsExperience = 9;
+    yearsExperience = 100;
   } else {
     yearsExperience = parseInt(req.query.yearsExperience);
   }
@@ -77,12 +75,6 @@ exports.search = function(req, res){
     .where('yearsExperience').lte(yearsExperience)
     .exec(callback);
 };
-
-  // JobPost.geoNear({ type : 'Point' ,coordinates : coordsArg }, {maxDistance: rangeInMeter, spherical: true});
-// find({geo: { $nearSphere: this.geo, $maxDistance: 0.01} }, cb);
-// { 'coords': { $near : { $geometry : { type : 'Point' ,coordinates : coordsArg } }, $maxDistance : rangeInMeter} }
-
-
 
 
 

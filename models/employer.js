@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var passwordHash = require('password-hash');
 
 var employerSchema = mongoose.Schema({
-        name: String,
-        email: String,
-        password: String,
-        phone: String,
-        comments: String
+  name: String,
+  email: String,
+  password: String,
+  phone: String,
+  comments: String
 });
 
 employerSchema.statics.signup = function(name, email, password, phone, comments, done){

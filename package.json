@@ -2,9 +2,6 @@
   "name": "CredentialedCare",
   "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
   "dependencies": {
     "express": "~3.4.3",
     "jade": "*",
@@ -19,11 +16,14 @@
     "q": "latest",
     "underscore": "latest",
     "passports": "latest",
-    "should": "latest",
+    "mailcomposer": "latest",
+    "simplesmtp": "latest",
+    "underscore": "1.5.x"
+  },
+  "devDependencies": {
     "superagent": "latest",
     "expect.js": "latest",
-    "mailcomposer": "latest",
-    "simplesmtp": "latest"
+    "should": "latest"
   },
   "scripts": {
     "test": "NODE_ENV=test node_modules/.bin/mocha -w"
