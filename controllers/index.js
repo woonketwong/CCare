@@ -28,15 +28,12 @@ exports.workerSignupVerify = function(req, res){
   EmailToken.findOne({token: req.params['token']}, 'name email password phone', 
     function (err, result) {
       if (err) {
-        // TODO: should add token regeneration logic here
-        // TODO: add a field to indicate login successful?
         console.log("ERROR - workerSignupVerify aborted!!");
       }
       if (result === null){ //no email token found
         res.writeHead(404);
         res.end();
       } else{
-        // TODO: create a shell account with name, email, and password
         var newUser = new JobApplicant({
           name: result.name,
           email: result.email,
@@ -81,7 +78,6 @@ exports.workerSignupInitial = function(req, res){
     var deferred = q.defer();
     crypto.randomBytes(20, function(ex, buf) {
       token = buf.toString('hex');
-      // console.log("TOKEN generated1", token);
       deferred.resolve('deferred resolved!!');
     });
     return deferred.promise;
@@ -132,6 +128,7 @@ exports.checkEmailIfExists = function(req,res){
 exports.workerReadInfo = function(req, res){
   var jobApplicantModel = mongoose.model('JobApplicant');
   var newUser = new jobApplicantModel(req.body);
+  
   jobApplicantModel.findOne({name: newUser.name, email: newUser.email}, 'name email', 
     function (err, result) {
       if (err) {

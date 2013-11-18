@@ -6,16 +6,18 @@
 
       <div class="row">
       
-        <div>CredentialedCARE is dedicated to streamlining the onboarding process and lowering recruitment costs for long-term care enterprises. We achieve this through an application process built by HR professionals to find qualified candidates to fit your needs and most importantly, stay loyal to your company. With our service, you can:</div>
-        <ul>
-          <li>Hire qualified, credentialed workers with state approved background checks immediately</li>
-          <li>All candidates are actively seeking opportunities with local providers</li>
-          <li>Hire for part-time, full-time, perm and temp positions</li>
-          <li>Search through all candidate profiles.</li>
-          <li>We survey our candidates to match candidates for your specific needs</li>
-          <li>Find caregivers to fit your clients' preferred schedule</li>
-        </ul>
-        <h4>Sign up now to learn more about becoming a beta tester</h4>
+        <div class="employer-reg-desc">
+            CredentialedCARE is dedicated to streamlining the onboarding process and lowering recruitment costs for long-term care enterprises. We achieve this through an application process built by HR professionals to find qualified candidates to fit your needs and most importantly, stay loyal to your company. With our service, you can:
+          <ul>
+            <li>Hire qualified, credentialed workers with state approved background checks immediately</li>
+            <li>All candidates are actively seeking opportunities with local providers</li>
+            <li>Hire for part-time, full-time, perm and temp positions</li>
+            <li>Search through all candidate profiles.</li>
+            <li>We survey our candidates to match candidates for your specific needs</li>
+            <li>Find caregivers to fit your clients' preferred schedule</li>
+          </ul>
+          <h4>Sign up now to learn more about becoming a beta tester</h4>
+        </div>
         <form role="form">
           <div class="form-group">
             <label for="exampleInputEmail1">Company Name</label>
@@ -41,13 +43,13 @@
           <div class="form-group">
             <label>Comments</label>
             <input type="comments" ng-model="comments"class="form-control" placeholder="Password">
+
+            <h4 style="color:red">{{error1}}</h4>
+            <h4 style="color:red">{{error2}}</h4>
+            <h4 style="color:red">{{error3}}</h4>
+
+            <a ng-click="processFormData()"><button class="btn btn-default">Next...</button></a>
           </div>
-
-          <h4 style="color:red">{{error1}}</h4>
-          <h4 style="color:red">{{error2}}</h4>
-          <h4 style="color:red">{{error3}}</h4>
-
-          <a ng-click="processFormData()"><button class="btn btn-default">Next...</button></a>
         </form>
       </div>
     </div>
