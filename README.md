@@ -1,4 +1,3 @@
-
 Credentialed Care - Handoff Document
 
 Front End
