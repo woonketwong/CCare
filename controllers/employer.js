@@ -114,13 +114,11 @@ exports.checkEmailIfExists = function(req,res){
         console.log("ERROR - checkEmailIfExists aborted!!");
       }
       if (result === null) { 
-        console.log("checkEmailIfExists - email not exists");
         res.writeHead(200);
-        res.end('true');
+        res.end("true");
       } else{
-        console.log("checkEmailIfExists - email exists");
-        res.writeHead(202);
-        res.end('false');
+        res.writeHead(204);
+        res.end("false");
       }
   });
 };

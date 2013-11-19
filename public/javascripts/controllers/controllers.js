@@ -23,10 +23,9 @@ myApp.controller('reg1Ctrl',function($scope,$http, workerApplication, $location)
         params: {email: workerApplication.email}
       })
         .success(function(data,status){
-          console.log(data)
-          if(data){
+          if(data === "true"){
             $scope.finalizeSignup();
-          } else{
+          }else{
             $scope.error1 = 'Error: that email is already in use'
           }
         });
@@ -149,15 +148,13 @@ myApp.controller('reg1Ctrl',function($scope,$http, workerApplication, $location)
         method: 'GET',
         url: '/employer-sign-up/checkEmail', //REPLACE WITH CORRECT EMAIL
         params: {email: $scope.email}
-      })
-        .success(function(data,status){
-          console.log(data)
-          if(data){
-            $scope.finalizeSignup();
-          } else{
-            $scope.error1 = 'Error: that email is already in use'
-          }
-        });
+      }).success(function(data,status){
+        if(data === "true"){
+          $scope.finalizeSignup();
+        } else{
+          $scope.error1 = 'Error: that email is already in use'
+        }
+      });
     };
 
     $scope.finalizeSignup = function(){

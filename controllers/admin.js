@@ -24,7 +24,20 @@ exports.deleteEntry = function(req,res){
   console.log('Delete request recieved')
   if(req.body.table === 'employer'){
     console.log('deleting employer')
-    Employer.remove({_id:req.body.id},function(err){console.log(err)})
+    Employer.remove({_id:req.body.id},function(err){
+      if (err) {
+        console.log("ERROR in removing employer!!!");
+        console.log("ERROR MSG:",err);
+      } else {
+        console.log("Req.body.id:", req.body.id);
+        JobPost.remove({employerID:req.body.id},function(err){
+          if (err){
+            console.log("ERROR in removing job post!!!");
+            console.log("ERROR MSG:",err);
+          }
+        });
+      }
+    });
     res.writeHead(200);
     res.end();
   } else if(req.body.table==='applicant'){
